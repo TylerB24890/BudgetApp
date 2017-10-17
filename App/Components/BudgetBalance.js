@@ -21,6 +21,12 @@ export default class BudgetBalance extends Component {
     this.setState({
       balance: nextProps.balance
     })
+
+    if(nextProps.balance < 0) {
+      this.setState({
+        balanceColor: negativeColor
+      })
+    }
   }
 
   componentDidMount () {

@@ -38,7 +38,7 @@ export default class BudgetItem extends Component {
 
     if(!editBool) {
       BudgetService.update(itemData)
-      this.props.updateBudgetOverview(title, this.state.type, cost)
+      this.props.updateBudgetOverview()
     }
   }
 
