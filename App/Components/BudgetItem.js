@@ -12,28 +12,18 @@ export default class BudgetItem extends Component {
     super(props)
 
     this.state = {
-      item: null,
-      cost: null,
-      type: null,
-      itemId: 0,
+      item: this.props.item.title,
+      cost: this.props.item.cost,
+      type: this.props.item.type,
+      itemId: this.props.item.id,
       editing: false
     }
   }
 
-  componentDidMount () {
-    this.setState({
-      item: this.props.item.title,
-      cost: this.props.item.cost,
-      itemId: this.props.item.id,
-      type: this.props.item.type,
-      editing: false
-    })
-  }
-
-  editBudgetItem (editBool, title, type, cost, id) {
+  editBudgetItem (editBool, title, type, cost) {
 
     var itemData = {
-      id: id,
+      id: this.state.itemId,
       type: type,
       title: title,
       cost: parseFloat(cost)
@@ -42,11 +32,13 @@ export default class BudgetItem extends Component {
     this.setState({
       editing: editBool,
       item: title,
-      cost: cost
+      cost: cost,
+      type: type
     })
 
     if(!editBool) {
       BudgetService.update(itemData)
+      this.props.updateBudgetOverview(title, this.state.type, cost)
     }
   }
 
@@ -55,7 +47,7 @@ export default class BudgetItem extends Component {
     if(!this.state.editing) {
       return (
         <View>
-          <TouchableHighlight onPress={() => this.editBudgetItem(true, this.state.item, this.state.cost, this.state.itemId)} underlayColor="#34495e">
+          <TouchableHighlight onPress={() => this.editBudgetItem(true, this.state.item, this.state.type, this.state.cost)} underlayColor="#34495e">
             <View style={styles.row}>
               <View style={styles.item}>
                 <Text style={[styles.itemTitle, styles.label]}>{this.state.item}</Text>

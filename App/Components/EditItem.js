@@ -13,12 +13,13 @@ export default class EditItem extends Component {
       item: this.props.item.title,
       cost: this.props.item.cost,
       itemId: this.props.item.id,
-      type: this.props.item.type
+      type: this.props.item.type,
+      editing: true
     }
   }
 
-  submitBudgetEdit (editing, title, type, cost, id) {
-    this.props.editHandler(editing, title, type, cost, id)
+  submitBudgetEdit (title, type, cost, id) {
+    this.props.editHandler(title, type, cost, id)
   }
 
   render () {
