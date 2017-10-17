@@ -9,7 +9,6 @@ const ApplicationStyles = {
   screen: {
     mainContainer: {
       flex: 1,
-      backgroundColor: Colors.transparent
     },
     backgroundImage: {
       position: 'absolute',
@@ -21,59 +20,25 @@ const ApplicationStyles = {
     container: {
       flex: 1,
       paddingTop: Metrics.baseMargin,
-      backgroundColor: Colors.transparent
+      backgroundColor: Colors.background
     },
-    section: {
-      margin: Metrics.section,
-      padding: Metrics.baseMargin
+    screenHeader: {
+      flex: .25,
+      paddingTop: 15,
+      marginBottom: 30,
+      borderBottomWidth: 0.5,
+      borderBottomColor: '#FFF',
+      paddingBottom: 15,
+      alignItems: 'center'
     },
-    sectionText: {
-      ...Fonts.style.normal,
-      paddingVertical: Metrics.doubleBaseMargin,
-      color: Colors.snow,
-      marginVertical: Metrics.smallMargin,
-      textAlign: 'center'
+    screenTitle: {
+      fontSize: 22,
+      textAlign: 'center',
+      fontWeight: 'bold',
+      flex: 1,
+      alignItems: 'center',
+      color: '#FFF'
     },
-    subtitle: {
-      color: Colors.snow,
-      padding: Metrics.smallMargin,
-      marginBottom: Metrics.smallMargin,
-      marginHorizontal: Metrics.smallMargin
-    },
-    titleText: {
-      ...Fonts.style.h2,
-      fontSize: 14,
-      color: Colors.text
-    }
-  },
-  darkLabelContainer: {
-    padding: Metrics.smallMargin,
-    paddingBottom: Metrics.doubleBaseMargin,
-    borderBottomColor: Colors.border,
-    borderBottomWidth: 1,
-    marginBottom: Metrics.baseMargin
-  },
-  darkLabel: {
-    fontFamily: Fonts.type.bold,
-    color: Colors.snow
-  },
-  groupContainer: {
-    margin: Metrics.smallMargin,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  sectionTitle: {
-    ...Fonts.style.h4,
-    color: Colors.coal,
-    backgroundColor: Colors.ricePaper,
-    padding: Metrics.smallMargin,
-    marginTop: Metrics.smallMargin,
-    marginHorizontal: Metrics.baseMargin,
-    borderWidth: 1,
-    borderColor: Colors.ember,
-    alignItems: 'center',
-    textAlign: 'center'
   }
 }
 
