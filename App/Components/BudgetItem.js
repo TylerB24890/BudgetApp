@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
 import { View, Text, TouchableHighlight } from 'react-native'
 import EditItem from './EditItem'
+import BudgetService from '../Services/BudgetService'
 import { CurrencyFormat } from '../Utils/CurrencyFormat'
 import styles from './Styles/BudgetItemStyle'
 
@@ -13,6 +14,8 @@ export default class BudgetItem extends Component {
     this.state = {
       item: null,
       cost: null,
+      type: null,
+      itemId: 0,
       editing: false
     }
   }
@@ -22,16 +25,29 @@ export default class BudgetItem extends Component {
       item: this.props.item.title,
       cost: this.props.item.cost,
       itemId: this.props.item.id,
+      type: this.props.item.type,
       editing: false
     })
   }
 
-  editBudgetItem (editBool, title, cost, id) {
+  editBudgetItem (editBool, title, type, cost, id) {
+
+    var itemData = {
+      id: id,
+      type: type,
+      title: title,
+      cost: parseFloat(cost)
+    }
+
     this.setState({
       editing: editBool,
       item: title,
       cost: cost
     })
+
+    if(!editBool) {
+      BudgetService.update(itemData)
+    }
   }
 
   render () {
@@ -54,7 +70,7 @@ export default class BudgetItem extends Component {
     } else {
       return (
         <View style={styles.row}>
-          <EditItem title={this.state.item} cost={this.state.cost} editHandler={this.editBudgetItem.bind(this)}/>
+          <EditItem item={this.props.item} editHandler={this.editBudgetItem.bind(this)}/>
         </View>
       )
     }

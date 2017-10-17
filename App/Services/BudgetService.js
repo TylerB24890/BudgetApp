@@ -9,7 +9,7 @@ let repository = new Realm({
       id: {type: 'string', indexed: true},
       type: 'string',
       title: 'string',
-      cost: 'int'
+      cost: 'float'
     }
   }]
 })
@@ -18,22 +18,21 @@ let BudgetService = {
   findAll: function(sortBy) {
     return repository.objects('BudgetItem').sorted('type')
   },
+  findById: function(id) {
+    return repository.objects('BudgetItem').filtered('id = "' + id + '"')
+  },
   save: function(item) {
     repository.write(() => {
       repository.create('BudgetItem', item)
     })
   },
-  update: function(item, callback) {
-    if(!callback) return
-
+  update: function(item) {
     repository.write(() => {
-      callback()
+      repository.create('BudgetItem', item, true)
     })
   }
 }
 
-BudgetService.save(new BudgetModel("Monthly", "Test Realm Monthly", 433.33))
-BudgetService.save(new BudgetModel("Daily", "Test Realm Daily", 420.00))
-BudgetService.save(new BudgetModel("Misc", "Test Realm Misc", 4.20))
+BudgetService.save(new BudgetModel("Monthly", "Test Realm Monthly", 433.20))
 
 module.exports = BudgetService

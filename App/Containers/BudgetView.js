@@ -12,30 +12,15 @@ import { CurrencyFormat } from '../Utils/CurrencyFormat'
 import styles from './Styles/BudgetViewStyle'
 
 let budgetData = BudgetService.findAll()
+let monthly = []
+let daily = []
+let misc = []
 
 class BudgetView extends React.PureComponent {
 
   constructor(props) {
 
     super(props)
-
-    var monthly = []
-    var daily = []
-    var misc = []
-
-    budgetData.forEach( function(item) {
-      if(item.type === 'Monthly') {
-        monthly.push({title: item.title, cost: item.cost})
-      }
-
-      if(item.type === 'Daily') {
-        daily.push({title: item.title, cost: item.cost})
-      }
-
-      if(item.type === 'Misc') {
-        misc.push({title: item.title, cost: item.cost})
-      }
-    })
 
     this.state = {
       starting: 4182,
@@ -59,15 +44,17 @@ class BudgetView extends React.PureComponent {
     }
   }
 
-  _calculateTotals (totalKey) {
-    var data = this.state.data
+  _calculateTotals (data, totalKey) {
+    if(!data)
+      data = this.state.data
+
     var sectionTotal = 0
 
     data.forEach( function (item) {
       if(item.key === totalKey) {
         var itemData = item.data
         itemData.forEach( function(lineItem) {
-          sectionTotal += lineItem.cost
+          sectionTotal += parseFloat(lineItem.cost)
         })
       }
     })
@@ -77,9 +64,38 @@ class BudgetView extends React.PureComponent {
 
   componentWillMount () {
 
-    var monthTotal = this._calculateTotals('Monthly')
-    var dailyTotal = this._calculateTotals('Daily')
-    var miscTotal = this._calculateTotals('Misc')
+    budgetData.forEach( function(item) {
+      if(item.type === 'Monthly') {
+        monthly.push({title: item.title, cost: parseFloat(item.cost).toFixed(2), type: item.type, id: item.id})
+      }
+
+      if(item.type === 'Daily') {
+        daily.push({title: item.title, cost: parseFloat(item.cost).toFixed(2), type: item.type, id: item.id})
+      }
+
+      if(item.type === 'Misc') {
+        misc.push({title: item.title, cost: parseFloat(item.cost).toFixed(2), type: item.type, id: item.id})
+      }
+    })
+
+    this.setState({
+      data: [
+        {
+          key: 'Monthly',
+          data: monthly
+        }, {
+          key: 'Daily',
+          data: daily
+        }, {
+          key: 'Misc',
+          data: misc
+        }
+      ],
+    })
+
+    var monthTotal = this._calculateTotals(false, 'Monthly')
+    var dailyTotal = this._calculateTotals(false, 'Daily')
+    var miscTotal = this._calculateTotals(false, 'Misc')
     var total = (monthTotal + dailyTotal + miscTotal)
 
     this.setState({
@@ -93,12 +109,12 @@ class BudgetView extends React.PureComponent {
 
   renderItem ({item}) {
     return (
-      <BudgetItem item={item} />
+      <BudgetItem item={item}/>
     )
   }
 
   renderSectionHeader = ({section}) => {
-    var total = this._calculateTotals(section.key)
+    var total = this._calculateTotals(false, section.key)
 
     return (
       <View style={styles.sectionHeader}>
@@ -134,7 +150,7 @@ class BudgetView extends React.PureComponent {
           renderSectionHeader={this.renderSectionHeader}
           sections={this.state.data}
           contentContainerStyle={styles.listContent}
-          data={this.state.dataObjects}
+          data={this.state.data}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
           initialNumToRender={this.oneScreensWorth}

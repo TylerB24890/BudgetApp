@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
 import { View, TextInput, Text } from 'react-native'
+import { CurrencyFormat } from '../Utils/CurrencyFormat'
 import styles from './Styles/EditItemStyle'
 
 export default class EditItem extends Component {
@@ -9,15 +10,16 @@ export default class EditItem extends Component {
     super(props)
 
     this.state = {
-      item: this.props.title,
-      cost: this.props.cost
+      item: this.props.item.title,
+      cost: this.props.item.cost,
+      itemId: this.props.item.id,
+      type: this.props.item.type
     }
   }
 
-  submitBudgetEdit (title, cost) {
-    this.props.editHandler(false, title, cost)
+  submitBudgetEdit (editing, title, type, cost, id) {
+    this.props.editHandler(editing, title, type, cost, id)
   }
-
 
   render () {
     return (
@@ -28,7 +30,7 @@ export default class EditItem extends Component {
             editable={true}
             onChangeText={(text) => this.setState({item: text})}
             style={styles.input}
-            onSubmitEditing={this.submitBudgetEdit.bind(this, this.state.item, this.state.cost)}
+            onSubmitEditing={() => this.submitBudgetEdit(false, this.state.item, this.state.type, this.state.cost, this.state.itemId)}
           />
         </View>
         <View style={styles.editCost}>
@@ -38,7 +40,7 @@ export default class EditItem extends Component {
             editable={true}
             onChangeText={(text) => this.setState({cost: text})}
             style={styles.input}
-            onSubmitEditing={this.submitBudgetEdit.bind(this, this.state.item, this.state.cost)}
+            onSubmitEditing={() => this.submitBudgetEdit(false, this.state.item, this.state.type, this.state.cost, this.state.itemId)}
           />
         </View>
       </View>

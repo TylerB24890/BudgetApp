@@ -10,12 +10,21 @@ export default class BudgetBalance extends Component {
     super(props)
 
     this.state = {
-      balanceColor: positiveColor
+      balanceColor: positiveColor,
+      starting: this.props.starting,
+      balance: this.props.balance
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+
+    this.setState({
+      balance: nextProps.balance
+    })
+  }
+
   componentDidMount () {
-    if(this.props.balance < 0) {
+    if(this.state.balance < 0) {
       this.setState({
         balanceColor: negativeColor
       })
@@ -26,10 +35,10 @@ export default class BudgetBalance extends Component {
     return (
       <View style={styles.screenHeader}>
         <View style={styles.starting}>
-          <Text style={styles.screenTitle}>Starting Balance: <Text style={styles.starting}>{CurrencyFormat.format(this.props.starting)}</Text></Text>
+          <Text style={styles.screenTitle}>Starting Balance: <Text style={styles.starting}>{CurrencyFormat.format(this.state.starting)}</Text></Text>
         </View>
         <View style={styles.available}>
-          <Text style={styles.screenTitle}>Available: <Text style={{color: this.state.balanceColor}}>{CurrencyFormat.format(this.props.balance)}</Text></Text>
+          <Text style={styles.screenTitle}>Available: <Text style={{color: this.state.balanceColor}}>{CurrencyFormat.format(this.state.balance)}</Text></Text>
         </View>
       </View>
     )
