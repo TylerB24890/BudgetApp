@@ -16,7 +16,7 @@ let repository = new Realm({
 
 let BudgetService = {
   findAll: function(sortBy) {
-    return repository.objects('BudgetItem').filtered("type = '" + sortBy + "'")
+    return repository.objects('BudgetItem').sorted('type')
   },
   save: function(item) {
     repository.write(() => {

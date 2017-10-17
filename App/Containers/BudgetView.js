@@ -11,11 +11,32 @@ import { CurrencyFormat } from '../Utils/CurrencyFormat'
 // Styles
 import styles from './Styles/BudgetViewStyle'
 
+let budgetData = BudgetService.findAll()
+
 class BudgetView extends React.PureComponent {
 
   constructor(props) {
 
     super(props)
+
+    var monthly = []
+    var daily = []
+    var misc = []
+
+    budgetData.forEach( function(item) {
+      if(item.type === 'Monthly') {
+        monthly.push({title: item.title, cost: item.cost})
+      }
+
+      if(item.type === 'Daily') {
+        daily.push({title: item.title, cost: item.cost})
+      }
+
+      if(item.type === 'Misc') {
+        misc.push({title: item.title, cost: item.cost})
+      }
+    })
+
     this.state = {
       starting: 4182,
       balance: 0,
@@ -26,13 +47,13 @@ class BudgetView extends React.PureComponent {
       data: [
         {
           key: 'Monthly',
-          data: BudgetService.findAll('Monthly')
+          data: monthly
         }, {
           key: 'Daily',
-          data: BudgetService.findAll('Daily')
+          data: daily
         }, {
           key: 'Misc',
-          data: BudgetService.findAll('Misc')
+          data: misc
         }
       ],
     }
@@ -55,6 +76,7 @@ class BudgetView extends React.PureComponent {
   }
 
   componentWillMount () {
+
     var monthTotal = this._calculateTotals('Monthly')
     var dailyTotal = this._calculateTotals('Daily')
     var miscTotal = this._calculateTotals('Misc')
