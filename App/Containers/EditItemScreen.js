@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import EditItem from '../Components/EditItem'
+import BudgetExpenseForm from '../Components/BudgetExpenseForm'
 
 // Styles
 import styles from './Styles/EditItemScreenStyle'
@@ -12,7 +12,7 @@ class EditItemScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <EditItem title={data.title} cost={data.cost} type={data.type} id={data.id}/>
+        <BudgetExpenseForm title={data.title} cost={data.cost} type={data.type} id={data.id}/>
       </View>
     )
   }
