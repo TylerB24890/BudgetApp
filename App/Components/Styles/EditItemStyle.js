@@ -1,28 +1,29 @@
 import { StyleSheet } from 'react-native'
 import Colors from '../../Themes/Colors'
+import Metrics from '../../Themes/Metrics'
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
+    paddingTop: (Metrics.screenHeight / 6)
   },
-  editTitle: {
-    flex: .5,
-  },
-  editCost: {
-    flex: .5,
+  inputContainer: {
     flexDirection: 'row',
-    alignItems: 'flex-start'
+    position: 'relative'
   },
   input: {
     backgroundColor: Colors.background,
     color: '#FFF',
-    flex: .94,
+    height: 50,
+    borderBottomWidth: .5,
+    borderBottomColor: '#FFF',
+    marginBottom: 30,
+    flex: .8
   },
   moneySign: {
-    flex: .06,
     color: '#FFF',
-    fontSize: 16
+    fontSize: 16,
+    display: 'none'
   }
 })

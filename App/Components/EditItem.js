@@ -24,7 +24,7 @@ export default class EditItem extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <View style={styles.editTitle}>
+        <View style={styles.inputContainer}>
           <TextInput
             value={this.state.item}
             editable={true}
@@ -33,13 +33,13 @@ export default class EditItem extends Component {
             onSubmitEditing={() => this.submitBudgetEdit(this.state.item, this.state.type, this.state.cost, this.props.item.id)}
           />
         </View>
-        <View style={styles.editCost}>
+        <View style={styles.inputContainer}>
           <Text style={styles.moneySign}>$</Text>
           <TextInput
             value={this.state.cost.toString()}
             editable={true}
             onChangeText={(text) => this.setState({cost: text})}
-            style={styles.input}
+            style={[styles.input, styles.costInput]}
             onSubmitEditing={() => this.submitBudgetEdit(this.state.item, this.state.type, this.state.cost, this.props.item.id)}
           />
         </View>
