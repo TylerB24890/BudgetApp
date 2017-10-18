@@ -11,10 +11,20 @@ export default class BudgetExpenseForm extends Component {
 
     this.state = {
       id: this.props.id,
-      item: this.props.title,
+      title: this.props.title,
       cost: parseFloat(this.props.cost).toFixed(2),
       type: this.props.type
     }
+  }
+
+  submitExpenseForm(title, type, cost, id) {
+    if(id === '' || id.length < 2) {
+      // Save new realm object
+    } else {
+      // Update existing realm object
+    }
+
+    this.props.handler
   }
 
   render () {
@@ -22,13 +32,13 @@ export default class BudgetExpenseForm extends Component {
       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <TextInput
-            placeholder="Expense title"
+            placeholder="Expense name"
             placeholderTextColor="rgba(255,255,255,.6)"
-            value={this.state.item}
+            value={this.state.title}
             editable={true}
             onChangeText={(text) => this.setState({item: text})}
             style={styles.input}
-            onSubmitEditing={() => this.submitBudgetEdit(this.state.item, this.state.type, this.state.cost, this.state.id)}
+            onSubmitEditing={() => this.submitExpenseForm(this.state.title, this.state.type, this.state.cost, this.state.id)}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -39,7 +49,7 @@ export default class BudgetExpenseForm extends Component {
             options={{separator: '.', unit: '$'}}
             onChangeText={(text) => this.setState({cost: text})}
             style={[styles.input, styles.costInput]}
-            onSubmitEditing={() => this.submitBudgetEdit(this.state.item, this.state.type, this.state.cost, this.state.id)}
+            onSubmitEditing={() => this.submitExpenseForm(this.state.title, this.state.type, this.state.cost, this.state.id)}
             keyboardType="numeric"
           />
         </View>

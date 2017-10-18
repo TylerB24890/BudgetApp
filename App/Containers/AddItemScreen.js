@@ -8,10 +8,18 @@ import styles from './Styles/AddItemScreenStyle'
 
 class AddItemScreen extends Component {
 
+  constructor(props) {
+    super(props)
+  }
+
+  handleNewExpense() {
+    
+  }
+
   render () {
     return (
       <View style={styles.container}>
-        <BudgetExpenseForm id='' title='' cost='0.00' type='' />
+        <BudgetExpenseForm id='' title='' cost='0.00' type='' handler={() => this.handleNewExpense()}/>
       </View>
     )
   }
