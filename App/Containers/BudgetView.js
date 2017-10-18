@@ -143,7 +143,7 @@ class BudgetView extends React.PureComponent {
    */
   renderItem ({item}) {
     return (
-      <BudgetItem item={item} updateBudgetOverview={() => this.updateBudgetOverview()}/>
+      <BudgetItem item={item} updateBudgetOverview={() => this.updateBudgetOverview()} navigation={this.props.navigation}/>
     )
   }
 
@@ -213,7 +213,6 @@ class BudgetView extends React.PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    // ...redux state to props here
   }
 }
 

@@ -1,13 +1,24 @@
 import React from 'react'
-import { Text, Animated, View } from 'react-native'
+import { Text, Animated, View, Easing } from 'react-native'
 import { DrawerNavigator, StackNavigator } from 'react-navigation'
+
 import CategoriesScreen from '../Containers/CategoriesScreen'
 import EditItemScreen from '../Containers/EditItemScreen'
 import SettingsScreen from '../Containers/SettingsScreen'
 import BudgetView from '../Containers/BudgetView'
 import AddItemScreen from '../Containers/AddItemScreen'
+
 import Icon from 'react-native-vector-icons/Ionicons'
+
 import styles, { inactiveColor, activeColor, barColor } from './Styles/NavigationStyles'
+
+const noTransitionConfig = () => ({
+  transitionSpec: {
+    duration: 0,
+    timing: Animated.timing,
+    easing: Easing.step0
+  }
+})
 
 const DrawerStack = DrawerNavigator({
   BudgetView: {
@@ -72,12 +83,18 @@ const DrawerStack = DrawerNavigator({
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  EditItemScreen: { screen: EditItemScreen },
+  EditItemScreen: {
+    screen: EditItemScreen,
+    navigationOptions: ({navigation}) => ({
+      title: 'Edit Expense'
+    })
+  },
   DrawerStack: { screen: DrawerStack }
 }, {
   // Default config for all screens
   headerMode: 'float',
   initialRouteName: 'DrawerStack',
+  transitionConfig: noTransitionConfig,
   navigationOptions: ({navigation}) => ({
     headerStyle: styles.header,
     headerTintColor: '#ecf0f1',

@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 // import PropTypes from 'prop-types';
 import { View, Text, TouchableHighlight } from 'react-native'
-import EditItem from './EditItem'
 import BudgetService from '../Services/BudgetService'
 import { CurrencyFormat } from '../Utils/CurrencyFormat'
 import styles from './Styles/BudgetItemStyle'
 
-export default class BudgetItem extends Component {
+export default class BudgetItem extends React.Component {
 
   constructor(props) {
     super(props)
@@ -16,11 +15,10 @@ export default class BudgetItem extends Component {
       cost: this.props.item.cost,
       type: this.props.item.type,
       itemId: this.props.item.id,
-      editing: false
     }
   }
 
-  editBudgetItem (editBool, title, type, cost) {
+  editBudgetItem (title, type, cost) {
 
     var itemData = {
       id: this.state.itemId,
@@ -30,7 +28,6 @@ export default class BudgetItem extends Component {
     }
 
     this.setState({
-      editing: editBool,
       item: title,
       cost: cost,
       type: type
@@ -42,29 +39,35 @@ export default class BudgetItem extends Component {
     }
   }
 
+  navigateToEdit () {
+
+    const {navigate} = this.props.navigation
+
+    navigate(
+      'EditItemScreen', {
+        id: this.state.itemId,
+        type: this.state.type,
+        title: this.state.item,
+        cost: this.state.cost
+      }
+    )
+  }
+
   render () {
 
-    if(!this.state.editing) {
-      return (
-        <View>
-          <TouchableHighlight onPress={() => this.editBudgetItem(true, this.state.item, this.state.type, this.state.cost)} underlayColor="#34495e">
-            <View style={styles.row}>
-              <View style={styles.item}>
-                <Text style={[styles.itemTitle, styles.label]}>{this.state.item}</Text>
-              </View>
-              <View style={styles.cost}>
-                <Text style={[styles.itemCost, styles.label]}>${parseFloat(this.state.cost).toFixed(2)}</Text>
-              </View>
+    return (
+      <View>
+        <TouchableHighlight onPress={() => this.navigateToEdit()} underlayColor="#34495e">
+          <View style={styles.row}>
+            <View style={styles.item}>
+              <Text style={[styles.itemTitle, styles.label]}>{this.state.item}</Text>
             </View>
-          </TouchableHighlight>
-        </View>
-      )
-    } else {
-      return (
-        <View style={styles.row}>
-          <EditItem item={this.props.item} editHandler={this.editBudgetItem.bind(this)}/>
-        </View>
-      )
-    }
+            <View style={styles.cost}>
+              <Text style={[styles.itemCost, styles.label]}>${parseFloat(this.state.cost).toFixed(2)}</Text>
+            </View>
+          </View>
+        </TouchableHighlight>
+      </View>
+    )
   }
 }
