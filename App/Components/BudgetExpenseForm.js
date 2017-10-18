@@ -20,6 +20,14 @@ export default class BudgetExpenseForm extends Component {
     }
   }
 
+  // Set expense category to state
+  _setExpenseCategory (type) {
+    this.setState({
+      type: type
+    })
+  }
+
+  // Handle the submission of the expense form
   _submitExpenseForm() {
 
     var title = this.state.title
@@ -27,6 +35,7 @@ export default class BudgetExpenseForm extends Component {
     var cost = this.state.cost
     var id = this.state.id
 
+    // Send to parent component for processing
     this.props.handler
   }
 
@@ -58,7 +67,7 @@ export default class BudgetExpenseForm extends Component {
           />
         </View>
 
-        <CategorySelect type={this.state.type} />
+        <CategorySelect type={this.state.type} categoryHandler={(type) => this._setExpenseCategory(type)}/>
 
         <View style={[styles.inputContainer, {zIndex: 0}]}>
           <TouchableOpacity style={styles.submitButton} onPress={() => this._submitExpenseForm()}>

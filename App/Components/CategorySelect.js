@@ -36,7 +36,7 @@ export default class CategorySelect extends Component {
     this.setState({
       type: type,
       selectColor: '#FFF'
-    })
+    }, this.props.categoryHandler(type))
   }
 
   render () {
