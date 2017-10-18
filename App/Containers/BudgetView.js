@@ -45,6 +45,9 @@ class BudgetView extends React.PureComponent {
     this.updateBudgetOverview = this.updateBudgetOverview.bind(this)
   }
 
+  /**
+   * Calculate section totals
+   */
   _calculateTotals (data, totalKey) {
     if(!data)
       data = this.state.data
@@ -65,19 +68,27 @@ class BudgetView extends React.PureComponent {
   }
 
   componentDidMount () {
+    this._setBudgetState()
+  }
+
+  /**
+   * Set the budget application state
+   */
+  _setBudgetState () {
+    let budgetData = BudgetService.findAll()
 
     budgetData.forEach( function(item) {
 
       if(item.type === 'Monthly') {
-        monthly.push({title: item.title, cost: item.cost.toFixed(2), type: item.type, id: item.id})
+        monthly.push({title: item.title, cost: item.cost, type: item.type, id: item.id})
       }
 
       if(item.type === 'Daily') {
-        daily.push({title: item.title, cost: item.cost.toFixed(2), type: item.type, id: item.id})
+        daily.push({title: item.title, cost: item.cost, type: item.type, id: item.id})
       }
 
       if(item.type === 'Misc') {
-        misc.push({title: item.title, cost: item.cost.toFixed(2), type: item.type, id: item.id})
+        misc.push({title: item.title, cost: item.cost, type: item.type, id: item.id})
       }
     })
 
@@ -94,12 +105,21 @@ class BudgetView extends React.PureComponent {
           data: misc
         }
       ],
-    })
+    }, this._setTotals())
+  }
 
+  /**
+   * Set the section totals to state + get available balance
+   */
+  _setTotals () {
     var monthTotal = this._calculateTotals(this.state.data, 'Monthly')
     var dailyTotal = this._calculateTotals(this.state.data, 'Daily')
     var miscTotal = this._calculateTotals(this.state.data, 'Misc')
     var total = (monthTotal + dailyTotal + miscTotal)
+
+    monthly = []
+    daily = []
+    misc = []
 
     this.setState({
       spending: total,
@@ -110,29 +130,49 @@ class BudgetView extends React.PureComponent {
     })
   }
 
+  /**
+   * Re-rerun the componentDidMount function to update state
+   */
   updateBudgetOverview() {
     this.componentDidMount()
+    this.forceUpdate()
   }
 
+  /**
+   * Render the budgetItem component
+   */
   renderItem ({item}) {
     return (
       <BudgetItem item={item} updateBudgetOverview={() => this.updateBudgetOverview()}/>
     )
   }
 
+  /**
+   * Render budget section header
+   */
   renderSectionHeader = ({section}) => {
     var total = this._calculateTotals(false, section.key)
 
     return (
       <View style={styles.sectionHeader}>
-        <Text style={styles.headerText}>{section.key}: <Text style={styles.itemCost}>{CurrencyFormat.format(total)}</Text></Text>
+        <Text style={styles.headerText}>{section.key}: <Text style={styles.itemCost}>${parseFloat(total).toFixed(2)}</Text></Text>
       </View>
     )
   }
 
-  // Render a header?
-  renderHeader = () =>
-    <BudgetBalance starting={this.state.starting} balance={this.state.balance}/>
+  /**
+   * Render budget list header (global)
+   */
+  renderHeader = () => {
+    var monthTotal = this._calculateTotals(false, 'Monthly')
+    var dailyTotal = this._calculateTotals(false, 'Daily')
+    var miscTotal = this._calculateTotals(false, 'Misc')
+    var total = (monthTotal + dailyTotal + miscTotal)
+    var balance = (this.state.starting - total)
+    return (
+      <BudgetBalance starting={this.state.starting} balance={balance}/>
+    )
+  }
 
   // Render a footer?
   renderFooter = () =>

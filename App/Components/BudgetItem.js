@@ -53,7 +53,7 @@ export default class BudgetItem extends Component {
                 <Text style={[styles.itemTitle, styles.label]}>{this.state.item}</Text>
               </View>
               <View style={styles.cost}>
-                <Text style={[styles.itemCost, styles.label]}>{CurrencyFormat.format(this.state.cost)}</Text>
+                <Text style={[styles.itemCost, styles.label]}>${parseFloat(this.state.cost).toFixed(2)}</Text>
               </View>
             </View>
           </TouchableHighlight>

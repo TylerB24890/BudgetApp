@@ -19,7 +19,8 @@ export default class BudgetBalance extends Component {
   componentWillReceiveProps(nextProps) {
 
     this.setState({
-      balance: nextProps.balance
+      balance: nextProps.balance,
+      starting: nextProps.starting
     })
 
     if(nextProps.balance < 0) {
@@ -32,13 +33,13 @@ export default class BudgetBalance extends Component {
   componentDidMount () {
     this.state = {
       balanceColor: positiveColor,
-      starting: this.props.starting,
-      balance: this.props.balance
     }
-    
+
     if(this.state.balance < 0) {
       this.setState({
-        balanceColor: negativeColor
+        balanceColor: negativeColor,
+        balance: this.state.balance,
+        starting: this.state.starting
       })
     }
   }

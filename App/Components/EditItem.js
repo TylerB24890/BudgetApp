@@ -11,7 +11,7 @@ export default class EditItem extends Component {
 
     this.state = {
       item: this.props.item.title,
-      cost: this.props.item.cost,
+      cost: this.props.item.cost.toFixed(2),
       itemId: this.props.item.id,
       type: this.props.item.type,
       editing: true
@@ -31,7 +31,7 @@ export default class EditItem extends Component {
             editable={true}
             onChangeText={(text) => this.setState({item: text})}
             style={styles.input}
-            onSubmitEditing={() => this.submitBudgetEdit(false, this.state.item, this.state.type, this.state.cost, this.state.itemId)}
+            onSubmitEditing={() => this.submitBudgetEdit(false, this.state.item, this.state.type, this.state.cost, this.props.item.id)}
           />
         </View>
         <View style={styles.editCost}>
@@ -41,7 +41,7 @@ export default class EditItem extends Component {
             editable={true}
             onChangeText={(text) => this.setState({cost: text})}
             style={styles.input}
-            onSubmitEditing={() => this.submitBudgetEdit(false, this.state.item, this.state.type, this.state.cost, this.state.itemId)}
+            onSubmitEditing={() => this.submitBudgetEdit(false, this.state.item, this.state.type, this.state.cost, this.props.item.id)}
           />
         </View>
       </View>
