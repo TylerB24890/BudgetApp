@@ -8,6 +8,11 @@ export default StyleSheet.create({
     paddingRight: 15,
     marginBottom: 0
   },
+  navElement: {
+    paddingVertical: 15,
+    flex: 1,
+    alignItems: 'flex-start'
+  }
 })
 
 export const barColor = Colors.header

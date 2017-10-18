@@ -1,68 +1,91 @@
 import React from 'react'
-import { Text, TouchableHighlight } from 'react-native'
-import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation'
+import { Text, Animated, View } from 'react-native'
+import { DrawerNavigator, StackNavigator } from 'react-navigation'
+import CategoriesScreen from '../Containers/CategoriesScreen'
+import EditItemScreen from '../Containers/EditItemScreen'
+import SettingsScreen from '../Containers/SettingsScreen'
 import BudgetView from '../Containers/BudgetView'
 import AddItemScreen from '../Containers/AddItemScreen'
 import Icon from 'react-native-vector-icons/Ionicons'
 import styles, { inactiveColor, activeColor, barColor } from './Styles/NavigationStyles'
 
-const TabStack = TabNavigator({
+const DrawerStack = DrawerNavigator({
   BudgetView: {
     screen: BudgetView,
     navigationOptions: ({navigation}) => ({
       title: 'Budget Overview',
-      tabBarLabel: ({ focused }) => (
-        <Text style={{textAlign: 'center', fontSize: 12, color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Budget Overview</Text>
+      drawerLabel: ({ focused }) => (
+        <View style={styles.navElement}>
+          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Budget Overview</Text>
+        </View>
       ),
-      tabBarIcon: ({ focused }) => (
-        <Icon name="ios-list-outline" size={30} color={focused ? '#FFF' : inactiveColor} />
-      ),
-      headerRight: <TouchableHighlight underlayColor="transparent" onPress={() => { navigation.navigate('AddItemScreen') }}><Icon name="ios-add" size={30} color="#ecf0f1" /></TouchableHighlight>
+      drawerIcon: ({ focused }) => (
+        <Icon name="ios-home-outline" size={25} color={focused ? activeColor : inactiveColor} />
+      )
     })
   },
   AddItemScreen: {
     screen: AddItemScreen,
     navigationOptions: ({navigation}) => ({
-      title: 'Add Item',
-      tabBarLabel: ({ focused }) => (
-        <Text style={{textAlign: 'center', fontSize: 12, color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Add Item</Text>
+      title: 'Add Expense',
+      drawerLabel: ({ focused }) => (
+        <View style={styles.navElement}>
+          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Add Expense</Text>
+        </View>
       ),
-      tabBarIcon: ({ focused }) => (
-        <Icon name="ios-add-circle-outline" size={30} color={focused ? '#FFF' : inactiveColor} />
+      drawerIcon: ({ focused }) => (
+        <Icon name="ios-add-outline" size={25} color={focused ? activeColor : inactiveColor} />
+      )
+    })
+  },
+  CategoriesScreen: {
+    screen: CategoriesScreen,
+    navigationOptions: ({navigation}) => ({
+      title: 'Budget Catgories',
+      drawerLabel: ({ focused }) => (
+        <View style={styles.navElement}>
+          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Budget Categories</Text>
+        </View>
       ),
-      headerLeft: <TouchableHighlight underlayColor="transparent" onPress={() => { navigation.navigate('BudgetView') }}><Icon name="ios-arrow-back" size={30} color="#ecf0f1" /></TouchableHighlight>
+      drawerIcon: ({ focused }) => (
+        <Icon name="ios-list-outline" size={25} color={focused ? activeColor : inactiveColor} />
+      )
+    })
+  },
+  SettingsScreen: {
+    screen: SettingsScreen,
+    navigationOptions: ({navigation}) => ({
+      title: 'Budget Settings',
+      drawerLabel: ({ focused }) => (
+        <View style={styles.navElement}>
+          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Settings</Text>
+        </View>
+      ),
+      drawerIcon: ({ focused }) => (
+        <Icon name="ios-settings-outline" size={25} color={focused ? activeColor : inactiveColor} />
+      )
     })
   },
 }, {
-  swipeEnabled: false,
-  lazy: false,
-  tabBarOptions: {
-    showIcon: true,
-    tabStyle: {
-      flex: 1,
-      justifyContent: 'center'
-    },
-  },
-  tabBarComponent: props => {
-    return (
-      <TabBarBottom
-        {...props}
-        style={{ backgroundColor: barColor }}
-      />
-    )
-  }
+  drawerWidth: 250,
 })
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  TabStack: { screen: TabStack }
+  EditItemScreen: { screen: EditItemScreen },
+  DrawerStack: { screen: DrawerStack }
 }, {
   // Default config for all screens
   headerMode: 'float',
-  initialRouteName: 'TabStack',
+  initialRouteName: 'DrawerStack',
   navigationOptions: ({navigation}) => ({
     headerStyle: styles.header,
     headerTintColor: '#ecf0f1',
+    headerLeft: <Icon name={navigation.state.index == 0 ? 'ios-menu' : 'ios-close'} size={30} color='#FFF' onPress={() => { if(navigation.state.index === 0) {
+      navigation.navigate('DrawerOpen')
+    } else {
+      navigation.navigate('DrawerClose')
+    }}} />
   })
 })
 
