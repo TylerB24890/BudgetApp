@@ -12,7 +12,7 @@ export default class BudgetExpenseForm extends Component {
     this.state = {
       id: this.props.id,
       item: this.props.title,
-      cost: this.props.cost.toFixed(2),
+      cost: parseFloat(this.props.cost).toFixed(2),
       type: this.props.type
     }
   }
@@ -22,11 +22,13 @@ export default class BudgetExpenseForm extends Component {
       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <TextInput
+            placeholder="Expense title"
+            placeholderTextColor="rgba(255,255,255,.6)"
             value={this.state.item}
             editable={true}
             onChangeText={(text) => this.setState({item: text})}
             style={styles.input}
-            onSubmitEditing={() => this.submitBudgetEdit(this.state.item, this.state.type, this.state.cost, this.props.item.id)}
+            onSubmitEditing={() => this.submitBudgetEdit(this.state.item, this.state.type, this.state.cost, this.state.id)}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -37,7 +39,7 @@ export default class BudgetExpenseForm extends Component {
             options={{separator: '.', unit: '$'}}
             onChangeText={(text) => this.setState({cost: text})}
             style={[styles.input, styles.costInput]}
-            onSubmitEditing={() => this.submitBudgetEdit(this.state.item, this.state.type, this.state.cost, this.props.item.id)}
+            onSubmitEditing={() => this.submitBudgetEdit(this.state.item, this.state.type, this.state.cost, this.state.id)}
             keyboardType="numeric"
           />
         </View>
