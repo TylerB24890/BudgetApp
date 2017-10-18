@@ -52,10 +52,10 @@ const DrawerStack = DrawerNavigator({
   CategoriesScreen: {
     screen: CategoriesScreen,
     navigationOptions: ({navigation}) => ({
-      title: 'Budget Catgories',
+      title: 'Expense Categories',
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
-          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Budget Categories</Text>
+          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Expense Categories</Text>
         </View>
       ),
       drawerIcon: ({ focused }) => (

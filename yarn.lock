@@ -6565,6 +6565,10 @@ react-native-masked-text@^1.6.2:
     moment "^2.18.1"
     tinymask "^1.0.2"
 
+react-native-option-select@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-option-select/-/react-native-option-select-1.0.4.tgz#cb6b8e14271747e256cc000eab873ab8c7d3d03f"
+
 react-native-tab-view@^0.0.69:
   version "0.0.69"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.69.tgz#f52d4354a98a382f10eb5fcf61db5216c91dc7e7"

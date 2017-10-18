@@ -1,6 +1,6 @@
 import DbUtils from '../Utils/DbUtils'
 
-class BudgetModel {
+class ExpenseModel {
   constructor(type, title, cost) {
     this.id = DbUtils.guid()
     this.type = type
@@ -9,4 +9,4 @@ class BudgetModel {
   }
 }
 
-module.exports = BudgetModel
+module.exports = ExpenseModel

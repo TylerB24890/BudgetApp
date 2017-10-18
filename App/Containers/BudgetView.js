@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, SectionList, Text, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
-import BudgetService from '../Services/BudgetService'
+import ExpenseService from '../Services/BudgetService'
 import BudgetBalance from '../Components/BudgetBalance'
 import BudgetItem from '../Components/BudgetItem'
 import { CurrencyFormat } from '../Utils/CurrencyFormat'
@@ -10,7 +10,7 @@ import { CurrencyFormat } from '../Utils/CurrencyFormat'
 
 // Styles
 import styles from './Styles/BudgetViewStyle'
-let budgetData = BudgetService.findAll()
+let expenseData = ExpenseService.findAll()
 let monthly = []
 let daily = []
 let misc = []
@@ -72,12 +72,12 @@ class BudgetView extends React.PureComponent {
   }
 
   /**
-   * Set the budget application state
+   * Set the expense application state
    */
   _setBudgetState () {
-    let budgetData = BudgetService.findAll()
+    let expenseData = ExpenseService.findAll()
 
-    budgetData.forEach( function(item) {
+    expenseData.forEach( function(item) {
 
       if(item.type === 'Monthly') {
         monthly.push({title: item.title, cost: item.cost, type: item.type, id: item.id})
@@ -139,7 +139,7 @@ class BudgetView extends React.PureComponent {
   }
 
   /**
-   * Render the budgetItem component
+   * Render the expenseItem component
    */
   renderItem ({item}) {
     return (
@@ -148,7 +148,7 @@ class BudgetView extends React.PureComponent {
   }
 
   /**
-   * Render budget section header
+   * Render expense section header
    */
   renderSectionHeader = ({section}) => {
     var total = this._calculateTotals(false, section.key)
@@ -161,7 +161,7 @@ class BudgetView extends React.PureComponent {
   }
 
   /**
-   * Render budget list header (global)
+   * Render expense list header (global)
    */
   renderHeader = () => {
     var monthTotal = this._calculateTotals(false, 'Monthly')

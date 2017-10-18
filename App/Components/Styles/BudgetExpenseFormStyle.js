@@ -6,11 +6,10 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: (Metrics.screenHeight / 6)
+    paddingTop: (Metrics.screenHeight / 7)
   },
   inputContainer: {
     flexDirection: 'row',
-    position: 'relative'
   },
   input: {
     backgroundColor: Colors.background,
@@ -19,11 +18,17 @@ export default StyleSheet.create({
     borderBottomWidth: .5,
     borderBottomColor: '#FFF',
     marginBottom: 30,
-    flex: .8
+    flex: .8,
+    paddingHorizontal: 10
   },
-  moneySign: {
+  submitButton: {
+    backgroundColor: '#16a085',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginTop: 60
+  },
+  submitText: {
     color: '#FFF',
-    fontSize: 16,
-    display: 'none'
+    fontSize: 18
   }
 })

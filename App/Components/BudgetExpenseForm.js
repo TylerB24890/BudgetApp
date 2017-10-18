@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
-import { View, Text, TextInput } from 'react-native'
-import {TextInputMask} from 'react-native-masked-text';
+import { View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native'
+import { TextInputMask } from 'react-native-masked-text';
+import CategorySelect from './CategorySelect'
+
 import styles from './Styles/BudgetExpenseFormStyle'
 
 export default class BudgetExpenseForm extends Component {
@@ -13,16 +15,17 @@ export default class BudgetExpenseForm extends Component {
       id: this.props.id,
       title: this.props.title,
       cost: parseFloat(this.props.cost).toFixed(2),
-      type: this.props.type
+      type: this.props.type,
+      inputColor: 'rgba(255,255,255,.6)'
     }
   }
 
-  submitExpenseForm(title, type, cost, id) {
-    if(id === '' || id.length < 2) {
-      // Save new realm object
-    } else {
-      // Update existing realm object
-    }
+  _submitExpenseForm() {
+
+    var title = this.state.title
+    var type = this.state.type
+    var cost = this.state.cost
+    var id = this.state.id
 
     this.props.handler
   }
@@ -36,22 +39,31 @@ export default class BudgetExpenseForm extends Component {
             placeholderTextColor="rgba(255,255,255,.6)"
             value={this.state.title}
             editable={true}
-            onChangeText={(text) => this.setState({item: text})}
+            onChangeText={(text) => this.setState({title: text})}
+            onEndEditing={Keyboard.dismiss}
+            onBlur={Keyboard.dismiss}
             style={styles.input}
-            onSubmitEditing={() => this.submitExpenseForm(this.state.title, this.state.type, this.state.cost, this.state.id)}
           />
         </View>
         <View style={styles.inputContainer}>
-          <Text style={styles.moneySign}>$</Text>
           <TextInputMask
             value={this.state.cost}
             type={'money'}
-            options={{separator: '.', unit: '$'}}
+            options={{separator: '.', unit: '$', delimiter: ','}}
             onChangeText={(text) => this.setState({cost: text})}
+            onEndEditing={Keyboard.dismiss}
+            onBlur={Keyboard.dismiss}
             style={[styles.input, styles.costInput]}
-            onSubmitEditing={() => this.submitExpenseForm(this.state.title, this.state.type, this.state.cost, this.state.id)}
             keyboardType="numeric"
           />
+        </View>
+
+        <CategorySelect type={this.state.type} />
+
+        <View style={[styles.inputContainer, {zIndex: 0}]}>
+          <TouchableOpacity style={styles.submitButton} onPress={() => this._submitExpenseForm()}>
+            <Text style={styles.submitText}>Save Expense</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )
