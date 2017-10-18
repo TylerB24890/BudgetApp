@@ -41,6 +41,7 @@ export default class EditItem extends Component {
             onChangeText={(text) => this.setState({cost: text})}
             style={[styles.input, styles.costInput]}
             onSubmitEditing={() => this.submitBudgetEdit(this.state.item, this.state.type, this.state.cost, this.props.item.id)}
+            keyboardType="numeric"
           />
         </View>
       </View>
