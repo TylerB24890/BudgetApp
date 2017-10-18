@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
+import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
+import { EditItem } from '../Components/EditItem'
 
 // Styles
 import styles from './Styles/EditItemScreenStyle'
@@ -10,11 +9,9 @@ import styles from './Styles/EditItemScreenStyle'
 class EditItemScreen extends Component {
   render () {
     return (
-      <ScrollView style={styles.container}>
-        <KeyboardAvoidingView behavior='position'>
-          <Text>EditItemScreen</Text>
-        </KeyboardAvoidingView>
-      </ScrollView>
+      <View style={styles.container}>
+
+      </View>
     )
   }
 }
