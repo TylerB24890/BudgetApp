@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, Keyboard } from 'react-native'
+import Realm from 'realm'
 import { CategorySchema } from '../Fixtures/BudgetSchemas'
 import CategoryModel from '../Fixtures/CategoryModel'
 import DropDown, { Select, Option, OptionList } from 'react-native-option-select'
@@ -41,7 +42,7 @@ export default class CategorySelect extends Component {
   }
 
   _returnExpenseCategories () {
-    var realm = new Realm({schema: [CategorySchema]})
+    var realm = new Realm({path: 'CategorySelect.realm', schema: [CategorySchema]})
     var categories = realm.objects('Category').sorted('title')
     var categoryDisplay = categories.map(catData => (
       <Option key={catData.id} style={styles.option} value={catData.title}>{catData.title}</Option>

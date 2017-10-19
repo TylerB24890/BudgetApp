@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
-import { View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { TextInputMask } from 'react-native-masked-text';
 import CategorySelect from './CategorySelect'
 
@@ -36,7 +36,7 @@ export default class BudgetExpenseForm extends Component {
     var id = this.state.id
 
     // Send to parent component for processing
-    this.props.handler
+    this.props.handler(title, cost)
   }
 
   render () {
@@ -49,8 +49,6 @@ export default class BudgetExpenseForm extends Component {
             value={this.state.title}
             editable={true}
             onChangeText={(text) => this.setState({title: text})}
-            onEndEditing={Keyboard.dismiss}
-            onBlur={Keyboard.dismiss}
             style={styles.input}
           />
         </View>
@@ -60,8 +58,6 @@ export default class BudgetExpenseForm extends Component {
             type={'money'}
             options={{separator: '.', unit: '$', delimiter: ','}}
             onChangeText={(text) => this.setState({cost: text})}
-            onEndEditing={Keyboard.dismiss}
-            onBlur={Keyboard.dismiss}
             style={[styles.input, styles.costInput]}
             keyboardType="numeric"
           />
@@ -69,7 +65,7 @@ export default class BudgetExpenseForm extends Component {
 
         <CategorySelect type={this.state.type} categoryHandler={(type) => this._setExpenseCategory(type)}/>
 
-        <View style={[styles.inputContainer, {zIndex: 0}]}>
+        <View style={styles.inputContainer} keyboardShouldPersistTaps="always">
           <TouchableOpacity style={styles.submitButton} onPress={() => this._submitExpenseForm()}>
             <Text style={styles.submitText}>Save Expense</Text>
           </TouchableOpacity>

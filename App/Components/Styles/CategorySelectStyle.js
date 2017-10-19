@@ -16,7 +16,7 @@ export default StyleSheet.create({
     borderBottomColor: '#FFF',
     marginBottom: 30,
     flex: .8,
-    zIndex: 2,
+    zIndex: 1,
   },
   option: {
     borderBottomWidth: .5,

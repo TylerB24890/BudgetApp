@@ -77,7 +77,7 @@ class BudgetView extends React.PureComponent {
    */
   _setBudgetState () {
 
-    var realm = new Realm({schema: [ExpenseSchema]})
+    var realm = new Realm({path: 'BudgetView.realm', schema: [ExpenseSchema]})
     let expenseData = realm.objects('BudgetItem').sorted('type')
 
     expenseData.forEach( function(item) {

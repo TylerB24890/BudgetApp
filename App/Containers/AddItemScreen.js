@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import BudgetExpenseForm from '../Components/BudgetExpenseForm'
 
@@ -12,15 +12,15 @@ class AddItemScreen extends Component {
     super(props)
   }
 
-  handleNewExpense() {
-    
+  handleNewExpense(title, cost) {
+    console.log(title, cost)
   }
 
   render () {
     return (
-      <View style={styles.container}>
-        <BudgetExpenseForm id='' title='' cost='0.00' type='' handler={() => this.handleNewExpense()}/>
-      </View>
+      <ScrollView scrollEnabled={false} style={styles.container} keyboardShouldPersistTaps="never">
+        <BudgetExpenseForm id='' title='' cost='0.00' type='' handler={(title, cost) => this.handleNewExpense(title, cost)}/>
+      </ScrollView>
     )
   }
 }
