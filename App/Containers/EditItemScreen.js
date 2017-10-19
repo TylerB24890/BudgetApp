@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { ScrollView, Text } from 'react-native'
 import { connect } from 'react-redux'
 import BudgetExpenseForm from '../Components/BudgetExpenseForm'
 
@@ -13,16 +13,16 @@ class EditItemScreen extends Component {
   }
 
   handleExpenseEdit() {
-    
+
   }
 
   render () {
     const data = this.props.navigation.state.params
 
     return (
-      <View style={styles.container}>
+      <ScrollView scrollEnabled={false} style={styles.container} keyboardShouldPersistTaps="never">
         <BudgetExpenseForm title={data.title} cost={data.cost} type={data.type} id={data.id} handler={() => this.handleExpenseEdit()}/>
-      </View>
+      </ScrollView>
     )
   }
 }

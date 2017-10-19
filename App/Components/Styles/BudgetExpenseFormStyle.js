@@ -4,28 +4,23 @@ import Metrics from '../../Themes/Metrics'
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: (Metrics.screenHeight / 7)
+    paddingTop: (Metrics.screenHeight / 7),
+    paddingHorizontal: 30
   },
-  inputContainer: {
-    flexDirection: 'row',
+  inputGroup: {
+    marginVertical: 10,
   },
   input: {
     backgroundColor: Colors.background,
     color: '#FFF',
-    height: 50,
-    borderBottomWidth: .5,
-    borderBottomColor: '#FFF',
-    marginBottom: 30,
-    flex: .8,
-    paddingHorizontal: 10
   },
   submitButton: {
     backgroundColor: '#16a085',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    marginTop: 60
+    marginTop: 50,
+    borderBottomWidth: 0,
+    alignSelf: 'center'
   },
   submitText: {
     color: '#FFF',

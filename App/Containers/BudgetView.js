@@ -6,7 +6,6 @@ import { ExpenseSchema } from '../Fixtures/BudgetSchemas'
 import ExpenseModel from '../Fixtures/ExpenseModel'
 import BudgetBalance from '../Components/BudgetBalance'
 import BudgetItem from '../Components/BudgetItem'
-import { CurrencyFormat } from '../Utils/CurrencyFormat'
 
 // More info here: https://facebook.github.io/react-native/docs/sectionlist.html
 

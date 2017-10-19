@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { Container, Content, InputGroup, Input, Icon, Text, Button } from 'native-base'
 import { TextInputMask } from 'react-native-masked-text';
 import CategorySelect from './CategorySelect'
 
@@ -16,7 +15,6 @@ export default class BudgetExpenseForm extends Component {
       title: this.props.title,
       cost: parseFloat(this.props.cost).toFixed(2),
       type: this.props.type,
-      inputColor: 'rgba(255,255,255,.6)'
     }
   }
 
@@ -41,36 +39,40 @@ export default class BudgetExpenseForm extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Expense name"
-            placeholderTextColor="rgba(255,255,255,.6)"
-            value={this.state.title}
-            editable={true}
-            onChangeText={(text) => this.setState({title: text})}
-            style={styles.input}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInputMask
-            value={this.state.cost}
-            type={'money'}
-            options={{separator: '.', unit: '$', delimiter: ','}}
-            onChangeText={(text) => this.setState({cost: text})}
-            style={[styles.input, styles.costInput]}
-            keyboardType="numeric"
-          />
-        </View>
 
-        <CategorySelect type={this.state.type} categoryHandler={(type) => this._setExpenseCategory(type)}/>
+      <Container style={styles.container}>
+        <Content scrollEnabled={false}>
+          <InputGroup style={styles.inputGroup}>
+            <Input
+              placeholder="Expense name"
+              placeholderTextColor="rgba(255,255,255,.6)"
+              value={this.state.title}
+              editable={true}
+              onChangeText={(text) => this.setState({title: text})}
+            />
+          </InputGroup>
 
-        <View style={styles.inputContainer} keyboardShouldPersistTaps="always">
-          <TouchableOpacity style={styles.submitButton} onPress={() => this._submitExpenseForm()}>
+          <InputGroup style={styles.inputGroup}>
+            <Icon active name="logo-usd" style={{color: 'rgba(255,255,255,.6)', fontSize: 18}} />
+            <Input
+              placeholder={"0.00"}
+              placeholderTextColor="rgba(255,255,255,.6)"
+              value={this.state.cost !== "0.00" ? this.state.cost : ""}
+              onChangeText={(text) => this.setState({cost: text})}
+              keyboardType="numeric"
+            />
+          </InputGroup>
+
+          <InputGroup style={styles.inputGroup}>
+            <CategorySelect type={this.state.type} categoryHandler={(type) => this._setExpenseCategory(type)}/>
+          </InputGroup>
+
+          <Button style={styles.submitButton} onPress={() => this._submitExpenseForm()}>
             <Text style={styles.submitText}>Save Expense</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+          </Button>
+        </Content>
+      </Container>
+
     )
   }
 }

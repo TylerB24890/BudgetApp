@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text, Keyboard } from 'react-native'
+import { Picker } from 'native-base'
 import Realm from 'realm'
 import { CategorySchema } from '../Fixtures/BudgetSchemas'
 import CategoryModel from '../Fixtures/CategoryModel'
-import DropDown, { Select, Option, OptionList } from 'react-native-option-select'
 
 import styles from './Styles/CategorySelectStyle'
 import Colors from '../Themes/Colors'
 
+const Item = Picker.Item
 
 export default class CategorySelect extends Component {
 
@@ -20,32 +20,27 @@ export default class CategorySelect extends Component {
     }
   }
 
-  componentDidMount () {
-    if(this.props.type !== '') {
-      this.setState({
-        selectColor: '#FFF'
-      })
-    }
-  }
-
-  _getOptionList () {
-    return this.refs['OPTIONLIST']
-  }
-
-  _updateExpenseType (type) {
-    Keyboard.dismiss
-
+  _updateExpenseType (value) {
     this.setState({
-      type: type,
-      selectColor: '#FFF'
-    }, this.props.categoryHandler(type))
+      type: value,
+      selectColor: (value === "key0" ? 'rgba(255,255,255,.6)' : '#FFF')
+    }, this.props.categoryHandler(value))
   }
 
   _returnExpenseCategories () {
     var realm = new Realm({path: 'CategorySelect.realm', schema: [CategorySchema]})
+
+    /*
+    realm.write(() => {
+      realm.create('Category', new CategoryModel('Bills'))
+      realm.create('Category', new CategoryModel('Entertainment'))
+      realm.create('Category', new CategoryModel('Food'))
+    })
+    */
+
     var categories = realm.objects('Category').sorted('title')
     var categoryDisplay = categories.map(catData => (
-      <Option key={catData.id} style={styles.option} value={catData.title}>{catData.title}</Option>
+      <Item key={catData.id} value={catData.title} label={catData.title} />
     ))
 
     return categoryDisplay
@@ -53,26 +48,21 @@ export default class CategorySelect extends Component {
 
   render () {
 
-    var val = this.state.type.length > 1 ? this.state.type : 'Expense Category'
+    var val = this.state.type.length > 1 ? this.state.type : 'key0'
     categoryDisplay = this._returnExpenseCategories()
 
-    return (
-      <View style={styles.container}>
-        <Select
-          style={styles.select}
-          optionListRef={this._getOptionList.bind(this)}
-          defaultValue={val}
-          onSelect={this._updateExpenseType.bind(this)}
-          styleText={{color: this.state.selectColor, fontSize: 16}}
-        >
-          {categoryDisplay}
-        </Select>
+    categoryDisplay.unshift(<Item key="key0" label="Expense Category" value="key0" />)
 
-        <OptionList
-          ref="OPTIONLIST"
-          overlayStyles={{backgroundColor: Colors.backgroundTransparent}}
-        />
-      </View>
+    return (
+        <Picker
+          iosHeader="Category"
+          mode="dropdown"
+          selectedValue={val}
+          onValueChange={this._updateExpenseType.bind(this)}
+          textStyle={{color: this.state.selectColor}}>
+          {categoryDisplay}
+
+        </Picker>
     )
   }
 }
