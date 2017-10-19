@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Content, InputGroup, Input, Icon, Text, Button } from 'native-base'
+import { Container, Content, Form, InputGroup, Input, Icon, Text, Button } from 'native-base'
 import { TextInputMask } from 'react-native-masked-text';
 import CategorySelect from './CategorySelect'
 
@@ -21,7 +21,7 @@ export default class BudgetExpenseForm extends Component {
   // Set expense category to state
   _setExpenseCategory (type) {
     this.setState({
-      type: type
+      type: type,
     })
   }
 
@@ -33,8 +33,7 @@ export default class BudgetExpenseForm extends Component {
     var cost = this.state.cost
     var id = this.state.id
 
-    // Send to parent component for processing
-    this.props.handler(title, cost)
+    this.props.handler(title, type, cost, id)
   }
 
   render () {
@@ -42,34 +41,36 @@ export default class BudgetExpenseForm extends Component {
 
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
-          <InputGroup style={styles.inputGroup}>
-            <Input
-              placeholder="Expense name"
-              placeholderTextColor="rgba(255,255,255,.6)"
-              value={this.state.title}
-              editable={true}
-              onChangeText={(text) => this.setState({title: text})}
-            />
-          </InputGroup>
+          <Form>
+            <InputGroup style={styles.inputGroup}>
+              <Input
+                placeholder="Expense name"
+                placeholderTextColor="rgba(255,255,255,.6)"
+                value={this.state.title}
+                editable={true}
+                onChangeText={(text) => this.setState({title: text})}
+                style={{color: '#FFF'}}
+              />
+            </InputGroup>
 
-          <InputGroup style={styles.inputGroup}>
-            <Icon active name="logo-usd" style={{color: 'rgba(255,255,255,.6)', fontSize: 18}} />
-            <Input
-              placeholder={"0.00"}
-              placeholderTextColor="rgba(255,255,255,.6)"
-              value={this.state.cost !== "0.00" ? this.state.cost : ""}
-              onChangeText={(text) => this.setState({cost: text})}
-              keyboardType="numeric"
-            />
-          </InputGroup>
+            <InputGroup style={styles.inputGroup}>
+              <Icon active name="logo-usd" style={{color: 'rgba(255,255,255,.6)', fontSize: 18}} />
+              <Input
+                placeholder={"0.00"}
+                placeholderTextColor="rgba(255,255,255,.6)"
+                value={this.state.cost !== "0.00" ? this.state.cost : ""}
+                onChangeText={(text) => this.setState({cost: text})}
+                keyboardType="numeric"
+                style={{color: '#FFF'}}
+              />
+            </InputGroup>
 
-          <InputGroup style={styles.inputGroup}>
             <CategorySelect type={this.state.type} categoryHandler={(type) => this._setExpenseCategory(type)}/>
-          </InputGroup>
 
-          <Button style={styles.submitButton} onPress={() => this._submitExpenseForm()}>
-            <Text style={styles.submitText}>Save Expense</Text>
-          </Button>
+            <Button style={styles.submitButton} onPress={() => this._submitExpenseForm()}>
+              <Text style={styles.submitText}>Save Expense</Text>
+            </Button>
+          </Form>
         </Content>
       </Container>
 

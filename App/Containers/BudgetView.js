@@ -2,7 +2,7 @@ import React from 'react'
 import { View, SectionList, Text, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 import Realm from 'realm'
-import { ExpenseSchema } from '../Fixtures/BudgetSchemas'
+import { CategorySchema, ExpenseSchema } from '../Fixtures/BudgetSchemas'
 import ExpenseModel from '../Fixtures/ExpenseModel'
 import BudgetBalance from '../Components/BudgetBalance'
 import BudgetItem from '../Components/BudgetItem'
@@ -28,18 +28,8 @@ class BudgetView extends React.PureComponent {
       monthly: 0,
       daily: 0,
       misc: 0,
-      data: [
-        {
-          key: 'Monthly',
-          data: monthly
-        }, {
-          key: 'Daily',
-          data: daily
-        }, {
-          key: 'Misc',
-          data: misc
-        }
-      ],
+      updated: false,
+      data: [],
     }
 
     this.updateBudgetOverview = this.updateBudgetOverview.bind(this)
@@ -71,13 +61,19 @@ class BudgetView extends React.PureComponent {
     this._setBudgetState()
   }
 
+  componentWillReceiveProps(nextProps) {
+    const data = this.props.navigation.state.params
+    this.setState({updated: nextProps.updated})
+  }
+
   /**
    * Set the expense application state
    */
   _setBudgetState () {
-
-    var realm = new Realm({path: 'BudgetView.realm', schema: [ExpenseSchema]})
-    let expenseData = realm.objects('BudgetItem').sorted('type')
+    let realm = new Realm({schema: [ExpenseSchema]})
+    var expenseData = realm.objects('BudgetItem').sorted('type')
+    
+    console.log(Array.from(expenseData))
 
     expenseData.forEach( function(item) {
 

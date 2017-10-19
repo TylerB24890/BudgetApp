@@ -89,6 +89,12 @@ const PrimaryNav = StackNavigator({
       title: 'Edit Expense'
     })
   },
+  BudgetView: {
+    screen: BudgetView,
+    navigationOptions: ({navigation}) => ({
+      title: 'Budget Overview',
+    })
+  },
   DrawerStack: { screen: DrawerStack }
 }, {
   // Default config for all screens

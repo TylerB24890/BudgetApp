@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Picker } from 'native-base'
+import { Picker, InputGroup } from 'native-base'
 import Realm from 'realm'
 import { CategorySchema } from '../Fixtures/BudgetSchemas'
-import CategoryModel from '../Fixtures/CategoryModel'
 
 import styles from './Styles/CategorySelectStyle'
 import Colors from '../Themes/Colors'
@@ -16,27 +15,35 @@ export default class CategorySelect extends Component {
 
     this.state = {
       type: this.props.type,
-      selectColor: 'rgba(255,255,255,.6)'
+      selectColor: 'rgba(255,255,255,.6)',
+      success: false,
+      error: false
     }
   }
 
   _updateExpenseType (value) {
-    this.setState({
-      type: value,
-      selectColor: (value === "key0" ? 'rgba(255,255,255,.6)' : '#FFF')
-    }, this.props.categoryHandler(value))
+
+    if(value !== 'key0') {
+      this.setState({
+        type: value,
+        selectColor: '#FFF',
+        success: true,
+      }, this.props.categoryHandler(value))
+    } else {
+      this.setState({
+        error: true
+      })
+    }
   }
 
   _returnExpenseCategories () {
     var realm = new Realm({path: 'CategorySelect.realm', schema: [CategorySchema]})
 
-    /*
     realm.write(() => {
       realm.create('Category', new CategoryModel('Bills'))
       realm.create('Category', new CategoryModel('Entertainment'))
       realm.create('Category', new CategoryModel('Food'))
     })
-    */
 
     var categories = realm.objects('Category').sorted('title')
     var categoryDisplay = categories.map(catData => (
@@ -54,6 +61,11 @@ export default class CategorySelect extends Component {
     categoryDisplay.unshift(<Item key="key0" label="Expense Category" value="key0" />)
 
     return (
+      <InputGroup
+        style={{marginTop: 15}}
+        error={this.state.error}
+        success={this.state.success}
+      >
         <Picker
           iosHeader="Category"
           mode="dropdown"
@@ -63,6 +75,7 @@ export default class CategorySelect extends Component {
           {categoryDisplay}
 
         </Picker>
+      </InputGroup>
     )
   }
 }
