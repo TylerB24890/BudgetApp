@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, Keyboard } from 'react-native'
-import CategoryService from '../Services/BudgetService'
+import CategorySchema, { CategoryModel } from '../Fixtures/CategoryModel'
 import DropDown, { Select, Option, OptionList } from 'react-native-option-select'
 
 import styles from './Styles/CategorySelectStyle'
@@ -39,9 +39,20 @@ export default class CategorySelect extends Component {
     }, this.props.categoryHandler(type))
   }
 
+  _returnExpenseCategories () {
+    var realm = new Realm({schema: CategorySchema})
+    var categories = realm.objects('Category').sorted('title')
+    var categoryDisplay = categories.map(catData => (
+      <Option key={catData.id} style={styles.option} value={catData.title}>{catData.title}</Option>
+    ))
+
+    return categoryDisplay
+  }
+
   render () {
 
     var val = this.state.type.length > 1 ? this.state.type : 'Expense Category'
+    categoryDisplay = this._returnExpenseCategories()
 
     return (
       <View style={styles.container}>
@@ -52,9 +63,7 @@ export default class CategorySelect extends Component {
           onSelect={this._updateExpenseType.bind(this)}
           styleText={{color: this.state.selectColor, fontSize: 16}}
         >
-          <Option style={styles.option} value="Monthly">Monthly</Option>
-          <Option style={styles.option} value="Daily">Daily</Option>
-          <Option style={styles.option} value="Misc">Misc</Option>
+          {categoryDisplay}
         </Select>
 
         <OptionList

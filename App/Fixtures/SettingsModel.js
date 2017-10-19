@@ -1,6 +1,6 @@
 import DbUtils from '../Utils/DbUtils'
 
-class SettingsModel {
+export default class SettingsModel {
   constructor(name, starting) {
     this.id = DbUtils.guid()
     this.name = name,
@@ -8,4 +8,13 @@ class SettingsModel {
   }
 }
 
-module.exports = SettingsModel
+// User Settings Schema
+export const SettingsSchema = {
+  name: 'Settings',
+  primaryKey: 'id',
+  properties: {
+    id: {type: 'string', indexed: true},
+    name: 'string',
+    starting: 'float',
+  }
+}

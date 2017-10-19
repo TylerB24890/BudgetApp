@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, SectionList, Text, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
-import ExpenseService from '../Services/BudgetService'
+import Realm from 'realm'
+import ExpenseSchema from '../Fixtures/ExpenseModel'
 import BudgetBalance from '../Components/BudgetBalance'
 import BudgetItem from '../Components/BudgetItem'
 import { CurrencyFormat } from '../Utils/CurrencyFormat'
@@ -10,7 +11,6 @@ import { CurrencyFormat } from '../Utils/CurrencyFormat'
 
 // Styles
 import styles from './Styles/BudgetViewStyle'
-let expenseData = ExpenseService.findAll()
 let monthly = []
 let daily = []
 let misc = []
@@ -75,7 +75,9 @@ class BudgetView extends React.PureComponent {
    * Set the expense application state
    */
   _setBudgetState () {
-    let expenseData = ExpenseService.findAll()
+
+    var realm = new Realm({schema: ExpenseSchema})
+    let expenseData = realm.objects('BudgetItem').sorted('type')
 
     expenseData.forEach( function(item) {
 
