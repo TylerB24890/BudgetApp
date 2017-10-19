@@ -2,7 +2,8 @@ import React from 'react'
 import { View, SectionList, Text, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 import Realm from 'realm'
-import ExpenseSchema from '../Fixtures/ExpenseModel'
+import { ExpenseSchema } from '../Fixtures/BudgetSchemas'
+import ExpenseModel from '../Fixtures/ExpenseModel'
 import BudgetBalance from '../Components/BudgetBalance'
 import BudgetItem from '../Components/BudgetItem'
 import { CurrencyFormat } from '../Utils/CurrencyFormat'
@@ -76,7 +77,7 @@ class BudgetView extends React.PureComponent {
    */
   _setBudgetState () {
 
-    var realm = new Realm({schema: ExpenseSchema})
+    var realm = new Realm({schema: [ExpenseSchema]})
     let expenseData = realm.objects('BudgetItem').sorted('type')
 
     expenseData.forEach( function(item) {

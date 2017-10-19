@@ -9,14 +9,4 @@ export class ExpenseModel {
   }
 }
 
-// Budget Expense
-export const ExpenseSchema = {
-  name: 'BudgetItem',
-  primaryKey: 'id',
-  properties: {
-    id: {type: 'string', indexed: true},
-    type: 'string',
-    title: 'string',
-    cost: 'float'
-  }
-}
+module.exports = ExpenseModel
