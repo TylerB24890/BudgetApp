@@ -12,9 +12,7 @@ import BudgetItem from '../Components/BudgetItem'
 
 // Styles
 import styles from './Styles/BudgetViewStyle'
-let monthly = []
-let daily = []
-let misc = []
+let total = []
 
 let realm = new Realm({schema: [ExpenseSchema]})
 
@@ -43,9 +41,8 @@ class BudgetView extends React.PureComponent {
       data = this.state.data
 
     var sectionTotal = 0
-
+    
     data.forEach( function (item) {
-
       if(item.key === totalKey) {
         var itemData = item.data
         itemData.forEach( function(lineItem) {
@@ -107,7 +104,6 @@ class BudgetView extends React.PureComponent {
    */
   renderSectionHeader = ({section}) => {
     var total = this._calculateTotals(false, section.key)
-
     return (
       <View style={styles.sectionHeader}>
         <Text style={styles.headerText}>{section.key}: <Text style={styles.itemCost}>${parseFloat(total).toFixed(2)}</Text></Text>
