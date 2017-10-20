@@ -1,5 +1,8 @@
 import BudgetCalculations from './BudgetCalculations'
 
+/**
+ * Class to format the budget state object by 'key' (Category)
+ */
 class BudgetObjectFormat {
   constructor(data) {
     var budgetData = []

@@ -1,20 +1,24 @@
+// Core
 import React from 'react'
-import { View, SectionList, Text, TouchableHighlight } from 'react-native'
+import { View, SectionList, Text } from 'react-native'
 import { connect } from 'react-redux'
+
+// Database
 import Realm from 'realm'
-import { CategorySchema, ExpenseSchema } from '../Fixtures/BudgetSchemas'
+import { ExpenseSchema } from '../Fixtures/BudgetSchemas'
 import ExpenseModel from '../Fixtures/ExpenseModel'
+
+// Utilities
 import BudgetCalculations from '../Utils/BudgetCalculations'
-import BudgetBalance from '../Components/BudgetBalance'
 import BudgetObjectFormat from '../Utils/BudgetObjectFormat'
+
+// Render components
+import BudgetBalance from '../Components/BudgetBalance'
 import BudgetItem from '../Components/BudgetItem'
 import EmptyBudget from '../Components/EmptyBudget'
 
-// More info here: https://facebook.github.io/react-native/docs/sectionlist.html
-
 // Styles
 import styles from './Styles/BudgetViewStyle'
-let total = []
 
 let realm = new Realm({schema: [ExpenseSchema]})
 
@@ -62,12 +66,11 @@ class BudgetView extends React.PureComponent {
     })
 
     this.setState({
-      data: new BudgetObjectFormat(data),
+      data: formattedData,
       spending: total,
       balance: (this.state.starting - total)
     })
   }
-
 
   /**
    * Re-rerun the componentDidMount function to update state

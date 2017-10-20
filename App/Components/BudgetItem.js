@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, TouchableHighlight } from 'react-native'
-import { CurrencyFormat } from '../Utils/CurrencyFormat'
 import styles from './Styles/BudgetItemStyle'
 
 export default class BudgetItem extends React.Component {

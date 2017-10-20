@@ -1,3 +1,6 @@
+/**
+ * Utility to calculate budget balances
+ */
 
 let BudgetCalculations = {
   sectionTotal: function(data, totalKey) {
