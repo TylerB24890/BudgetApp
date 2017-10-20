@@ -7,6 +7,7 @@ import ExpenseModel from '../Fixtures/ExpenseModel'
 import BudgetBalance from '../Components/BudgetBalance'
 import BudgetObjectFormat from '../Utils/BudgetObjectFormat'
 import BudgetItem from '../Components/BudgetItem'
+import EmptyBudget from '../Components/EmptyBudget'
 
 // More info here: https://facebook.github.io/react-native/docs/sectionlist.html
 
@@ -23,7 +24,7 @@ class BudgetView extends React.PureComponent {
     super(props)
 
     this.state = {
-      starting: 4182,
+      starting: 0,
       spending: 0,
       balance: 0,
       updated: false,
@@ -41,7 +42,7 @@ class BudgetView extends React.PureComponent {
       data = this.state.data
 
     var sectionTotal = 0
-    
+
     data.forEach( function (item) {
       if(item.key === totalKey) {
         var itemData = item.data
@@ -61,6 +62,9 @@ class BudgetView extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     const data = this.props.navigation.state.params
     this.setState({updated: nextProps.updated})
+
+    if(nextProps.updated)
+      this.forceUpdate()
   }
 
   /**
@@ -135,7 +139,7 @@ class BudgetView extends React.PureComponent {
 
   // Show this when data is empty
   renderEmpty = () =>
-    <Text style={styles.label}> - Nothing to See Here - </Text>
+    <EmptyBudget navigation={this.props.navigation} />
 
   keyExtractor = (item, index) => index
 
