@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Realm from 'realm'
 import { CategorySchema, ExpenseSchema } from '../Fixtures/BudgetSchemas'
 import ExpenseModel from '../Fixtures/ExpenseModel'
+import BudgetCalculations from '../Utils/BudgetCalculations'
 import BudgetBalance from '../Components/BudgetBalance'
 import BudgetObjectFormat from '../Utils/BudgetObjectFormat'
 import BudgetItem from '../Components/BudgetItem'
@@ -24,7 +25,7 @@ class BudgetView extends React.PureComponent {
     super(props)
 
     this.state = {
-      starting: 0,
+      starting: 4182,
       spending: 0,
       balance: 0,
       updated: false,
@@ -32,27 +33,6 @@ class BudgetView extends React.PureComponent {
     }
 
     this.updateBudgetOverview = this.updateBudgetOverview.bind(this)
-  }
-
-  /**
-   * Calculate section totals
-   */
-  _calculateTotals (data, totalKey) {
-    if(!data)
-      data = this.state.data
-
-    var sectionTotal = 0
-
-    data.forEach( function (item) {
-      if(item.key === totalKey) {
-        var itemData = item.data
-        itemData.forEach( function(lineItem) {
-          sectionTotal += parseFloat(lineItem.cost)
-        })
-      }
-    })
-
-    return sectionTotal
   }
 
   componentDidMount () {
@@ -75,13 +55,16 @@ class BudgetView extends React.PureComponent {
     var catTotals = []
     var total = 0
 
-    this.setState({
-      data: new BudgetObjectFormat(data),
+    var formattedData = new BudgetObjectFormat(data)
+
+    formattedData.forEach(function(item) {
+      total += item.keyTotal
     })
 
     this.setState({
+      data: new BudgetObjectFormat(data),
       spending: total,
-      balance: (this.state.starting - total),
+      balance: (this.state.starting - total)
     })
   }
 
@@ -107,7 +90,7 @@ class BudgetView extends React.PureComponent {
    * Render expense section header
    */
   renderSectionHeader = ({section}) => {
-    var total = this._calculateTotals(false, section.key)
+    var total = BudgetCalculations.sectionHeaderTotal(this.state.data, section.key)
     return (
       <View style={styles.sectionHeader}>
         <Text style={styles.headerText}>{section.key}: <Text style={styles.itemCost}>${parseFloat(total).toFixed(2)}</Text></Text>
@@ -119,13 +102,8 @@ class BudgetView extends React.PureComponent {
    * Render expense list header (global)
    */
   renderHeader = () => {
-    var monthTotal = this._calculateTotals(false, 'Monthly')
-    var dailyTotal = this._calculateTotals(false, 'Daily')
-    var miscTotal = this._calculateTotals(false, 'Misc')
-    var total = (monthTotal + dailyTotal + miscTotal)
-    var balance = (this.state.starting - total)
     return (
-      <BudgetBalance starting={this.state.starting} balance={balance}/>
+      <BudgetBalance starting={this.state.starting} balance={this.state.balance}/>
     )
   }
 

@@ -1,3 +1,4 @@
+import BudgetCalculations from './BudgetCalculations'
 
 class BudgetObjectFormat {
   constructor(data) {
@@ -21,7 +22,8 @@ class BudgetObjectFormat {
     }
 
     for (var type in stateData) {
-      returnArray.push({key: type, data: stateData[type]})
+      var total = BudgetCalculations.sectionTotal(stateData[type], type)
+      returnArray.push({key: type, keyTotal: total, data: stateData[type]})
     }
 
     return returnArray
