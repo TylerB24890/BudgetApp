@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Picker, InputGroup } from 'native-base'
 import Realm from 'realm'
 import { CategorySchema } from '../Fixtures/BudgetSchemas'
+import CategoryModel from '../Fixtures/CategoryModel'
 
 import styles from './Styles/CategorySelectStyle'
 import Colors from '../Themes/Colors'
