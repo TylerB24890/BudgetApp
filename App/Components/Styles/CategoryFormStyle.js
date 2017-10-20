@@ -11,19 +11,7 @@ export default StyleSheet.create({
   buttonContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 60
   },
-  submitButton: {
-    backgroundColor: '#16a085',
-    marginTop: 50,
-  },
-  submitText: {
-    color: '#FFF',
-    fontSize: 18
-  },
-  cancelButton: {
-    backgroundColor: '#c0392b',
-    marginTop: 50,
-    marginLeft: 15,
-  }
 })

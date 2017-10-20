@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, List, ListItem, Icon, Button, Left, Body } from 'native-base'
+import { Text, List, ListItem, Icon, Button } from 'native-base'
 import { TouchableOpacity } from 'react-native'
 import CategoryForm from './CategoryForm'
 
@@ -30,18 +30,19 @@ export default class CategoryList extends Component {
     var items = []
 
     categories.forEach(function(cat) {
-      items.push(cat.title)
+      items.push({id: cat.id, title: cat.title})
     })
 
     return items
   }
 
-  _navigateToEditCategory (cat) {
+  _navigateToEditCategory (cid, catTitle) {
     const {navigate} = this.props.navigation
 
     navigate(
       'EditCategoryScreen', {
-        category: cat,
+        cid: cid,
+        catTitle: catTitle,
         editing: true
       }
     )
@@ -57,9 +58,9 @@ export default class CategoryList extends Component {
           <Icon name="ios-close-circle-outline" style={{fontSize: 32, color: '#c0392b'}} />
         </Button>
         <TouchableOpacity
-          onPress={() => this._navigateToEditCategory(item.id)}
+          onPress={() => this._navigateToEditCategory(item.id, item.title)}
         >
-          <Text style={styles.listItemText}>{item}</Text>
+          <Text style={styles.listItemText}>{item.title}</Text>
         </TouchableOpacity>
       </ListItem>
     )

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Container, Content, Form, InputGroup, Input, Icon, Text, Button } from 'native-base'
 import { TextInputMask } from 'react-native-masked-text';
 import CategorySelect from './CategorySelect'
+import BudgetButton from './BudgetButton'
 
 import styles from './Styles/BudgetExpenseFormStyle'
 
@@ -68,9 +69,9 @@ export default class BudgetExpenseForm extends Component {
 
             <CategorySelect type={this.state.type} categoryHandler={(type) => this._setExpenseCategory(type)}/>
 
-            <Button style={styles.submitButton} onPress={() => this._submitExpenseForm()}>
-              <Text style={styles.submitText}>Save Expense</Text>
-            </Button>
+            <Content style={{marginTop: 60, alignSelf: 'center'}}>
+              <BudgetButton type="go" onPress={() => this._submitExpenseForm()} text="Save Expense" />
+            </Content>
           </Form>
         </Content>
       </Container>

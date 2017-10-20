@@ -12,13 +12,17 @@ class EditCategoryScreen extends Component {
     super(props)
   }
 
+  _handleCategoryEdit (category) {
+
+  }
+
   render () {
     const data = this.props.navigation.state.params
 
     return (
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
-          <CategoryForm category={data.category} editing={data.editing} navigation={this.props.navigation} />
+          <CategoryForm cid={data.cid} catTitle={data.catTitle} editing={data.editing} navigation={this.props.navigation} handler={() => this._handleCategoryEdit(category)} />
         </Content>
       </Container>
     )

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Content, Form, InputGroup, Input, Text, Button } from 'native-base'
+import BudgetButton from './BudgetButton'
 import styles from './Styles/CategoryFormStyle'
 
 export default class CategoryForm extends React.Component {
@@ -8,26 +9,35 @@ export default class CategoryForm extends React.Component {
     super(props)
 
     this.state = {
-      category: '',
+      cid: '',
+      catTitle: '',
       editing: false
     }
   }
 
   componentDidMount () {
     this.setState({
-      category: this.props.category,
+      cid: this.props.cid,
+      catTitle: this.props.catTitle,
       editing: this.props.editing
     })
   }
 
   componentWillReceiveProps (nextProps) {
     this.setState({
-      category: nextProps.category
+      cid: nextProps.cid,
+      catTitle: nextProps.catTitle,
+      editing: nextProps.editing
     })
   }
 
   _submitCategoryForm () {
 
+    if(this.state.editing) {
+      // Edit Category
+    } else {
+      // Save new category
+    }
   }
 
   _cancelCategoryEdit () {
@@ -35,7 +45,8 @@ export default class CategoryForm extends React.Component {
 
     navigate(
       'CategoriesScreen', {
-        category: this.state.category
+        cid: this.state.cid,
+        catTitle: this.state.catTitle
       }
     )
   }
@@ -47,20 +58,13 @@ export default class CategoryForm extends React.Component {
     if(this.state.editing) {
       buttons = (
         <Container style={styles.buttonContainer}>
-          <Button style={styles.submitButton} onPress={() => this._submitCategoryForm()}>
-            <Text style={styles.submitText}>Save Category</Text>
-          </Button>
-
-          <Button style={styles.cancelButton} onPress={() => this._cancelCategoryEdit()}>
-            <Text style={styles.submitText}>Cancel</Text>
-          </Button>
+          <BudgetButton type="go" onPress={() => this._submitCategoryForm()} text="Save Category" />
+          <BudgetButton type="cancel" onPress={() => this._cancelCategoryEdit()} text="Cancel Edit" />
         </Container>
       )
     } else {
       buttons = (
-        <Button style={styles.submitButton} onPress={() => this._submitCategoryForm()}>
-          <Text style={styles.submitText}>Save Category</Text>
-        </Button>
+        <BudgetButton type="go" onPress={() => this._submitCategoryForm()} text="Save Category" />
       )
     }
 
@@ -72,9 +76,9 @@ export default class CategoryForm extends React.Component {
               <Input
                 placeholder="Category name"
                 placeholderTextColor="rgba(255,255,255,.6)"
-                value={this.state.category}
+                value={this.state.catTitle}
                 editable={true}
-                onChangeText={(text) => this.setState({category: text})}
+                onChangeText={(text) => this.setState({catTitle: text})}
                 style={{color: '#FFF'}}
                 autoFocus={true}
               />
