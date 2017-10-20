@@ -23,9 +23,8 @@ class AddItemScreen extends Component {
         }).then(realm => {
           try {
             realm.write(() => {
-              realm.create('BudgetItem', new ExpenseModel(type, title, parseFloat(cost)))
+              realm.create('BudgetItem', new ExpenseModel(null, type, title, parseFloat(cost)))
             })
-            var expenses = realm.objects('BudgetItem').sorted('id')
 
             const {navigate} = this.props.navigation
 

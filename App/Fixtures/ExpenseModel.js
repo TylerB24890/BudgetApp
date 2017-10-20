@@ -1,8 +1,12 @@
 import DbUtils from '../Utils/DbUtils'
 
 export class ExpenseModel {
-  constructor(type, title, cost) {
-    this.id = DbUtils.guid()
+  constructor(id = null, type, title, cost) {
+    if(id === null) {
+      this.id = DbUtils.guid()
+    } else {
+      this.id = id
+    }
     this.type = type
     this.title = title
     this.cost = cost
