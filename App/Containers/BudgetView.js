@@ -16,6 +16,8 @@ let monthly = []
 let daily = []
 let misc = []
 
+let realm = new Realm({schema: [ExpenseSchema]})
+
 class BudgetView extends React.PureComponent {
 
   constructor(props) {
@@ -26,9 +28,6 @@ class BudgetView extends React.PureComponent {
       starting: 4182,
       spending: 0,
       balance: 0,
-      monthly: 0,
-      daily: 0,
-      misc: 0,
       updated: false,
       data: [],
     }
@@ -71,38 +70,20 @@ class BudgetView extends React.PureComponent {
    * Set the expense application state
    */
   _setBudgetState () {
-    let realm = new Realm({schema: [ExpenseSchema]})
     var data = realm.objects('BudgetItem').sorted('type')
+    var catTotals = []
+    var total = 0
 
-    //console.log(Array.from(data))
-    var stateData = new BudgetObjectFormat(data)
-    console.log(stateData)
     this.setState({
-      data: stateData,
-    }, this._setTotals())
-  }
-
-  /**
-   * Set the section totals to state + get available balance
-   */
-  _setTotals () {
-    var monthTotal = this._calculateTotals(this.state.data, 'Monthly')
-    var dailyTotal = this._calculateTotals(this.state.data, 'Daily')
-    var miscTotal = this._calculateTotals(this.state.data, 'Misc')
-    var total = (monthTotal + dailyTotal + miscTotal)
-
-    monthly = []
-    daily = []
-    misc = []
+      data: new BudgetObjectFormat(data),
+    })
 
     this.setState({
       spending: total,
       balance: (this.state.starting - total),
-      monthly: monthTotal,
-      daily: dailyTotal,
-      misc: miscTotal,
     })
   }
+
 
   /**
    * Re-rerun the componentDidMount function to update state
