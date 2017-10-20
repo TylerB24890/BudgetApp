@@ -5,6 +5,7 @@ import Realm from 'realm'
 import { CategorySchema, ExpenseSchema } from '../Fixtures/BudgetSchemas'
 import ExpenseModel from '../Fixtures/ExpenseModel'
 import BudgetBalance from '../Components/BudgetBalance'
+import BudgetObjectFormat from '../Utils/BudgetObjectFormat'
 import BudgetItem from '../Components/BudgetItem'
 
 // More info here: https://facebook.github.io/react-native/docs/sectionlist.html
@@ -71,38 +72,13 @@ class BudgetView extends React.PureComponent {
    */
   _setBudgetState () {
     let realm = new Realm({schema: [ExpenseSchema]})
-    var expenseData = realm.objects('BudgetItem').sorted('type')
-    
-    console.log(Array.from(expenseData))
+    var data = realm.objects('BudgetItem').sorted('type')
 
-    expenseData.forEach( function(item) {
-
-      if(item.type === 'Monthly') {
-        monthly.push({title: item.title, cost: item.cost, type: item.type, id: item.id})
-      }
-
-      if(item.type === 'Daily') {
-        daily.push({title: item.title, cost: item.cost, type: item.type, id: item.id})
-      }
-
-      if(item.type === 'Misc') {
-        misc.push({title: item.title, cost: item.cost, type: item.type, id: item.id})
-      }
-    })
-
+    //console.log(Array.from(data))
+    var stateData = new BudgetObjectFormat(data)
+    console.log(stateData)
     this.setState({
-      data: [
-        {
-          key: 'Monthly',
-          data: monthly
-        }, {
-          key: 'Daily',
-          data: daily
-        }, {
-          key: 'Misc',
-          data: misc
-        }
-      ],
+      data: stateData,
     }, this._setTotals())
   }
 

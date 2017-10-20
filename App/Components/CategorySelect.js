@@ -40,11 +40,12 @@ export default class CategorySelect extends Component {
   _returnExpenseCategories () {
     var realm = new Realm({path: 'CategorySelect.realm', schema: [CategorySchema]})
 
+    /*
     realm.write(() => {
       realm.create('Category', new CategoryModel('Bills'))
       realm.create('Category', new CategoryModel('Entertainment'))
       realm.create('Category', new CategoryModel('Food'))
-    })
+    })*/
 
     var categories = realm.objects('Category').sorted('title')
     var categoryDisplay = categories.map(catData => (
