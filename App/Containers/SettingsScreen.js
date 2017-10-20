@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { Container, Content, Text } from 'native-base'
 import { connect } from 'react-redux'
 
 // Styles
@@ -8,9 +8,11 @@ import styles from './Styles/SettingsScreenStyle'
 class SettingsScreen extends Component {
   render () {
     return (
-      <View style={styles.container}>
-
-      </View>
+      <Container style={styles.container}>
+        <Content>
+          <Text>Add Settings</Text>
+        </Content>
+      </Container>
     )
   }
 }
