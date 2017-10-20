@@ -5,7 +5,7 @@ import Metrics from '../../Themes/Metrics'
 export default StyleSheet.create({
   container: {
     paddingTop: (Metrics.screenHeight / 7),
-    paddingHorizontal: 30
+    paddingHorizontal: 15
   },
   inputGroup: {
     marginVertical: 10,

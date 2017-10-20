@@ -27,14 +27,14 @@ class CategoriesScreen extends Component {
 
   componentDidMount () {
 
-    
+
   }
 
   render () {
     return (
       <Container style={styles.container}>
         <Content>
-          <CategoryList categories={this.state.categories} />
+          <CategoryList categories={this.state.categories} navigation={this.props.navigation} />
         </Content>
       </Container>
     )

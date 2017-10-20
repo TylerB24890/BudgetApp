@@ -1,6 +1,8 @@
 import React from 'react'
 import { Text, Animated, View, Easing } from 'react-native'
 import { DrawerNavigator, StackNavigator } from 'react-navigation'
+import AddCategoryScreen from '../Containers/AddCategoryScreen'
+import EditCategoryScreen from '../Containers/EditCategoryScreen'
 
 import CategoriesScreen from '../Containers/CategoriesScreen'
 import EditItemScreen from '../Containers/EditItemScreen'
@@ -83,6 +85,8 @@ const DrawerStack = DrawerNavigator({
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
+  AddCategoryScreen: { screen: AddCategoryScreen },
+  EditCategoryScreen: { screen: EditCategoryScreen },
   EditItemScreen: {
     screen: EditItemScreen,
     navigationOptions: ({navigation}) => ({
