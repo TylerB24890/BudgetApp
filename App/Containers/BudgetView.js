@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 // Database
 import Realm from 'realm'
-import { ExpenseSchema, CategorySchema } from '../Fixtures/BudgetSchemas'
+import { ExpenseSchema, CategorySchema, SettingsSchema } from '../Fixtures/BudgetSchemas'
 import ExpenseModel from '../Fixtures/ExpenseModel'
 
 // Utilities
@@ -20,7 +20,9 @@ import EmptyBudget from '../Components/EmptyBudget'
 // Styles
 import styles from './Styles/BudgetViewStyle'
 
-let realm = new Realm({schema: [ExpenseSchema]})
+let realm = new Realm({schema: [ExpenseSchema, SettingsSchema]})
+let settings = realm.objects('Settings').sorted('id')
+let starting = 0
 
 class BudgetView extends React.PureComponent {
 
@@ -29,7 +31,7 @@ class BudgetView extends React.PureComponent {
     super(props)
 
     this.state = {
-      starting: 4182,
+      starting: starting,
       spending: 0,
       balance: 0,
       updated: false,
@@ -40,6 +42,16 @@ class BudgetView extends React.PureComponent {
   }
 
   componentDidMount () {
+    var startComp = 0
+
+    settings.forEach(function(setting) {
+      startComp += setting.starting
+    })
+
+    this.setState({
+      starting: startComp
+    })
+
     this._setBudgetState()
   }
 

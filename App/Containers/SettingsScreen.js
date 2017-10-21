@@ -9,13 +9,41 @@ import SettingsForm from '../Components/SettingsForm'
 // Styles
 import styles from './Styles/SettingsScreenStyle'
 
+let realm = new Realm({path: 'SettingsScreen.realm', schema: [SettingsSchema]})
+let settings = realm.objects('Settings')
+
 class SettingsScreen extends Component {
 
   constructor(props) {
     super(props)
+
+    this.state = {
+      id: '',
+      user: '',
+      starting: 0
+    }
   }
 
-  handleSettingsSubmission(title, type, cost, id) {
+  componentDidMount () {
+    var starting = 0
+    var user = ''
+    var id = ''
+
+    settings.forEach(function(setting) {
+      console.log(setting)
+      id = setting.id
+      starting = setting.starting
+      user = setting.name
+    })
+
+    this.setState({
+      id: id,
+      starting: starting,
+      user: user,
+    })
+  }
+
+  handleSettingsSubmission(id, user, starting) {
     if(id === '') {
       try {
         Realm.open({
@@ -23,7 +51,7 @@ class SettingsScreen extends Component {
         }).then(realm => {
           try {
             realm.write(() => {
-              realm.create('Settings', new SettingsModel())
+              realm.create('Settings', new SettingsModel(id, user, starting))
             })
           } catch (e) {
             console.log('Error saving settings: ' + e)
@@ -40,7 +68,7 @@ class SettingsScreen extends Component {
     return (
       <Container style={styles.container}>
         <Content scrollEnabled={false} keyboardShouldPersistTaps="never">
-          <SettingsForm />
+          <SettingsForm id={this.state.id} starting={this.state.starting} user={this.state.user}/>
         </Content>
       </Container>
     )
