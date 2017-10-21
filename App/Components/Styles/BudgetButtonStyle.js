@@ -15,5 +15,10 @@ export default StyleSheet.create({
     marginLeft: 15,
     paddingVertical: 10,
     paddingHorizontal: 10
+  },
+  cancelFull: {
+    backgroundColor: '#c0392b',
+    paddingVertical: 10,
+    paddingHorizontal: 10
   }
 })

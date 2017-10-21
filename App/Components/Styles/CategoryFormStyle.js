@@ -9,6 +9,8 @@ export default StyleSheet.create({
     paddingHorizontal: 15
   },
   buttonContainer: {
-    marginTop: 60
+    marginTop: 60,
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
 })

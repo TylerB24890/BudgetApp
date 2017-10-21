@@ -44,6 +44,35 @@ class EditItemScreen extends Component {
     }
   }
 
+  _handleDeleteExpense(id) {
+
+    try {
+      Realm.open({
+        schema: [ExpenseSchema]
+      }).then(realm => {
+        try {
+          realm.write(() => {
+            var expense = realm.objects('BudgetItem').filtered('id = "' + id + '"')
+            realm.delete(expense)
+          })
+
+          const {navigate} = this.props.navigation
+
+          navigate(
+            'BudgetView', {
+              updated: true
+            }
+          )
+        } catch (e) {
+          console.log('Error deleting budget item: ' + e)
+        }
+      })
+
+    } catch (e) {
+      console.log('Error opening Expense table: ' + e)
+    }
+  }
+
   render () {
     const data = this.props.navigation.state.params
 
@@ -56,6 +85,7 @@ class EditItemScreen extends Component {
             type={data.type}
             id={data.id}
             handler={(title, type, cost, id) => this._handleExpenseEdit(title, type, cost, id)}
+            deleteHandler={(id) => this._handleDeleteExpense(id)}
           />
         </Content>
       </Container>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Container, Content, Form, InputGroup, Input, Icon, Text, Button } from 'native-base'
+import { Container, Content, Form, InputGroup, Input, Icon, Text } from 'native-base'
+import { Alert } from 'react-native'
 import { TextInputMask } from 'react-native-masked-text';
 import CategorySelect from './CategorySelect'
 import BudgetButton from './BudgetButton'
@@ -26,6 +27,15 @@ export default class BudgetExpenseForm extends Component {
     })
   }
 
+  componentDidMount () {
+    this.setState({
+      id: this.props.id,
+      title: this.props.title,
+      cost: parseFloat(this.props.cost).toFixed(2),
+      type: this.props.type,
+    })
+  }
+
   // Handle the submission of the expense form
   _submitExpenseForm() {
 
@@ -37,7 +47,32 @@ export default class BudgetExpenseForm extends Component {
     this.props.handler(title, type, cost, id)
   }
 
+  _deleteExpenseItem () {
+    Alert.alert(
+      'Delete Expense',
+      'Are you sure you want to delete this expense?',
+      [
+        {text: 'Cancel', style: 'cancel'},
+        {text: 'Continue', onPress: () => this.props.deleteHandler(this.state.id)}
+      ],
+      { cancelable: false }
+    )
+  }
+
+  _renderDeleteButton () {
+    if(this.state.id !== '') {
+      return (
+        <Content scrollEnabled={false} style={{marginTop: 15}}>
+          <BudgetButton block type="cancel-full" onPress={() => this._deleteExpenseItem()} text="Delete Expense" />
+        </Content>
+      )
+    }
+  }
+
   render () {
+
+    let deleteButton = this._renderDeleteButton()
+
     return (
 
       <Container style={styles.container}>
@@ -69,9 +104,11 @@ export default class BudgetExpenseForm extends Component {
 
             <CategorySelect type={this.state.type} categoryHandler={(type) => this._setExpenseCategory(type)}/>
 
-            <Container style={styles.buttonContainer}>
+            <Content scrollEnabled={false} style={styles.buttonContainer}>
               <BudgetButton block type="go" onPress={() => this._submitExpenseForm()} text="Save Expense" />
-            </Container>
+            </Content>
+
+            {deleteButton}
           </Form>
         </Content>
       </Container>
