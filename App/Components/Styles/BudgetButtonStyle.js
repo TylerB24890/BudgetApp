@@ -4,7 +4,7 @@ export default StyleSheet.create({
   budgetButton: {
     backgroundColor: '#1abc9c',
     paddingVertical: 10,
-    paddingHorizontal: 20
+    paddingHorizontal: 10
   },
   budgetButtonText: {
     color: '#ecf0f1',
@@ -13,5 +13,7 @@ export default StyleSheet.create({
   cancelButton: {
     backgroundColor: '#c0392b',
     marginLeft: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 10
   }
 })

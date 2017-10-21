@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Content, Text } from 'native-base'
 import Realm from 'realm'
-import { CategorySchema } from '../Fixtures/BudgetSchemas'
+import { CategorySchema, ExpenseSchema } from '../Fixtures/BudgetSchemas'
 import CategoryModel from '../Fixtures/CategoryModel'
 import { connect } from 'react-redux'
 
@@ -29,15 +29,48 @@ class CategoriesScreen extends Component {
     navigate('AddCategoryScreen')
   }
 
+  _deleteCategoryExpenses (catId) {
+    let expenseRealm = new Realm({schema: [ExpenseSchema]})
+
+    expenseRealm.write(() => {
+      var expenses = expenseRealm.objects('BudgetItem').filtered('type = "' + catId + '"')
+      expenseRealm.delete(expenses)
+    })
+  }
+
+  _deleteCategory(cid) {
+
+    this._deleteCategoryExpenses(cid)
+
+    realm.write(() => {
+      var cat = realm.objects('Category').filtered('id = "' + cid + '"')
+      realm.delete(cat)
+
+      let categories = realm.objects('Category').sorted('title')
+      this.setState({
+        categories: categories
+      })
+    })
+  }
+
   render () {
     return (
       <Container style={styles.container}>
         <Content>
           <Content style={{marginVertical: 30, paddingHorizontal: 15}}>
-            <BudgetButton block type="go" text="Add Category" onPress={() => this._navigateToAddCategory()}/>
+            <BudgetButton
+              block
+              type="go"
+              text="Add Category"
+              onPress={() => this._navigateToAddCategory()}
+            />
           </Content>
 
-          <CategoryList categories={this.state.categories} navigation={this.props.navigation} />
+          <CategoryList
+            categories={this.state.categories}
+            navigation={this.props.navigation}
+            deleteHandler={(cid, catTitle) => this._deleteCategory(cid, catTitle)}
+          />
         </Content>
       </Container>
     )

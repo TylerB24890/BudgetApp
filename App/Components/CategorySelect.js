@@ -42,14 +42,14 @@ export default class CategorySelect extends Component {
 
     /*
     realm.write(() => {
-      realm.create('Category', new CategoryModel('Bills'))
-      realm.create('Category', new CategoryModel('Entertainment'))
-      realm.create('Category', new CategoryModel('Food'))
+      realm.create('Category', new CategoryModel(null, 'Bills'))
+      realm.create('Category', new CategoryModel(null, 'Entertainment'))
+      realm.create('Category', new CategoryModel(null, 'Food'))
     })*/
 
     var categories = realm.objects('Category').sorted('title')
     var categoryDisplay = categories.map(catData => (
-      <Item key={catData.id} value={catData.title} label={catData.title} />
+      <Item key={catData.id} value={catData.id} label={catData.title} />
     ))
 
     return categoryDisplay

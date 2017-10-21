@@ -1,8 +1,13 @@
 import DbUtils from '../Utils/DbUtils'
 
 class CategoryModel {
-  constructor(title) {
-    this.id = DbUtils.guid()
+  constructor(id = null, title) {
+
+    if(id === null) {
+      this.id = DbUtils.guid()
+    } else {
+      this.id = id
+    }
     this.title = title
   }
 }

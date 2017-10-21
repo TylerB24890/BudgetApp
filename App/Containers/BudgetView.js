@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 // Database
 import Realm from 'realm'
-import { ExpenseSchema } from '../Fixtures/BudgetSchemas'
+import { ExpenseSchema, CategorySchema } from '../Fixtures/BudgetSchemas'
 import ExpenseModel from '../Fixtures/ExpenseModel'
 
 // Utilities
@@ -51,6 +51,20 @@ class BudgetView extends React.PureComponent {
       this.forceUpdate()
   }
 
+  _getCategoryTitle (catId) {
+    let cat = {}
+    var catTitle = ''
+
+    let catRealm = new Realm({path: 'CategorySelect.realm', schema: [CategorySchema]})
+    cat = catRealm.objects('Category').filtered('id = "' + catId + '"')
+
+    cat.forEach(function(item) {
+      catTitle = item.title
+    })
+
+    return catTitle
+  }
+
   /**
    * Set the expense application state
    */
@@ -93,10 +107,11 @@ class BudgetView extends React.PureComponent {
    * Render expense section header
    */
   renderSectionHeader = ({section}) => {
+    var title = this._getCategoryTitle(section.key)
     var total = BudgetCalculations.sectionHeaderTotal(this.state.data, section.key)
     return (
       <View style={styles.sectionHeader}>
-        <Text style={styles.headerText}>{section.key}: <Text style={styles.itemCost}>${parseFloat(total).toFixed(2)}</Text></Text>
+        <Text style={styles.headerText}>{title}: <Text style={styles.itemCost}>${parseFloat(total).toFixed(2)}</Text></Text>
       </View>
     )
   }

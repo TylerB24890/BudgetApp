@@ -25,6 +25,12 @@ export default class CategoryList extends Component {
     })
   }
 
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      categories: nextProps.categories
+    })
+  }
+
   _configureCategoryList () {
     var categories = this.state.categories
     var items = []
@@ -48,13 +54,17 @@ export default class CategoryList extends Component {
     )
   }
 
+  _handleDeleteCategory (cid, title) {
+    this.props.deleteHandler(cid, title)
+  }
+
   _renderCategoryItem (item) {
     return (
       <ListItem
         iconLeft
         style={styles.listItem}
       >
-        <Button iconLeft transparent primary>
+        <Button iconLeft transparent primary onPress={() => this._handleDeleteCategory(item.id, item.title)}>
           <Icon name="ios-close-circle-outline" style={{fontSize: 32, color: '#c0392b'}} />
         </Button>
         <TouchableOpacity
