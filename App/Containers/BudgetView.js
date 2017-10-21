@@ -55,7 +55,7 @@ class BudgetView extends React.PureComponent {
     let cat = {}
     var catTitle = ''
 
-    let catRealm = new Realm({path: 'CategorySelect.realm', schema: [CategorySchema]})
+    var catRealm = new Realm({path: 'CategorySelect.realm', schema: [CategorySchema]})
     cat = catRealm.objects('Category').filtered('id = "' + catId + '"')
 
     cat.forEach(function(item) {

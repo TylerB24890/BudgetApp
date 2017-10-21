@@ -1,8 +1,4 @@
 import React from 'react'
-import Realm from 'realm'
-import { CategorySchema } from '../Fixtures/BudgetSchemas'
-import CategoryModel from '../Fixtures/CategoryModel'
-
 import { Container, Content, Form, InputGroup, Input, Text, Button } from 'native-base'
 import BudgetButton from './BudgetButton'
 import styles from './Styles/CategoryFormStyle'
@@ -36,26 +32,7 @@ export default class CategoryForm extends React.Component {
   }
 
   _submitCategoryForm () {
-
-    let realm = new Realm({schema: [CategorySchema]})
-
-    if(this.state.editing) {
-      try {
-        realm.write(() => {
-          realm.create('Category', new CategoryModel(this.state.cid, this.state.catTitle))
-        })
-      } catch (e) {
-        console.log('Failed to edit category: ' + e)
-      }
-    } else {
-      try {
-        realm.write(() => {
-          realm.create('Category', new CategoryModel(null, this.state.catTitle))
-        })
-      } catch (e) {
-        console.log('Failed to create category: ' + e)
-      }
-    }
+    this.props.handler(this.state.cid, this.state.catTitle)
   }
 
   _cancelCategoryEdit () {
@@ -82,7 +59,9 @@ export default class CategoryForm extends React.Component {
       )
     } else {
       buttons = (
-        <BudgetButton type="go" onPress={() => this._submitCategoryForm()} text="Save Category" />
+        <Container style={styles.buttonContainer}>
+          <BudgetButton type="go" onPress={() => this._submitCategoryForm()} text="Save Category" />
+        </Container>
       )
     }
 
