@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Realm from 'realm'
 import { SettingsSchema } from '../Fixtures/BudgetSchemas'
 import SettingsModel from '../Fixtures/SettingsModel'
-import { Container, Content } from 'native-base'
+import { Container, Content, Text } from 'native-base'
+import BudgetButton from '../Components/BudgetButton'
 import { connect } from 'react-redux'
 import SettingsForm from '../Components/SettingsForm'
 
@@ -20,7 +21,8 @@ class SettingsScreen extends Component {
     this.state = {
       id: '',
       user: '',
-      starting: 0
+      starting: 0,
+      udpated: false
     }
   }
 
@@ -31,7 +33,7 @@ class SettingsScreen extends Component {
 
     settings.forEach(function(setting) {
       id = setting.id
-      starting = setting.starting
+      starting = parseFloat(setting.starting).toFixed(2)
       user = setting.name
     })
 
@@ -42,32 +44,45 @@ class SettingsScreen extends Component {
     })
   }
 
-  handleSettingsSubmission(id, user, starting) {
-    if(id === '') {
-      try {
-        Realm.open({
-          schema: [SettingsSchema]
-        }).then(realm => {
-          try {
-            realm.write(() => {
-              realm.create('Settings', new SettingsModel(id, user, starting))
-            })
-          } catch (e) {
-            console.log('Error saving settings: ' + e)
-          }
-        })
+  _handleSettingsSubmission(id, user, starting) {
+    try {
+      realm.write(() => {
+        realm.create('Settings', new SettingsModel(id, user, starting), true)
+      })
 
-      } catch (e) {
-        console.log('Error opening Settings table: ' + e)
-      }
+      this.setState({
+        updated: true,
+        user: user
+      })
+    } catch (e) {
+      console.log('Error opening Settings table: ' + e)
     }
   }
 
+  _navigateToCategories () {
+
+  }
+
   render () {
+
+    let updatedMessage = null
+
+    if(this.state.updated) {
+      updatedMessage = (
+        <Content style={styles.updated}>
+          <Text style={styles.updatedText}>Now we're cooking.{"\n"}Ready to save some money, {this.state.user}?</Text>
+          <Content style={{marginTop: 15}}>
+            <BudgetButton block type="go" onPress={() => this._navigateToCategories()} text="Let's go" />
+          </Content>
+        </Content>
+      )
+    }
+
     return (
       <Container style={styles.container}>
         <Content scrollEnabled={false} keyboardShouldPersistTaps="never">
-          <SettingsForm id={this.state.id} starting={this.state.starting} user={this.state.user}/>
+          {updatedMessage}
+          <SettingsForm id={this.state.id} starting={this.state.starting} user={this.state.user} handler={(id, user, starting) => this._handleSettingsSubmission(id, user, starting)}/>
         </Content>
       </Container>
     )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Content, Form, InputGroup, Input, Text, Button } from 'native-base'
+import { Container, Content, Item, Label, Input, Text, Button } from 'native-base'
 import BudgetButton from './BudgetButton'
 import styles from './Styles/CategoryFormStyle'
 
@@ -68,21 +68,20 @@ export default class CategoryForm extends React.Component {
     return (
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
-          <Form style={styles.form}>
-            <InputGroup>
+          <Container style={styles.form}>
+            <Item floatingLabel>
+              <Label style={{color: 'rgba(255,255,255,.6)'}}>Category name</Label>
               <Input
-                placeholder="Category name"
-                placeholderTextColor="rgba(255,255,255,.6)"
                 value={this.state.catTitle}
                 editable={true}
                 onChangeText={(text) => this.setState({catTitle: text})}
                 style={{color: '#FFF'}}
                 autoFocus={true}
               />
-            </InputGroup>
+            </Item>
 
             {buttons}
-          </Form>
+          </Container>
         </Content>
       </Container>
     )

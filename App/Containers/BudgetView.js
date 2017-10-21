@@ -43,27 +43,27 @@ class BudgetView extends React.PureComponent {
   componentDidMount () {
     var startComp = 0
     var settings = {}
+    var total = 0
+
+    var data = realm.objects('BudgetItem').sorted('type')
+    var formattedData = new BudgetObjectFormat(data)
+    formattedData.forEach(function(item) {
+      total += item.keyTotal
+    })
+
 
     var settingsRealm = new Realm({path: 'SettingsScreen.realm', schema: [SettingsSchema]})
     settings = settingsRealm.objects('Settings')
-
     settings.forEach(function(setting) {
       startComp = setting.starting
     })
 
     this.setState({
-      starting: startComp
+      starting: startComp,
+      data: formattedData,
+      spending: total,
+      balance: (startComp - total)
     })
-
-    this._setBudgetState()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const data = this.props.navigation.state.params
-    this.setState({updated: nextProps.updated})
-
-    if(nextProps.updated)
-      this.forceUpdate()
   }
 
   _getCategoryTitle (catId) {
@@ -78,27 +78,6 @@ class BudgetView extends React.PureComponent {
     })
 
     return catTitle
-  }
-
-  /**
-   * Set the expense application state
-   */
-  _setBudgetState () {
-    var data = realm.objects('BudgetItem').sorted('type')
-    var catTotals = []
-    var total = 0
-
-    var formattedData = new BudgetObjectFormat(data)
-
-    formattedData.forEach(function(item) {
-      total += item.keyTotal
-    })
-
-    this.setState({
-      data: formattedData,
-      spending: total,
-      balance: (this.state.starting - total)
-    })
   }
 
   /**

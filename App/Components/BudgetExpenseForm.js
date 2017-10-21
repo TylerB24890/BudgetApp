@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Container, Content, Form, InputGroup, Input, Icon, Text } from 'native-base'
-import { Alert } from 'react-native'
+import { Container, Content, Item, Label, Input, Icon, Text } from 'native-base'
+import { Alert, KeyboardAvoidingView } from 'react-native'
 import { TextInputMask } from 'react-native-masked-text';
 import CategorySelect from './CategorySelect'
 import BudgetButton from './BudgetButton'
@@ -75,43 +75,41 @@ export default class BudgetExpenseForm extends Component {
 
     return (
 
-      <Container style={styles.container}>
-        <Content scrollEnabled={false}>
-          <Form>
-            <InputGroup style={styles.inputGroup}>
-              <Input
-                placeholder="Expense name"
-                placeholderTextColor="rgba(255,255,255,.6)"
-                value={this.state.title}
-                editable={true}
-                onChangeText={(text) => this.setState({title: text})}
-                style={{color: '#FFF'}}
-                autoFocus={true}
-              />
-            </InputGroup>
+      <KeyboardAvoidingView behavior="padding">
+        <Container style={styles.container}>
+          <Content scrollEnabled={false}>
+              <Item floatingLabel style={styles.inputGroup}>
+                <Label style={{color: 'rgba(255,255,255,.6)'}}>What are you buying?</Label>
+                <Input
+                  value={this.state.title}
+                  editable={true}
+                  onChangeText={(text) => this.setState({title: text})}
+                  style={{color: '#FFF'}}
+                  autoFocus={true}
+                />
+              </Item>
 
-            <InputGroup style={styles.inputGroup}>
-              <Icon active name="logo-usd" style={{color: 'rgba(255,255,255,.6)', fontSize: 18}} />
-              <Input
-                placeholder={"0.00"}
-                placeholderTextColor="rgba(255,255,255,.6)"
-                value={this.state.cost !== "0.00" ? this.state.cost : ""}
-                onChangeText={(text) => this.setState({cost: text})}
-                keyboardType="numeric"
-                style={{color: '#FFF'}}
-              />
-            </InputGroup>
+              <Item floatingLabel style={styles.inputGroup}>
+                <Label style={{color: 'rgba(255,255,255,.6)'}}>How much does it cost?</Label>
+                <Icon active name="logo-usd" style={{color: 'rgba(255,255,255,.6)', fontSize: 16}} />
+                <Input
+                  value={this.state.cost !== "0.00" ? this.state.cost : ""}
+                  onChangeText={(text) => this.setState({cost: text})}
+                  keyboardType="numeric"
+                  style={{color: '#FFF'}}
+                />
+              </Item>
 
-            <CategorySelect type={this.state.type} categoryHandler={(type) => this._setExpenseCategory(type)}/>
+              <CategorySelect type={this.state.type} categoryHandler={(type) => this._setExpenseCategory(type)}/>
 
-            <Content scrollEnabled={false} style={styles.buttonContainer}>
-              <BudgetButton block type="go" onPress={() => this._submitExpenseForm()} text="Save Expense" />
-            </Content>
+              <Content scrollEnabled={false} style={styles.buttonContainer}>
+                <BudgetButton block type="go" onPress={() => this._submitExpenseForm()} text="Save Expense" />
+              </Content>
 
-            {deleteButton}
-          </Form>
-        </Content>
-      </Container>
+              {deleteButton}
+          </Content>
+        </Container>
+      </KeyboardAvoidingView>
 
     )
   }
