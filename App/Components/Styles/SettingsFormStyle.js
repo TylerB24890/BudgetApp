@@ -1,14 +1,13 @@
 import { StyleSheet } from 'react-native'
-import { ApplicationStyles, Colors, Metrics } from '../../Themes/'
+import { ApplicationStyles } from '../../Themes'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
 
   form: {
-    paddingTop: (Metrics.screenHeight / 7),
     paddingHorizontal: 15
   },
   buttonContainer: {
     marginTop: 60
-  },
+  }
 })

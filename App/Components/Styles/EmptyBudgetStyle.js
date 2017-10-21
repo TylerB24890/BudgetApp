@@ -6,7 +6,7 @@ export default StyleSheet.create({
 
   container: {
     flex: 1,
-    paddingHorizontal: 30,
+    paddingHorizontal: 15,
   },
   emptyListText: {
     color: '#FFF',

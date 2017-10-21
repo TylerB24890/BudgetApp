@@ -69,9 +69,9 @@ export default class BudgetExpenseForm extends Component {
 
             <CategorySelect type={this.state.type} categoryHandler={(type) => this._setExpenseCategory(type)}/>
 
-            <Content style={{marginTop: 60, alignSelf: 'center'}}>
-              <BudgetButton type="go" onPress={() => this._submitExpenseForm()} text="Save Expense" />
-            </Content>
+            <Container style={styles.buttonContainer}>
+              <BudgetButton block type="go" onPress={() => this._submitExpenseForm()} text="Save Expense" />
+            </Container>
           </Form>
         </Content>
       </Container>

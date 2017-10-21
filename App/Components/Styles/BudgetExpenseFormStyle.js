@@ -14,16 +14,7 @@ export default StyleSheet.create({
     backgroundColor: Colors.background,
     color: '#FFF',
   },
-  submitButton: {
-    backgroundColor: '#16a085',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    marginTop: 50,
-    borderBottomWidth: 0,
-    alignSelf: 'center'
+  buttonContainer: {
+    marginTop: 60,
   },
-  submitText: {
-    color: '#FFF',
-    fontSize: 18
-  }
 })

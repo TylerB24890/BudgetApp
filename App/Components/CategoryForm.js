@@ -60,7 +60,7 @@ export default class CategoryForm extends React.Component {
     } else {
       buttons = (
         <Container style={styles.buttonContainer}>
-          <BudgetButton type="go" onPress={() => this._submitCategoryForm()} text="Save Category" />
+          <BudgetButton block type="go" onPress={() => this._submitCategoryForm()} text="Save Category" />
         </Container>
       )
     }
