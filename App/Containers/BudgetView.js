@@ -20,8 +20,7 @@ import EmptyBudget from '../Components/EmptyBudget'
 // Styles
 import styles from './Styles/BudgetViewStyle'
 
-let realm = new Realm({schema: [ExpenseSchema, SettingsSchema]})
-let settings = realm.objects('Settings').sorted('id')
+let realm = new Realm({schema: [ExpenseSchema]})
 let starting = 0
 
 class BudgetView extends React.PureComponent {
@@ -43,9 +42,13 @@ class BudgetView extends React.PureComponent {
 
   componentDidMount () {
     var startComp = 0
+    var settings = {}
+
+    var settingsRealm = new Realm({path: 'SettingsScreen.realm', schema: [SettingsSchema]})
+    settings = settingsRealm.objects('Settings')
 
     settings.forEach(function(setting) {
-      startComp += setting.starting
+      startComp = setting.starting
     })
 
     this.setState({

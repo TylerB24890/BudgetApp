@@ -30,7 +30,6 @@ class SettingsScreen extends Component {
     var id = ''
 
     settings.forEach(function(setting) {
-      console.log(setting)
       id = setting.id
       starting = setting.starting
       user = setting.name
