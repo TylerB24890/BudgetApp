@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, List, ListItem, Icon, Button } from 'native-base'
+import { Alert } from 'react-native'
 import { TouchableOpacity } from 'react-native'
 import CategoryForm from './CategoryForm'
 
@@ -55,7 +56,15 @@ export default class CategoryList extends Component {
   }
 
   _handleDeleteCategory (cid, title) {
-    this.props.deleteHandler(cid, title)
+    Alert.alert(
+      'Delete Category',
+      'Deleting this category will also delete all of its expenses.' + "\n\n" + ' Would you like to continue?',
+      [
+        {text: 'Cancel', style: 'cancel'},
+        {text: 'Continue', onPress: () => this.props.deleteHandler(cid, title)}
+      ],
+      { cancelable: false }
+    )
   }
 
   _renderCategoryItem (item) {
