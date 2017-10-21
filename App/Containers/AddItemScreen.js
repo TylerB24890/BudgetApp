@@ -15,6 +15,7 @@ class AddItemScreen extends Component {
     super(props)
   }
 
+
   handleNewExpense(title, type, cost, id) {
     if(id === '') {
       try {

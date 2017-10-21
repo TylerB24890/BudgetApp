@@ -33,5 +33,10 @@ export default StyleSheet.create({
   buttonText: {
     color: '#FFF',
     fontSize: 18
-  }
+	},
+	small: {
+		fontSize: 15,
+		fontStyle: 'italic',
+		color: '#FFF'
+	}
 })

@@ -46,11 +46,12 @@ class BudgetView extends React.PureComponent {
     var total = 0
 
     var data = realm.objects('BudgetItem').sorted('type')
+
     var formattedData = new BudgetObjectFormat(data)
+
     formattedData.forEach(function(item) {
       total += item.keyTotal
     })
-
 
     var settingsRealm = new Realm({path: 'SettingsScreen.realm', schema: [SettingsSchema]})
     settings = settingsRealm.objects('Settings')
@@ -129,7 +130,7 @@ class BudgetView extends React.PureComponent {
 
   // Show this when data is empty
   renderEmpty = () =>
-    <EmptyBudget navigation={this.props.navigation} />
+		<EmptyBudget navigation={this.props.navigation} />
 
   keyExtractor = (item, index) => index
 

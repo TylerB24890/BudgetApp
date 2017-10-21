@@ -26,7 +26,7 @@ export default class SettingsForm extends React.Component {
   }
 
   _submitSettingsForm () {
-    this.props.handler(this.state.id, this.state.user, parseFloat(this.state.starting))
+		this.props.handler(this.state.id, this.state.user, parseFloat(this.state.starting))
   }
 
 
@@ -37,7 +37,7 @@ export default class SettingsForm extends React.Component {
         <Content scrollEnabled={false}>
           <Container style={styles.form}>
             <Item floatingLabel>
-              <Label style={{color: 'rgba(255,255,255,.6)'}}>What should we call you?</Label>
+              <Label style={{color: 'rgba(255,255,255,.6)'}}>What does your mom call you?</Label>
               <Input
                   value={this.state.user}
                   editable={true}
@@ -46,7 +46,7 @@ export default class SettingsForm extends React.Component {
               />
             </Item>
             <Item floatingLabel style={{marginTop: 30}}>
-              <Label style={{color: 'rgba(255,255,255,.6)'}}>How much are you staring with?</Label>
+              <Label style={{color: 'rgba(255,255,255,.6)'}}>Fun coupons to budget?</Label>
               <Icon active name="logo-usd" style={{color: 'rgba(255,255,255,.6)', fontSize: 18}} />
               <Input
                   value={this.state.starting}
@@ -58,7 +58,7 @@ export default class SettingsForm extends React.Component {
             </Item>
 
             <Container style={styles.buttonContainer}>
-              <BudgetButton block type="go" onPress={() => this._submitSettingsForm()} text="Save Settings" />
+              <BudgetButton block type="go" onPress={() => this._submitSettingsForm()} text='Save Settings' />
             </Container>
           </Container>
         </Content>

@@ -22,7 +22,7 @@ class SettingsScreen extends Component {
       id: '',
       user: '',
       starting: 0,
-      udpated: false
+      udpated: false,
     }
   }
 
@@ -30,6 +30,7 @@ class SettingsScreen extends Component {
     var starting = 0
     var user = ''
     var id = ''
+		var updated = false
 
     settings.forEach(function(setting) {
       id = setting.id
@@ -50,17 +51,13 @@ class SettingsScreen extends Component {
         realm.create('Settings', new SettingsModel(id, user, starting), true)
       })
 
-      this.setState({
-        updated: true,
-        user: user
-      })
+			this.setState({
+				user: user,
+				updated: true
+			})
     } catch (e) {
       console.log('Error opening Settings table: ' + e)
     }
-  }
-
-  _navigateToCategories () {
-
   }
 
   render () {
@@ -70,10 +67,7 @@ class SettingsScreen extends Component {
     if(this.state.updated) {
       updatedMessage = (
         <Content style={styles.updated}>
-          <Text style={styles.updatedText}>Now we're cooking.{"\n"}Ready to save some money, {this.state.user}?</Text>
-          <Content style={{marginTop: 15}}>
-            <BudgetButton block type="go" onPress={() => this._navigateToCategories()} text="Let's go" />
-          </Content>
+          <Text style={styles.updatedText}>Settings updated</Text>
         </Content>
       )
     }

@@ -11,7 +11,7 @@ export default class CategoryForm extends React.Component {
     this.state = {
       cid: '',
       catTitle: '',
-      editing: false
+      editing: false,
     }
   }
 
@@ -19,16 +19,16 @@ export default class CategoryForm extends React.Component {
     this.setState({
       cid: this.props.cid,
       catTitle: this.props.catTitle,
-      editing: this.props.editing
+      editing: this.props.editing,
     })
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setState({
-      cid: nextProps.cid,
-      catTitle: nextProps.catTitle,
-      editing: nextProps.editing
-    })
+		this.setState({
+	    cid: nextProps.cid,
+	    catTitle: nextProps.catTitle,
+	    editing: nextProps.editing,
+	  })
   }
 
   _submitCategoryForm () {

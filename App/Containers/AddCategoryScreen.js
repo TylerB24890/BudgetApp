@@ -29,11 +29,11 @@ class AddCategoryScreen extends Component {
 
             const {navigate} = this.props.navigation
 
-            navigate(
-              'CategoriesScreen', {
-                updated: true
-              }
-            )
+						navigate(
+							'CategoriesScreen', {
+								updated: true
+							}
+						)
           } catch (e) {
             console.log('Error category: ' + e)
           }

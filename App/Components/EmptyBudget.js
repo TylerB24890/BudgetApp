@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Content, Text, Button } from 'native-base'
+import BudgetButton from './BudgetButton'
 import styles from './Styles/EmptyBudgetStyle'
 
 export default class EmptyBudget extends Component {
@@ -19,7 +20,12 @@ export default class EmptyBudget extends Component {
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
           <Text style={[styles.emptyListText, styles.welcome]}>
-            Welcome to your budget!
+            So, you're broke too, huh?
+          </Text>
+
+          <Text style={[styles.emptyListText, styles.help]}>
+            Have a hard time managing your expenses?{"\n"}
+            <Text style={styles.small}>So do we.</Text>
           </Text>
 
           <Text style={[styles.emptyListText, styles.help]}>
@@ -27,19 +33,12 @@ export default class EmptyBudget extends Component {
           </Text>
 
           <Text style={[styles.emptyListText, styles.help]}>
-            First, enter your starting balance.{"\n"}
-            Then, create some "Expense Categories"{"\n"}
-            Lastly, create some Expenses.{"\n"}{"\n"}
-            Let the app do the math.
+            Categorize your expenses and{"\n"}let the app do the math.{"\n"}{"\n"}<Text style={styles.small}>Because math is hard.</Text>
           </Text>
 
-          <Text style={[styles.emptyListText, styles.help]}>
-            To edit an expense, you can simply tap on the expense item in the overview list.
-          </Text>
-
-          <Button block style={styles.button} onPress={() => this._openNavDrawer()}>
-            <Text style={styles.buttonText}>Get Started!</Text>
-          </Button>
+          <Content style={{marginTop: 30}}>
+            <BudgetButton block type="go" onPress={() => this.props.navigation.navigate('SettingsScreen')} text="Let's do this." />
+          </Content>
         </Content>
       </Container>
     )
