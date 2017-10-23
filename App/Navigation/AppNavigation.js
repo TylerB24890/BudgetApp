@@ -42,6 +42,7 @@ const DrawerStack = DrawerNavigator({
     screen: AddItemScreen,
     navigationOptions: ({navigation}) => ({
       title: 'Add Expense',
+			headerRight: (<Icon name="ios-home" size={25} color="#FFF" onPress={() => { navigation.navigate('BudgetView')}}/>),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
           <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Add Expense</Text>
@@ -56,6 +57,7 @@ const DrawerStack = DrawerNavigator({
     screen: CategoriesScreen,
     navigationOptions: ({navigation}) => ({
       title: 'Expense Categories',
+			headerRight: (<Icon name="ios-home" size={25} color="#FFF" onPress={() => { navigation.navigate('BudgetView')}}/>),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
           <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Expense Categories</Text>
@@ -70,6 +72,7 @@ const DrawerStack = DrawerNavigator({
     screen: SettingsScreen,
     navigationOptions: ({navigation}) => ({
       title: 'Budget Settings',
+			headerRight: (<Icon name="ios-home" size={25} color="#FFF" onPress={() => { navigation.navigate('BudgetView')}}/>),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
           <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Settings</Text>
@@ -91,20 +94,23 @@ const PrimaryNav = StackNavigator({
     screen: AddCategoryScreen,
     navigationOptions: ({navigation}) => ({
       title: 'Add Category',
-      headerLeft: <Icon name='ios-close' size={30} color='#FFF' onPress={() => { navigation.navigate('CategoriesScreen')}} />
+      headerLeft: (<Icon name='ios-close' size={30} color='#FFF' onPress={() => { navigation.navigate('CategoriesScreen')}} />),
+			headerRight: (<Icon name="ios-home" size={25} color="#FFF" onPress={() => { navigation.navigate('BudgetView')}}/>),
     })
   },
   EditCategoryScreen: {
     screen: EditCategoryScreen,
     navigationOptions: ({navigation}) => ({
       title: 'Edit Category',
-      headerLeft: <Icon name='ios-close' size={30} color='#FFF' onPress={() => { navigation.navigate('CategoriesScreen')}} />
+      headerLeft: (<Icon name='ios-close' size={30} color='#FFF' onPress={() => { navigation.navigate('CategoriesScreen')}} />),
+			headerRight: (<Icon name="ios-home" size={25} color="#FFF" onPress={() => { navigation.navigate('BudgetView')}}/>),
     })
   },
   EditItemScreen: {
     screen: EditItemScreen,
     navigationOptions: ({navigation}) => ({
-      title: 'Edit Expense'
+      title: 'Edit Expense',
+			headerRight: (<Icon name="ios-home" size={25} color="#FFF" onPress={() => { navigation.navigate('BudgetView')}}/>),
     })
   },
   BudgetView: {
@@ -122,11 +128,11 @@ const PrimaryNav = StackNavigator({
   navigationOptions: ({navigation}) => ({
     headerStyle: styles.header,
     headerTintColor: '#ecf0f1',
-    headerLeft: <Icon name={navigation.state.index == 0 ? 'ios-menu' : 'ios-close'} size={30} color='#FFF' onPress={() => { if(navigation.state.index === 0) {
+    headerLeft: (<Icon name={navigation.state.index == 0 ? 'ios-menu' : 'ios-close'} size={30} color='#FFF' onPress={() => { if(navigation.state.index === 0) {
       navigation.navigate('DrawerOpen')
     } else {
       navigation.navigate('DrawerClose')
-    }}} />
+    }}} />),
   })
 })
 
