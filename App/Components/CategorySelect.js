@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Picker, InputGroup, Icon, Text, View, Button } from 'native-base'
+import AddCategoryModal from './AddCategoryModal'
 import Realm from 'realm'
 import { CategorySchema } from '../Fixtures/BudgetSchemas'
 import CategoryModel from '../Fixtures/CategoryModel'
@@ -18,9 +19,14 @@ export default class CategorySelect extends Component {
       type: this.props.type,
       selectColor: 'rgba(255,255,255,.6)',
       success: false,
-      error: false
+      error: false,
+			modalVisible: false
     }
   }
+
+	_setModalVisible(visible) {
+		this.setState({modalVisible: visible})
+	}
 
   _updateExpenseType (value) {
 
@@ -75,10 +81,12 @@ export default class CategorySelect extends Component {
 
 	        </Picker>
 	      </InputGroup>
-				<Button iconLeft transparent>
+				<Button iconLeft transparent onPress={() => { this._setModalVisible(true) }}>
 					<Icon name="ios-add" style={{color: '#FFF', fontSize: 14}}/>
 					<Text style={{fontSize: 14, color: '#FFF'}}>New category</Text>
 				</Button>
+
+				<AddCategoryModal visible={this.state.modalVisible} modalHandler={(visible) => this._setModalVisible(visible)}/>
 			</View>
     )
   }
