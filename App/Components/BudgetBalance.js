@@ -7,7 +7,7 @@ import styles, { positiveColor, negativeColor } from './Styles/BudgetBalanceStyl
 
 export default class BudgetBalance extends Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -18,7 +18,7 @@ export default class BudgetBalance extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
 
 		var color = this.state.balanceColor
 

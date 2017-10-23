@@ -11,7 +11,7 @@ const Item = Picker.Item
 
 export default class CategorySelect extends Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {

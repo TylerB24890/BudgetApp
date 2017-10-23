@@ -4,15 +4,8 @@ import styles from './Styles/BudgetItemStyle'
 
 export default class BudgetItem extends React.Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
-
-    this.state = {
-      title: this.props.item.title,
-      cost: this.props.item.cost,
-      type: this.props.item.type,
-      id: this.props.item.id,
-    }
   }
 
   navigateToEdit () {
@@ -21,10 +14,10 @@ export default class BudgetItem extends React.Component {
 
     navigate(
       'EditItemScreen', {
-        id: this.state.id,
-        type: this.state.type,
-        title: this.state.title,
-        cost: this.state.cost
+        id: this.props.item.id,
+        type: this.props.item.type,
+        title: this.props.item.title,
+        cost: this.props.item.cost
       }
     )
   }
@@ -36,10 +29,10 @@ export default class BudgetItem extends React.Component {
         <TouchableHighlight onPress={() => this.navigateToEdit()} underlayColor="#34495e">
           <View style={styles.row}>
             <View style={styles.item}>
-              <Text style={[styles.itemTitle, styles.label]}>{this.state.title}</Text>
+              <Text style={[styles.itemTitle, styles.label]}>{this.props.item.title}</Text>
             </View>
             <View style={styles.cost}>
-              <Text style={[styles.itemCost, styles.label]}>${parseFloat(this.state.cost).toFixed(2)}</Text>
+              <Text style={[styles.itemCost, styles.label]}>${parseFloat(this.props.item.cost).toFixed(2)}</Text>
             </View>
           </View>
         </TouchableHighlight>

@@ -3,7 +3,7 @@ import { Button, Text } from 'native-base'
 import styles from './Styles/BudgetButtonStyle'
 
 export default class BudgetButton extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
   }
 

@@ -7,7 +7,7 @@ import styles from './Styles/CategoryListStyle'
 
 export default class CategoryList extends Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -17,18 +17,12 @@ export default class CategoryList extends Component {
     }
   }
 
-  componentDidMount () {
-    this.setState({
-      categories: this.props.categories,
-      editing: false,
-      category: ''
-    })
-  }
-
   componentWillReceiveProps (nextProps) {
-    this.setState({
-      categories: nextProps.categories
-    })
+		if(nextProps.categories !== this.state.categories) {
+			this.setState({
+	      categories: nextProps.categories
+	    })
+		}
   }
 
   _configureCategoryList () {

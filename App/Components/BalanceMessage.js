@@ -16,30 +16,14 @@ const messages = {
 
 export default class BalanceMessage extends Component {
 
-	constructor(props) {
+	constructor (props) {
 		super(props)
-
-		this.state = {
-			balance: this.props.balance,
-			starting: this.props.starting,
-			user: this.props.user
-		}
-	}
-
-	componentWillReceiveProps (nextProps) {
-		if(nextProps.balance !== this.state.balance) {
-			this.setState({
-				balance: nextProps.balance,
-				starting: nextProps.starting,
-				user: nextProps.user
-			})
-		}
 	}
 
 	_renderBalanceMessage () {
 		var returnMsg = ''
-		var balance = parseFloat(this.state.balance)
-		var starting = parseFloat(this.state.starting)
+		var balance = parseFloat(this.props.balance)
+		var starting = parseFloat(this.props.starting)
 
 		if(starting <= 0) {
 			return (
@@ -72,7 +56,7 @@ export default class BalanceMessage extends Component {
 				returnMsg = messages.rich
 			}
 
-			return (<Text style={[styles.messageText, styles.messageTextWhite]}>{returnMsg} {this.state.user}</Text>)
+			return (<Text style={[styles.messageText, styles.messageTextWhite]}>{returnMsg}</Text>)
 		}
 	}
 

@@ -9,7 +9,7 @@ import styles from './Styles/BudgetExpenseFormStyle'
 
 export default class BudgetExpenseForm extends Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -27,17 +27,18 @@ export default class BudgetExpenseForm extends Component {
     })
   }
 
-  componentDidMount () {
-    this.setState({
-      id: this.props.id,
-      title: this.props.title,
-      cost: parseFloat(this.props.cost).toFixed(2),
-      type: this.props.type,
-    })
-  }
+	componentWillReceiveProps (nextProps) {
+		if(nextProps.title !== this.state.title || nextProps.cost !== this.state.cost || nextProps.type !== this.state.type) {
+			this.setState({
+				title: nextProps.title,
+				cost: parseFloat(nextProps.cost).toFixed(2),
+				type: nextProps.type
+			})
+		}
+	}
 
   // Handle the submission of the expense form
-  _submitExpenseForm() {
+  _submitExpenseForm () {
 
     var title = this.state.title
     var type = this.state.type

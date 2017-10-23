@@ -5,7 +5,7 @@ import styles from './Styles/SettingsFormStyle'
 
 export default class SettingsForm extends React.Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {

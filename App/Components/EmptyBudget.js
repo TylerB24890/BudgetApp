@@ -5,7 +5,7 @@ import styles from './Styles/EmptyBudgetStyle'
 
 export default class EmptyBudget extends Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
   }
 

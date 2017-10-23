@@ -25,7 +25,7 @@ let starting = 0
 
 class BudgetView extends React.PureComponent {
 
-  constructor(props) {
+  constructor (props) {
 
     super(props)
 
@@ -38,7 +38,7 @@ class BudgetView extends React.PureComponent {
 			user: ''
     }
 
-    this.updateBudgetOverview = this.updateBudgetOverview.bind(this)
+    this._updateBudgetOverview = this._updateBudgetOverview.bind(this)
   }
 
   componentDidMount () {
@@ -92,7 +92,7 @@ class BudgetView extends React.PureComponent {
   /**
    * Re-rerun the componentDidMount function to update state
    */
-  updateBudgetOverview() {
+  _updateBudgetOverview () {
     this.componentDidMount()
     this.forceUpdate()
   }
@@ -102,7 +102,7 @@ class BudgetView extends React.PureComponent {
    */
   renderItem ({item}) {
     return (
-      <BudgetItem item={item} updateBudgetOverview={() => this.updateBudgetOverview()} navigation={this.props.navigation}/>
+      <BudgetItem item={item} updateBudgetOverview={() => this._updateBudgetOverview()} navigation={this.props.navigation}/>
     )
   }
 

@@ -5,22 +5,14 @@ import styles from './Styles/CategoryFormStyle'
 
 export default class CategoryForm extends React.Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
-      cid: '',
-      catTitle: '',
-      editing: false,
-    }
-  }
-
-  componentDidMount () {
-    this.setState({
       cid: this.props.cid,
       catTitle: this.props.catTitle,
-      editing: this.props.editing,
-    })
+      editing: false,
+    }
   }
 
   componentWillReceiveProps (nextProps) {
