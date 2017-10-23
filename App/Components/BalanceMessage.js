@@ -25,6 +25,8 @@ export default class BalanceMessage extends Component {
 		var balance = parseFloat(this.props.balance)
 		var starting = parseFloat(this.props.starting)
 
+		var percentLeft = (balance/starting * 100)
+
 		if(starting <= 0) {
 			return (
 				<TouchableOpacity onPress={() => this.props.navigation.navigate('SettingsScreen')}>
@@ -32,27 +34,27 @@ export default class BalanceMessage extends Component {
 				</TouchableOpacity>
 			)
 		} else {
-			if(balance <= 0) {
+			if(percentLeft <= 0) {
 				returnMsg = messages.negative
 			}
 
-			if(balance > 0 && balance <= 100) {
+			if(percentLeft > 0 && percentLeft <= 10) {
 				returnMsg = messages.low
 			}
 
-			if(balance > 101 && balance <= 500) {
+			if(percentLeft > 10 && percentLeft <= 40) {
 				returnMsg = messages.medium
 			}
 
-			if(balance > 500 && balance <= 1000) {
+			if(percentLeft > 40 && percentLeft <= 60) {
 				returnMsg = messages.stable
 			}
 
-			if(balance > 1000 && balance <= 2000) {
+			if(percentLeft > 60 && percentLeft <= 80) {
 				returnMsg = messages.high
 			}
 
-			if(balance > 2000) {
+			if(percentLeft > 80) {
 				returnMsg = messages.rich
 			}
 
