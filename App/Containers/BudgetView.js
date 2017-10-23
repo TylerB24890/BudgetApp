@@ -128,7 +128,7 @@ class BudgetView extends React.PureComponent {
    */
   renderHeader = () => {
     return (
-      <BudgetBalance starting={this.state.starting} balance={this.state.balance}/>
+      <BudgetBalance navigation={this.props.navigation} starting={this.state.starting} balance={this.state.balance}/>
     )
   }
 

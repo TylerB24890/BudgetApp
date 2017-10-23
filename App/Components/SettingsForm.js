@@ -20,7 +20,7 @@ export default class SettingsForm extends React.Component {
       this.setState({
         id: nextProps.id,
         starting: nextProps.starting.toString(),
-        user: nextProps.user
+        user: nextProps.user,
       })
     }
   }

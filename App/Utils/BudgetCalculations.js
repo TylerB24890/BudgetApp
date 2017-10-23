@@ -3,22 +3,6 @@
  */
 
 let BudgetCalculations = {
-  sectionTotal: function(data, totalKey) {
-
-    if(!data)
-      return
-
-    var sectionTotal = 0
-
-    data.forEach( function (item) {
-      if(item.type === totalKey) {
-        sectionTotal += parseFloat(item.cost)
-      }
-    })
-
-    return sectionTotal
-  },
-
   sectionHeaderTotal: function(data, totalKey) {
     var sectionTotal = 0
 
