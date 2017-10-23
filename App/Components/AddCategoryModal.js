@@ -3,7 +3,7 @@ import Realm from 'realm'
 import { CategorySchema } from '../Fixtures/BudgetSchemas'
 import CategoryModel from '../Fixtures/CategoryModel'
 import { Button, Icon, Text } from 'native-base'
-import { View, Modal, TouchableOpacity } from 'react-native'
+import { View, Modal } from 'react-native'
 import CategoryForm from './CategoryForm'
 import styles from './Styles/AddCategoryModalStyle'
 
@@ -61,10 +61,10 @@ export default class AddCategoryModal extends Component {
 					transparent={true}
 					visible={this.state.modalVisible}
 				>
-					<View style={{marginTop: 64, flex: 1}}>
-						<TouchableOpacity onPress={() => this._handleCloseModal(false)}>
+					<View style={[styles.modalContent, {flex: 1}]}>
+						<Button iconRight transparent onPress={() => this._handleCloseModal(false)} style={{alignSelf: 'flex-end', paddingTop: 10}}>
 							<Icon name="ios-close-outline" style={styles.closeButton} />
-						</TouchableOpacity>
+						</Button>
 						<CategoryForm cid='' catTitle='' editing={false} handler={(id, title) => this._handleNewCategory(id, title)}/>
 					</View>
         </Modal>
