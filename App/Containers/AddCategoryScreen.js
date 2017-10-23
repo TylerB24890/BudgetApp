@@ -15,7 +15,7 @@ class AddCategoryScreen extends Component {
     super(props)
   }
 
-  handleNewCategory(cid, title) {
+  _handleNewCategory(cid, title) {
     if(cid === '' || cid === null) {
       try {
         Realm.open({
@@ -49,7 +49,7 @@ class AddCategoryScreen extends Component {
     return (
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
-          <CategoryForm cid='' catTitle='' handler={(cid, title) => this.handleNewCategory(cid, title)}/>
+          <CategoryForm cid='' catTitle='' handler={(cid, title) => this._handleNewCategory(cid, title)}/>
         </Content>
       </Container>
     )

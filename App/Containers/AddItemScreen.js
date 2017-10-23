@@ -16,7 +16,7 @@ class AddItemScreen extends Component {
   }
 
 
-  handleNewExpense(title, type, cost, id) {
+  _handleNewExpense(title, type, cost, id) {
     if(id === '') {
       try {
         Realm.open({
@@ -49,7 +49,7 @@ class AddItemScreen extends Component {
     return (
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
-          <BudgetExpenseForm id='' title='' cost='0.00' type='' handler={(title, type, cost, id) => this.handleNewExpense(title, type, cost, id)}/>
+          <BudgetExpenseForm id='' title='' cost='0.00' type='' handler={(title, type, cost, id) => this._handleNewExpense(title, type, cost, id)}/>
         </Content>
       </Container>
     )

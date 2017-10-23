@@ -8,7 +8,7 @@ export default class BudgetItem extends React.Component {
     super(props)
   }
 
-  navigateToEdit () {
+  _navigateToEdit () {
 
     const {navigate} = this.props.navigation
 
@@ -26,7 +26,7 @@ export default class BudgetItem extends React.Component {
 
     return (
       <View>
-        <TouchableHighlight onPress={() => this.navigateToEdit()} underlayColor="#34495e">
+        <TouchableHighlight onPress={() => this._navigateToEdit()} underlayColor="#34495e">
           <View style={styles.row}>
             <View style={styles.item}>
               <Text style={[styles.itemTitle, styles.label]}>{this.props.item.title}</Text>
