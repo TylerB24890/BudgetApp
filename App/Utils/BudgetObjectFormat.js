@@ -1,5 +1,3 @@
-import BudgetCalculations from './BudgetCalculations'
-
 /**
  * Class to format the budget state object by 'key' (Category)
  */
@@ -25,8 +23,7 @@ class BudgetObjectFormat {
     }
 
     for (var type in stateData) {
-      var total = BudgetCalculations.sectionTotal(stateData[type], type)
-      returnArray.push({key: type, keyTotal: total, data: stateData[type]})
+      returnArray.push({key: type, data: stateData[type]})
     }
 
     return returnArray

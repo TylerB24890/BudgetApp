@@ -1,6 +1,6 @@
 import DbUtils from '../Utils/DbUtils'
 
-class SettingsModel {
+export default class SettingsModel {
   constructor(id = null, name, starting) {
     if(id === null) {
       this.id = DbUtils.guid()
@@ -11,5 +11,3 @@ class SettingsModel {
     this.starting = starting
   }
 }
-
-module.exports = SettingsModel

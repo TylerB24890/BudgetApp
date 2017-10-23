@@ -11,7 +11,7 @@ export default class SettingsForm extends React.Component {
     this.state = {
       id: '',
       starting: '',
-      user: ''
+      user: '',
     }
   }
 
@@ -39,6 +39,7 @@ export default class SettingsForm extends React.Component {
             <Item floatingLabel>
               <Label style={{color: 'rgba(255,255,255,.6)'}}>What does your mom call you?</Label>
               <Input
+									ref="user"
                   value={this.state.user}
                   editable={true}
                   onChangeText={(text) => this.setState({user: text})}
@@ -46,9 +47,10 @@ export default class SettingsForm extends React.Component {
               />
             </Item>
             <Item floatingLabel style={{marginTop: 30}}>
-              <Label style={{color: 'rgba(255,255,255,.6)'}}>Fun coupons to budget?</Label>
+              <Label style={{color: 'rgba(255,255,255,.6)'}}>What's your staring budget?</Label>
               <Icon active name="logo-usd" style={{color: 'rgba(255,255,255,.6)', fontSize: 18}} />
               <Input
+									ref="starting"
                   value={this.state.starting}
                   editable={true}
                   onChangeText={(text) => this.setState({starting: text})}

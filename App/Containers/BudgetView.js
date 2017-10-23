@@ -50,8 +50,13 @@ class BudgetView extends React.PureComponent {
     var formattedData = new BudgetObjectFormat(data)
 
     formattedData.forEach(function(item) {
-      total += item.keyTotal
+			var itemData = item.data
+
+			itemData.forEach(function(expense) {
+				total += expense.cost
+			})
     })
+
 
     var settingsRealm = new Realm({path: 'SettingsScreen.realm', schema: [SettingsSchema]})
     settings = settingsRealm.objects('Settings')
@@ -104,11 +109,18 @@ class BudgetView extends React.PureComponent {
   renderSectionHeader = ({section}) => {
     var title = this._getCategoryTitle(section.key)
     var total = BudgetCalculations.sectionHeaderTotal(this.state.data, section.key)
-    return (
-      <View style={styles.sectionHeader}>
-        <Text style={styles.headerText}>{title}: <Text style={styles.itemCost}>${parseFloat(total).toFixed(2)}</Text></Text>
-      </View>
-    )
+
+		if(title.length > 1) {
+			return (
+	      <View style={styles.sectionHeader}>
+	        <Text style={styles.headerText}>{title}: <Text style={styles.itemCost}>${parseFloat(total).toFixed(2)}</Text></Text>
+	      </View>
+	    )
+		} else {
+			return (
+				<View></View>
+			)
+		}
   }
 
   /**

@@ -5,7 +5,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
 
   form: {
-    paddingTop: (Metrics.screenHeight / 7),
+    paddingTop: (Metrics.screenHeight * .05),
     paddingHorizontal: 15
   },
   buttonContainer: {

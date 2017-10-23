@@ -1,6 +1,6 @@
 import DbUtils from '../Utils/DbUtils'
 
-class CategoryModel {
+export default class CategoryModel {
   constructor(id = null, title) {
 
     if(id === null) {
@@ -11,5 +11,3 @@ class CategoryModel {
     this.title = title
   }
 }
-
-module.exports = CategoryModel

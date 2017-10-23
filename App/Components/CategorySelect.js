@@ -40,13 +40,6 @@ export default class CategorySelect extends Component {
   _returnExpenseCategories () {
     var realm = new Realm({path: 'CategorySelect.realm', schema: [CategorySchema]})
 
-    /*
-    realm.write(() => {
-      realm.create('Category', new CategoryModel(null, 'Bills'))
-      realm.create('Category', new CategoryModel(null, 'Entertainment'))
-      realm.create('Category', new CategoryModel(null, 'Food'))
-    })*/
-
     var categories = realm.objects('Category').sorted('title')
     var categoryDisplay = categories.map(catData => (
       <Item key={catData.id} value={catData.id} label={catData.title} />
@@ -60,8 +53,6 @@ export default class CategorySelect extends Component {
     var val = this.state.type.length > 1 ? this.state.type : 'key0'
     categoryDisplay = this._returnExpenseCategories()
 
-    categoryDisplay.unshift(<Item key="key0" label="Expense Category" value="key0" />)
-
     return (
       <InputGroup
         style={{marginTop: 15}}
@@ -69,11 +60,16 @@ export default class CategorySelect extends Component {
         success={this.state.success}
       >
         <Picker
-          iosHeader="Category"
+          iosHeader="Categories"
+					placeholder="Expense Category"
           mode="dropdown"
           selectedValue={val}
           onValueChange={this._updateExpenseType.bind(this)}
-          textStyle={{color: this.state.selectColor}}>
+          textStyle={{color: this.state.selectColor}}
+					headerStyle={{ backgroundColor: Colors.header }}
+					headerTitleStyle={{ color: '#FFF' }}
+					headerBackButtonTextStyle={{ color: '#FFF' }}
+				>
           {categoryDisplay}
 
         </Picker>

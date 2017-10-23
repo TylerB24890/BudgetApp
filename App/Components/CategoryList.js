@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Text, List, ListItem, Icon, Button } from 'native-base'
-import { Alert } from 'react-native'
-import { TouchableOpacity } from 'react-native'
+import { Alert, TouchableOpacity } from 'react-native'
 import CategoryForm from './CategoryForm'
 
 import styles from './Styles/CategoryListStyle'
