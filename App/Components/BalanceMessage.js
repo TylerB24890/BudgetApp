@@ -5,13 +5,13 @@ import { View, Text } from 'native-base'
 import styles from './Styles/BalanceMessageStyle'
 
 const messages = {
-	negative: "Damn, you're broke.",
-	low: "Time to cut back on the spending...",
-	medium: "Your balance is getting pretty low...",
-	stable: "You're doing good, keep it up.",
-	high: "You're killing it in the finance game.",
-	rich: "Treat yo' self.",
-	noStarting: "You should enter a starting balance..."
+	negative: "You are literally broke.",
+	low: "Time to stop spending. You're almost broke.",
+	medium: "Not bad, but could be better.",
+	stable: "You're sitting pretty alright. Keep it up.",
+	high: "Buy yourself a beer or two, you can afford it.",
+	rich: "You've got money, honey. Treat yo' self.",
+	noStarting: "It takes money to make money...\nEnter a starting balance"
 }
 
 export default class BalanceMessage extends Component {

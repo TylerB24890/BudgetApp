@@ -50,7 +50,7 @@ class EditCategoryScreen extends Component {
 
     return (
       <Container style={styles.container}>
-        <Content scrollEnabled={false} keyboardShouldPersistTaps="never">
+        <Content scrollEnabled={false}>
           <CategoryForm
             catTitle={data.catTitle}
             cid={data.cid}

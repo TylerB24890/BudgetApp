@@ -8,7 +8,8 @@ export default StyleSheet.create({
 		color: '#e74c3c',
 		fontSize: 14,
 		marginTop: 10,
-		fontStyle: 'italic'
+		fontStyle: 'italic',
+		textAlign: 'center'
 	},
 	messageTextError: {
 		color: '#e74c3c',

@@ -48,7 +48,7 @@ class AddCategoryScreen extends Component {
   render () {
     return (
       <Container style={styles.container}>
-        <Content scrollEnabled={false} keyboardShouldPersistTaps="never">
+        <Content scrollEnabled={false}>
           <CategoryForm cid='' catTitle='' handler={(cid, title) => this.handleNewCategory(cid, title)}/>
         </Content>
       </Container>

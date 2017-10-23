@@ -48,7 +48,7 @@ class AddItemScreen extends Component {
   render () {
     return (
       <Container style={styles.container}>
-        <Content scrollEnabled={false} keyboardShouldPersistTaps="never">
+        <Content scrollEnabled={false}>
           <BudgetExpenseForm id='' title='' cost='0.00' type='' handler={(title, type, cost, id) => this.handleNewExpense(title, type, cost, id)}/>
         </Content>
       </Container>

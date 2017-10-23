@@ -78,7 +78,7 @@ class EditItemScreen extends Component {
 
     return (
       <Container style={styles.container}>
-        <Content scrollEnabled={false} keyboardShouldPersistTaps="never">
+        <Content scrollEnabled={false}>
           <BudgetExpenseForm
             title={data.title}
             cost={data.cost}

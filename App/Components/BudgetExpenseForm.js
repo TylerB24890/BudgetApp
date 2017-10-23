@@ -102,12 +102,10 @@ export default class BudgetExpenseForm extends Component {
               </Item>
 
               <CategorySelect type={this.state.type} categoryHandler={(type) => this._setExpenseCategory(type)}/>
-
-              <Content scrollEnabled={false} style={styles.buttonContainer}>
-                <BudgetButton block type="go" onPress={() => this._submitExpenseForm()} text="Save Expense" />
-              </Content>
-
-              {deleteButton}
+	              <Content scrollEnabled={false} style={styles.buttonContainer}>
+	                <BudgetButton block type="go" onPress={() => this._submitExpenseForm()} text="Save Expense" />
+	              </Content>
+	              {deleteButton}
           </Content>
         </Container>
       </KeyboardAvoidingView>

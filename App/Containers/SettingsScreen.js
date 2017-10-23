@@ -74,7 +74,7 @@ class SettingsScreen extends Component {
 
     return (
       <Container style={styles.container}>
-        <Content scrollEnabled={false} keyboardShouldPersistTaps="never">
+        <Content scrollEnabled={false}>
           {updatedMessage}
           <SettingsForm id={this.state.id} starting={this.state.starting} user={this.state.user} handler={(id, user, starting) => this._handleSettingsSubmission(id, user, starting)}/>
         </Content>
