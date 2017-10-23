@@ -35,6 +35,7 @@ class BudgetView extends React.PureComponent {
       balance: 0,
       updated: false,
       data: [],
+			user: ''
     }
 
     this.updateBudgetOverview = this.updateBudgetOverview.bind(this)
@@ -42,6 +43,7 @@ class BudgetView extends React.PureComponent {
 
   componentDidMount () {
     var startComp = 0
+		var user = ''
     var settings = {}
     var total = 0
 
@@ -57,18 +59,19 @@ class BudgetView extends React.PureComponent {
 			})
     })
 
-
     var settingsRealm = new Realm({path: 'SettingsScreen.realm', schema: [SettingsSchema]})
     settings = settingsRealm.objects('Settings')
     settings.forEach(function(setting) {
       startComp = setting.starting
+			user = setting.user
     })
 
     this.setState({
       starting: startComp,
       data: formattedData,
       spending: total,
-      balance: (startComp - total)
+      balance: (startComp - total),
+			user: user
     })
   }
 
@@ -128,7 +131,7 @@ class BudgetView extends React.PureComponent {
    */
   renderHeader = () => {
     return (
-      <BudgetBalance navigation={this.props.navigation} starting={this.state.starting} balance={this.state.balance}/>
+      <BudgetBalance user={this.state.user} navigation={this.props.navigation} starting={this.state.starting} balance={this.state.balance}/>
     )
   }
 

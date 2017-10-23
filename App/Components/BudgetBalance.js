@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity } from 'react-native'
+import BalanceMessage from './BalanceMessage'
 import { CurrencyFormat } from '../Utils/CurrencyFormat'
 import styles, { positiveColor, negativeColor } from './Styles/BudgetBalanceStyle'
 
@@ -12,36 +13,25 @@ export default class BudgetBalance extends Component {
     this.state = {
       balanceColor: positiveColor,
       starting: this.props.starting,
-      balance: this.props.balance
+      balance: this.props.balance,
+			user: this.props.user
     }
   }
 
   componentWillReceiveProps(nextProps) {
 
+		var color = this.state.balanceColor
+
+		if(nextProps.balance < 0) {
+			color = negativeColor
+		}
+
     this.setState({
       balance: nextProps.balance,
-      starting: nextProps.starting
+      starting: nextProps.starting,
+			user: nextProps.user,
+			balanceColor: color
     })
-
-    if(nextProps.balance < 0) {
-      this.setState({
-        balanceColor: negativeColor
-      })
-    }
-  }
-
-  componentDidMount () {
-    this.state = {
-      balanceColor: positiveColor,
-    }
-
-    if(this.state.balance < 0) {
-      this.setState({
-        balanceColor: negativeColor,
-        balance: this.state.balance,
-        starting: this.state.starting
-      })
-    }
   }
 
   render () {
@@ -55,6 +45,8 @@ export default class BudgetBalance extends Component {
         <View style={styles.available}>
           <Text style={styles.screenTitle}>Available: <Text style={{color: this.state.balanceColor}}>{CurrencyFormat.format(this.state.balance)}</Text></Text>
         </View>
+
+				<BalanceMessage user={this.state.user} balance={this.state.balance} starting={this.state.starting} navigation={this.props.navigation} />
       </View>
     )
   }
