@@ -27,6 +27,7 @@ const DrawerStack = DrawerNavigator({
     screen: BudgetView,
     navigationOptions: ({navigation}) => ({
       title: 'Budget Overview',
+			headerRight: (<Icon name="ios-add-outline" size={25} color='#FFF' onPress={() => navigation.navigate("AddItemScreen")} />),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
           <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Budget Overview</Text>
@@ -85,6 +86,7 @@ const DrawerStack = DrawerNavigator({
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
+	AddItemScreen: {screen: AddItemScreen},
   AddCategoryScreen: {
     screen: AddCategoryScreen,
     navigationOptions: ({navigation}) => ({
