@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Picker, InputGroup } from 'native-base'
+import { Picker, InputGroup, Icon, Text, View, Button } from 'native-base'
 import Realm from 'realm'
 import { CategorySchema } from '../Fixtures/BudgetSchemas'
 import CategoryModel from '../Fixtures/CategoryModel'
@@ -54,26 +54,32 @@ export default class CategorySelect extends Component {
     categoryDisplay = this._returnExpenseCategories()
 
     return (
-      <InputGroup
-        style={{marginTop: 15}}
-        error={this.state.error}
-        success={this.state.success}
-      >
-        <Picker
-          iosHeader="Categories"
-					placeholder="Expense Category"
-          mode="dropdown"
-          selectedValue={val}
-          onValueChange={this._updateExpenseType.bind(this)}
-          textStyle={{color: this.state.selectColor}}
-					headerStyle={{ backgroundColor: Colors.header }}
-					headerTitleStyle={{ color: '#FFF' }}
-					headerBackButtonTextStyle={{ color: '#FFF' }}
-				>
-          {categoryDisplay}
+			<View>
+				<InputGroup
+	        style={{marginTop: 15}}
+	        error={this.state.error}
+	        success={this.state.success}
+	      >
+	        <Picker
+	          iosHeader="Categories"
+						placeholder="Expense Category"
+	          mode="dropdown"
+	          selectedValue={val}
+	          onValueChange={this._updateExpenseType.bind(this)}
+	          textStyle={{color: this.state.selectColor}}
+						headerStyle={{ backgroundColor: Colors.header }}
+						headerTitleStyle={{ color: '#FFF' }}
+						headerBackButtonTextStyle={{ color: '#FFF' }}
+					>
+	          {categoryDisplay}
 
-        </Picker>
-      </InputGroup>
+	        </Picker>
+	      </InputGroup>
+				<Button iconLeft transparent>
+					<Icon name="ios-add" style={{color: '#FFF', fontSize: 14}}/>
+					<Text style={{fontSize: 14, color: '#FFF'}}>New category</Text>
+				</Button>
+			</View>
     )
   }
 }
