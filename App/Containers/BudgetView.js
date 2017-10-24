@@ -35,7 +35,8 @@ class BudgetView extends React.PureComponent {
       balance: 0,
       updated: false,
       data: [],
-			user: ''
+			user: '',
+			new: true
     }
 
     this._updateBudgetOverview = this._updateBudgetOverview.bind(this)
@@ -46,6 +47,7 @@ class BudgetView extends React.PureComponent {
 		var user = ''
     var settings = {}
     var total = 0
+		var newUser = false
 
     var data = realm.objects('BudgetItem').sorted('type')
 
@@ -66,12 +68,17 @@ class BudgetView extends React.PureComponent {
 			user = setting.user
     })
 
+		if(parseFloat(startComp) <= 0) {
+			newUser = true
+		}
+
     this.setState({
       starting: startComp,
       data: formattedData,
       spending: total,
       balance: (startComp - total),
-			user: user
+			user: user,
+			new: newUser
     })
   }
 
@@ -145,7 +152,7 @@ class BudgetView extends React.PureComponent {
 
   // Show this when data is empty
   renderEmpty = () =>
-		<EmptyBudget navigation={this.props.navigation} />
+		<EmptyBudget navigation={this.props.navigation} new={this.state.new} />
 
   keyExtractor = (item, index) => index
 

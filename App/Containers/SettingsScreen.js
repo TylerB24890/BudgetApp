@@ -23,6 +23,7 @@ class SettingsScreen extends Component {
       user: '',
       starting: 0,
       udpated: false,
+			new: false
     }
   }
 
@@ -42,8 +43,17 @@ class SettingsScreen extends Component {
       id: id,
       starting: starting,
       user: user,
+			new: this.props.new
     })
   }
+
+	componentWillReceiveProps (nextProps) {
+		if(nextProps.new !== this.state.new) {
+			this.setState({
+				new: nextProps.new
+			})
+		}
+	}
 
   _handleSettingsSubmission(id, user, starting) {
     try {
@@ -51,9 +61,14 @@ class SettingsScreen extends Component {
         realm.create('Settings', new SettingsModel(id, user, starting), true)
       })
 
+			if(this.state.new) {
+				this.props.navigation.navigate('AddItemScreen', { new: false })
+			}
+
 			this.setState({
 				user: user,
-				updated: true
+				updated: true,
+				new: false
 			})
     } catch (e) {
       console.log('Error opening Settings table: ' + e)

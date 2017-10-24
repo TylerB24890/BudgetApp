@@ -31,7 +31,8 @@ class AddItemScreen extends Component {
 
             navigate(
               'BudgetView', {
-                updated: true
+                updated: true,
+								new: false
               }
             )
           } catch (e) {

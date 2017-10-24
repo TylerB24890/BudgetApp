@@ -25,12 +25,25 @@ const noTransitionConfig = () => ({
   }
 })
 
+const paramsToProps = (SomeComponent) => {
+// turns this.props.navigation.state.params into this.params.<x>
+    return class extends React.Component {
+        static navigationOptions = SomeComponent.navigationOptions;
+    	// everything else, call as SomeComponent
+        render() {
+            const {navigation, ...otherProps} = this.props
+            const {state: {params}} = navigation
+            return <SomeComponent {...this.props} {...params} />
+        }
+    }
+}
+
 // Card Stack Navigator
 // Transitions screens in as cards (left to right)
 // Currently only services the 'Add Expense Item' screen
 const CardStack = StackNavigator({
 	BudgetView: {
-    screen: BudgetView,
+    screen: paramsToProps(BudgetView),
     navigationOptions: ({navigation}) => ({
       title: 'Budget Overview',
 			headerRight: (
@@ -49,7 +62,7 @@ const CardStack = StackNavigator({
     })
   },
   AddItemScreen: {
-    screen: AddItemScreen,
+    screen: paramsToProps(AddItemScreen),
     navigationOptions: ({navigation}) => ({
       title: 'Add Expense',
 			headerRight: (
@@ -68,9 +81,6 @@ const CardStack = StackNavigator({
 }, {
 	mode: 'card',
 	headerMode: 'none',
-	navigationOptions: {
-     gesturesEnabled: true,
-  },
 })
 
 // Slide out Drawer navigator
@@ -79,7 +89,7 @@ const CardStack = StackNavigator({
 const DrawerStack = DrawerNavigator({
   CardStack: { screen: CardStack },
 	AddItemScreen: {
-    screen: AddItemScreen,
+    screen: paramsToProps(AddItemScreen),
     navigationOptions: ({navigation}) => ({
       title: 'Add Expense',
 			headerRight: (
@@ -96,7 +106,7 @@ const DrawerStack = DrawerNavigator({
     })
   },
   CategoriesScreen: {
-    screen: CategoriesScreen,
+    screen: paramsToProps(CategoriesScreen),
     navigationOptions: ({navigation}) => ({
       title: 'Expense Categories',
 			headerRight: (
@@ -113,7 +123,7 @@ const DrawerStack = DrawerNavigator({
     })
   },
   SettingsScreen: {
-    screen: SettingsScreen,
+    screen: paramsToProps(SettingsScreen),
     navigationOptions: ({navigation}) => ({
       title: 'Budget Settings',
 			headerRight: (
@@ -138,7 +148,7 @@ const DrawerStack = DrawerNavigator({
 // Transitions screens in as modals
 const PrimaryNav = StackNavigator({
   AddCategoryScreen: {
-    screen: AddCategoryScreen,
+    screen: paramsToProps(AddCategoryScreen),
     navigationOptions: ({navigation}) => ({
       title: 'Add Category',
       headerLeft: (
@@ -150,7 +160,7 @@ const PrimaryNav = StackNavigator({
     })
   },
   EditCategoryScreen: {
-    screen: EditCategoryScreen,
+    screen: paramsToProps(EditCategoryScreen),
     navigationOptions: ({navigation}) => ({
       title: 'Edit Category',
       headerLeft: (
@@ -159,7 +169,7 @@ const PrimaryNav = StackNavigator({
     })
   },
   EditItemScreen: {
-    screen: EditItemScreen,
+    screen: paramsToProps(EditItemScreen),
     navigationOptions: ({navigation}) => ({
       title: 'Edit Expense',
 			headerLeft: (
@@ -174,7 +184,6 @@ const PrimaryNav = StackNavigator({
   initialRouteName: 'DrawerStack',
 	mode: 'modal',
   navigationOptions: ({navigation}) => ({
-		gesturesEnabled: true,
     headerStyle: styles.header,
     headerTintColor: '#ecf0f1',
     headerLeft: (
