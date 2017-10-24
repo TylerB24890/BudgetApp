@@ -15,6 +15,14 @@ export default class SettingsForm extends React.Component {
     }
   }
 
+	componentDidMount () {
+		this.setState({
+			id: this.props.id,
+			starting: (typeof this.props.starting !== 'undefined' && this.props.starting > 0 ? this.props.starting.toString() : ''),
+			user: this.props.user,
+		})
+	}
+
   componentWillReceiveProps (nextProps) {
     if(nextProps.starting !== this.props.starting) {
       this.setState({
