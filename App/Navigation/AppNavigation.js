@@ -131,22 +131,12 @@ const PrimaryNav = StackNavigator({
 					<Icon name='ios-close' size={30} color='#FFF' />
 				</TouchableOpacity>
 			),
-			headerRight: (
-				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('BudgetView')}}>
-					<Icon name="ios-home" size={30} color="#FFF"/>
-				</TouchableOpacity>
-			),
     })
   },
   EditItemScreen: {
     screen: EditItemScreen,
     navigationOptions: ({navigation}) => ({
       title: 'Edit Expense',
-			headerRight: (
-				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('BudgetView')}}>
-					<Icon name="ios-home" size={30} color="#FFF"/>
-				</TouchableOpacity>
-			),
     })
   },
   BudgetView: {
