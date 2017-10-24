@@ -12,7 +12,11 @@ export default StyleSheet.create({
     paddingVertical: 15,
     flex: 1,
     alignItems: 'flex-start'
-  }
+  },
+	headerIcon: {
+		paddingVertical: 10,
+		paddingHorizontal: 10
+	}
 })
 
 export const barColor = Colors.header
