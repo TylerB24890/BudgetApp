@@ -2,6 +2,9 @@ import React from 'react'
 import { Text, Animated, View, Easing, TouchableOpacity } from 'react-native'
 import { DrawerNavigator, StackNavigator } from 'react-navigation'
 
+import HeaderHomeIcon from '../Components/HeaderHomeIcon'
+import HeaderBackIcon from '../Components/HeaderBackIcon'
+
 import AddCategoryScreen from '../Containers/AddCategoryScreen'
 import EditCategoryScreen from '../Containers/EditCategoryScreen'
 import CategoriesScreen from '../Containers/CategoriesScreen'
@@ -22,9 +25,11 @@ const noTransitionConfig = () => ({
   }
 })
 
-
-const DrawerStack = DrawerNavigator({
-  BudgetView: {
+// Card Stack Navigator
+// Transitions screens in as cards (left to right)
+// Currently only services the 'Add Expense Item' screen
+const CardStack = StackNavigator({
+	BudgetView: {
     screen: BudgetView,
     navigationOptions: ({navigation}) => ({
       title: 'Budget Overview',
@@ -48,9 +53,35 @@ const DrawerStack = DrawerNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Add Expense',
 			headerRight: (
-				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('BudgetView')}}>
-					<Icon name="ios-home" size={30} color="#FFF"/>
-				</TouchableOpacity>
+				<HeaderHomeIcon navigation={navigation} />
+			),
+      drawerLabel: ({ focused }) => (
+        <View style={styles.navElement}>
+          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Add Expense</Text>
+        </View>
+      ),
+      drawerIcon: ({ focused }) => (
+        <Icon name="ios-add-outline" size={30} color={focused ? activeColor : inactiveColor} />
+      )
+    })
+  },
+}, {
+	mode: 'card',
+	gesturesEnabled: true,
+	headerMode: 'none'
+})
+
+// Slide out Drawer navigator
+// Main app navigation
+// Services all pages (Except add/edit categories & edit expenses)
+const DrawerStack = DrawerNavigator({
+  CardStack: { screen: CardStack },
+	AddItemScreen: {
+    screen: AddItemScreen,
+    navigationOptions: ({navigation}) => ({
+      title: 'Add Expense',
+			headerRight: (
+				<HeaderHomeIcon navigation={navigation} />
 			),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
@@ -67,9 +98,7 @@ const DrawerStack = DrawerNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Expense Categories',
 			headerRight: (
-				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('BudgetView')}}>
-					<Icon name="ios-home" size={30} color="#FFF"/>
-				</TouchableOpacity>
+				<HeaderHomeIcon navigation={navigation} />
 			),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
@@ -86,9 +115,7 @@ const DrawerStack = DrawerNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Budget Settings',
 			headerRight: (
-				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('BudgetView')}}>
-					<Icon name="ios-home" size={30} color="#FFF"/>
-				</TouchableOpacity>
+				<HeaderHomeIcon navigation={navigation} />
 			),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
@@ -102,23 +129,21 @@ const DrawerStack = DrawerNavigator({
   },
 }, {
   drawerWidth: 250,
+	initialRouteName: 'CardStack',
 })
 
-// Manifest of possible screens
+// Main Navigator
+// Transitions screens in as modals
 const PrimaryNav = StackNavigator({
   AddCategoryScreen: {
     screen: AddCategoryScreen,
     navigationOptions: ({navigation}) => ({
       title: 'Add Category',
       headerLeft: (
-				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.goBack()}}>
-					<Icon name='ios-close' size={30} color='#FFF' />
-				</TouchableOpacity>
+				<HeaderBackIcon navigation={navigation} />
 			),
 			headerRight: (
-				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('BudgetView')}}>
-					<Icon name="ios-home" size={30} color="#FFF"/>
-				</TouchableOpacity>
+				<HeaderHomeIcon navigation={navigation} />
 			),
     })
   },
@@ -127,9 +152,7 @@ const PrimaryNav = StackNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Edit Category',
       headerLeft: (
-				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.goBack()}}>
-					<Icon name='ios-close' size={30} color='#FFF' />
-				</TouchableOpacity>
+				<HeaderBackIcon navigation={navigation} />
 			),
     })
   },
@@ -138,13 +161,11 @@ const PrimaryNav = StackNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Edit Expense',
 			headerLeft: (
-				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.goBack()}}>
-					<Icon name='ios-close' size={30} color='#FFF' />
-				</TouchableOpacity>
+				<HeaderBackIcon navigation={navigation} />
 			),
     })
   },
-  DrawerStack: { screen: DrawerStack }
+  DrawerStack: { screen: DrawerStack },
 }, {
   // Default config for all screens
   headerMode: 'float',
