@@ -68,14 +68,6 @@ const CardStack = StackNavigator({
 			headerRight: (
 				<HeaderHomeIcon navigation={navigation} />
 			),
-      drawerLabel: ({ focused }) => (
-        <View style={styles.navElement}>
-          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Add Expense</Text>
-        </View>
-      ),
-      drawerIcon: ({ focused }) => (
-        <Icon name="ios-add-outline" size={30} color={focused ? activeColor : inactiveColor} />
-      )
     })
   },
 }, {
@@ -183,7 +175,32 @@ const PrimaryNav = StackNavigator({
   headerMode: 'float',
   initialRouteName: 'DrawerStack',
 	mode: 'modal',
+	transitionConfig: () => ({
+    transitionSpec: {
+      duration: 300,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+    },
+    screenInterpolator: sceneProps => {
+      const { layout, position, scene } = sceneProps;
+      const { index } = scene;
+
+      const height = layout.initHeight;
+      const translateY = position.interpolate({
+        inputRange: [index - 1, index, index + 1],
+        outputRange: [height, 0, 0],
+      });
+
+      const opacity = position.interpolate({
+        inputRange: [index - 1, index - 0.99, index],
+        outputRange: [0, 1, 1],
+    	});
+
+      return { opacity, transform: [{ translateY }] };
+    },
+  }),
   navigationOptions: ({navigation}) => ({
+		gesturesEnabled: true,
     headerStyle: styles.header,
     headerTintColor: '#ecf0f1',
     headerLeft: (
