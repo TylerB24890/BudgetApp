@@ -37,7 +37,7 @@ export default class EmptyBudget extends Component {
           </Text>
 
           <Content style={{marginTop: 30}}>
-            <BudgetButton block type="go" onPress={() => this._openNavDrawer()} text="Let's do this." />
+            <BudgetButton block type="go" onPress={() => this.props.navigation.navigate('SettingsScreen')} text="Let's do this." />
           </Content>
         </Content>
       </Container>

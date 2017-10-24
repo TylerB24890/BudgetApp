@@ -86,7 +86,6 @@ export default class BudgetExpenseForm extends Component {
                   editable={true}
                   onChangeText={(text) => this.setState({title: text})}
                   style={{color: '#FFF'}}
-                  autoFocus={true}
                 />
               </Item>
 
