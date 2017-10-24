@@ -29,7 +29,7 @@ const DrawerStack = DrawerNavigator({
       title: 'Budget Overview',
 			headerRight: (
 				<TouchableOpacity style={styles.headerIcon} onPress={() => navigation.navigate("AddItemScreen")}>
-					<Icon name="ios-add-outline" size={25} color='#FFF' />
+					<Icon name="ios-add-outline" size={30} color='#FFF' />
 				</TouchableOpacity>
 			),
       drawerLabel: ({ focused }) => (
@@ -38,7 +38,7 @@ const DrawerStack = DrawerNavigator({
         </View>
       ),
       drawerIcon: ({ focused }) => (
-        <Icon name="ios-home-outline" size={25} color={focused ? activeColor : inactiveColor} />
+        <Icon name="ios-home-outline" size={30} color={focused ? activeColor : inactiveColor} />
       )
     })
   },
@@ -48,7 +48,7 @@ const DrawerStack = DrawerNavigator({
       title: 'Add Expense',
 			headerRight: (
 				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('BudgetView')}}>
-					<Icon name="ios-home" size={25} color="#FFF"/>
+					<Icon name="ios-home" size={30} color="#FFF"/>
 				</TouchableOpacity>
 			),
       drawerLabel: ({ focused }) => (
@@ -57,7 +57,7 @@ const DrawerStack = DrawerNavigator({
         </View>
       ),
       drawerIcon: ({ focused }) => (
-        <Icon name="ios-add-outline" size={25} color={focused ? activeColor : inactiveColor} />
+        <Icon name="ios-add-outline" size={30} color={focused ? activeColor : inactiveColor} />
       )
     })
   },
@@ -67,7 +67,7 @@ const DrawerStack = DrawerNavigator({
       title: 'Expense Categories',
 			headerRight: (
 				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('BudgetView')}}>
-					<Icon name="ios-home" size={25} color="#FFF"/>
+					<Icon name="ios-home" size={30} color="#FFF"/>
 				</TouchableOpacity>
 			),
       drawerLabel: ({ focused }) => (
@@ -76,7 +76,7 @@ const DrawerStack = DrawerNavigator({
         </View>
       ),
       drawerIcon: ({ focused }) => (
-        <Icon name="ios-list-outline" size={25} color={focused ? activeColor : inactiveColor} />
+        <Icon name="ios-list-outline" size={30} color={focused ? activeColor : inactiveColor} />
       )
     })
   },
@@ -86,7 +86,7 @@ const DrawerStack = DrawerNavigator({
       title: 'Budget Settings',
 			headerRight: (
 				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('BudgetView')}}>
-					<Icon name="ios-home" size={25} color="#FFF"/>
+					<Icon name="ios-home" size={30} color="#FFF"/>
 				</TouchableOpacity>
 			),
       drawerLabel: ({ focused }) => (
@@ -95,7 +95,7 @@ const DrawerStack = DrawerNavigator({
         </View>
       ),
       drawerIcon: ({ focused }) => (
-        <Icon name="ios-settings-outline" size={25} color={focused ? activeColor : inactiveColor} />
+        <Icon name="ios-settings-outline" size={30} color={focused ? activeColor : inactiveColor} />
       )
     })
   },
@@ -117,7 +117,7 @@ const PrimaryNav = StackNavigator({
 			),
 			headerRight: (
 				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('BudgetView')}}>
-					<Icon name="ios-home" size={25} color="#FFF"/>
+					<Icon name="ios-home" size={30} color="#FFF"/>
 				</TouchableOpacity>
 			),
     })
@@ -133,7 +133,7 @@ const PrimaryNav = StackNavigator({
 			),
 			headerRight: (
 				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('BudgetView')}}>
-					<Icon name="ios-home" size={25} color="#FFF"/>
+					<Icon name="ios-home" size={30} color="#FFF"/>
 				</TouchableOpacity>
 			),
     })
@@ -144,7 +144,7 @@ const PrimaryNav = StackNavigator({
       title: 'Edit Expense',
 			headerRight: (
 				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('BudgetView')}}>
-					<Icon name="ios-home" size={25} color="#FFF"/>
+					<Icon name="ios-home" size={30} color="#FFF"/>
 				</TouchableOpacity>
 			),
     })
