@@ -67,8 +67,10 @@ const CardStack = StackNavigator({
   },
 }, {
 	mode: 'card',
-	gesturesEnabled: true,
-	headerMode: 'none'
+	headerMode: 'none',
+	navigationOptions: {
+     gesturesEnabled: true,
+  },
 })
 
 // Slide out Drawer navigator
@@ -172,6 +174,7 @@ const PrimaryNav = StackNavigator({
   initialRouteName: 'DrawerStack',
 	mode: 'modal',
   navigationOptions: ({navigation}) => ({
+		gesturesEnabled: true,
     headerStyle: styles.header,
     headerTintColor: '#ecf0f1',
     headerLeft: (
