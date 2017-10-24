@@ -22,6 +22,7 @@ const noTransitionConfig = () => ({
   }
 })
 
+
 const DrawerStack = DrawerNavigator({
   BudgetView: {
     screen: BudgetView,
@@ -105,13 +106,12 @@ const DrawerStack = DrawerNavigator({
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-	AddItemScreen: {screen: AddItemScreen},
   AddCategoryScreen: {
     screen: AddCategoryScreen,
     navigationOptions: ({navigation}) => ({
       title: 'Add Category',
       headerLeft: (
-				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('CategoriesScreen')}}>
+				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.goBack()}}>
 					<Icon name='ios-close' size={30} color='#FFF' />
 				</TouchableOpacity>
 			),
@@ -127,7 +127,7 @@ const PrimaryNav = StackNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Edit Category',
       headerLeft: (
-				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.navigate('CategoriesScreen')}}>
+				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.goBack()}}>
 					<Icon name='ios-close' size={30} color='#FFF' />
 				</TouchableOpacity>
 			),
@@ -137,12 +137,11 @@ const PrimaryNav = StackNavigator({
     screen: EditItemScreen,
     navigationOptions: ({navigation}) => ({
       title: 'Edit Expense',
-    })
-  },
-  BudgetView: {
-    screen: BudgetView,
-    navigationOptions: ({navigation}) => ({
-      title: 'Budget Overview',
+			headerLeft: (
+				<TouchableOpacity style={styles.headerIcon} onPress={() => { navigation.goBack()}}>
+					<Icon name='ios-close' size={30} color='#FFF' />
+				</TouchableOpacity>
+			),
     })
   },
   DrawerStack: { screen: DrawerStack }
@@ -150,7 +149,7 @@ const PrimaryNav = StackNavigator({
   // Default config for all screens
   headerMode: 'float',
   initialRouteName: 'DrawerStack',
-  transitionConfig: noTransitionConfig,
+	mode: 'modal',
   navigationOptions: ({navigation}) => ({
     headerStyle: styles.header,
     headerTintColor: '#ecf0f1',
