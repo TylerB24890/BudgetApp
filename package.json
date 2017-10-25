@@ -27,6 +27,7 @@
     "apisauce": "^0.14.0",
     "format-json": "^1.0.3",
     "lodash": "^4.17.2",
+    "moment": "^2.19.1",
     "native-base": "^2.3.3",
     "prop-types": "^15.5.10",
     "querystringify": "0.0.4",

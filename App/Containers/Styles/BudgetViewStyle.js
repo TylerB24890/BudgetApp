@@ -17,13 +17,13 @@ export default StyleSheet.create({
   },
   sectionHeader: {
     marginTop: 0,
-    marginBottom: 5,
+    marginBottom: 10,
     backgroundColor: '#34495e',
     paddingVertical: 10,
     paddingHorizontal: 15
   },
   sectionFooter: {
-    marginVertical: 20
+    marginVertical: 15
   },
   headerText: {
     fontSize: 20,

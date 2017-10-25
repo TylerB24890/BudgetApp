@@ -68,7 +68,7 @@ export default class SettingsForm extends React.Component {
               />
             </Item>
             <Item floatingLabel style={{marginTop: 30}}>
-              <Label style={{color: 'rgba(255,255,255,.6)'}}>Starting balance?</Label>
+              <Label style={{color: 'rgba(255,255,255,.6)'}}>Starting balance</Label>
               <Icon active name="logo-usd" style={{color: 'rgba(255,255,255,.6)', fontSize: 18}} />
               <Input
 									ref="starting"

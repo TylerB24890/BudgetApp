@@ -33,9 +33,12 @@ export default class BudgetItem extends React.Component {
               <Text style={[styles.itemTitle, styles.label]}>
 								{this.props.item.title}
 							</Text>
+							<View>
+								<Text style={styles.itemDate}>{this.props.item.displayDate}</Text>
+							</View>
             </View>
             <View style={styles.cost}>
-              <Text style={[styles.itemCost, styles.label]}>${parseFloat(this.props.item.cost).toFixed(2)}</Text>
+              <Text style={[styles.itemCost]}>- ${parseFloat(this.props.item.cost).toFixed(2)}</Text>
             </View>
           </View>
         </TouchableHighlight>

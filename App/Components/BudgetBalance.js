@@ -27,15 +27,13 @@ export default class BudgetBalance extends Component {
 			color = negativeColor
 		}
 
-		if(nextProps.balance !== this.state.balance || nextProps.starting !== this.state.starting || nextProps.budgetName !== this.state.budgetName) {
-			this.setState({
-	      balance: nextProps.balance,
-	      starting: nextProps.starting,
-				user: nextProps.user,
-				budgetName: nextProps.budgetName,
-				balanceColor: color
-	    })
-		}
+		this.setState({
+	  	balance: nextProps.balance,
+	    starting: nextProps.starting,
+			user: nextProps.user,
+			budgetName: nextProps.budgetName,
+			balanceColor: color
+	  })
   }
 
   render () {

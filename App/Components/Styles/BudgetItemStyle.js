@@ -3,34 +3,42 @@ import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
   row: {
     flex: 1,
-    paddingVertical: 10,
+    paddingVertical: 20,
     paddingHorizontal: 15,
+		marginHorizontal: 10,
+		marginVertical: 5,
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    borderBottomWidth: .5,
-    borderBottomColor: '#7f8c8d'
+    alignItems: 'center',
+		borderWidth: .5,
+		borderColor: '#2ecc71',
+		backgroundColor: 'transparent',
   },
   item: {
     flex: .5,
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   itemTitle: {
     fontWeight: 'bold',
     color: '#FFF',
     fontSize: 16,
-    flex: 1
+    flex: 1,
+		textAlign: 'left'
   },
   cost: {
     flex: .5,
-    alignItems: 'flex-start'
   },
+	itemDate: {
+		color: '#bdc3c7',
+	},
   itemCost: {
     fontWeight: 'normal',
-    textAlign: 'right'
+    textAlign: 'right',
+		color: '#ecf0f1',
+		fontSize: 30
   },
   label: {
-    textAlign: 'center',
-    color: '#FFF',
-    fontSize: 16
+    textAlign: 'left',
+    color: '#ecf0f1',
+    fontSize: 22
   },
 })
