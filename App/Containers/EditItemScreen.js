@@ -85,6 +85,7 @@ class EditItemScreen extends Component {
             type={data.type}
             id={data.id}
 						date={data.displayDate}
+						navigation={this.props.navigation}
             handler={(title, type, cost, id, date) => this._handleExpenseEdit(title, type, cost, id, date)}
             deleteHandler={(id) => this._handleDeleteExpense(id)}
           />

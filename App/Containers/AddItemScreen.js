@@ -50,7 +50,7 @@ class AddItemScreen extends Component {
     return (
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
-          <BudgetExpenseForm id='' title='' cost='0.00' type='' date='' handler={(title, type, cost, id, date) => this._handleNewExpense(title, type, cost, id, date)}/>
+          <BudgetExpenseForm navigation={this.props.navigation} id='' title='' cost='0.00' type='' date='' handler={(title, type, cost, id, date) => this._handleNewExpense(title, type, cost, id, date)}/>
         </Content>
       </Container>
     )
