@@ -15,7 +15,7 @@ class EditItemScreen extends Component {
     super(props)
   }
 
-  _handleExpenseEdit(title, type, cost, id) {
+  _handleExpenseEdit(title, type, cost, id, date) {
     if(id !== '' && typeof id !== undefined) {
       try {
         Realm.open({
@@ -23,7 +23,7 @@ class EditItemScreen extends Component {
         }).then(realm => {
           try {
             realm.write(() => {
-              realm.create('BudgetItem', new ExpenseModel(id, type, title, parseFloat(cost)), true)
+              realm.create('BudgetItem', new ExpenseModel(id, type, title, parseFloat(cost), date), true)
             })
 
             const {navigate} = this.props.navigation
@@ -84,7 +84,8 @@ class EditItemScreen extends Component {
             cost={data.cost}
             type={data.type}
             id={data.id}
-            handler={(title, type, cost, id) => this._handleExpenseEdit(title, type, cost, id)}
+						date={data.displayDate}
+            handler={(title, type, cost, id, date) => this._handleExpenseEdit(title, type, cost, id, date)}
             deleteHandler={(id) => this._handleDeleteExpense(id)}
           />
         </Content>

@@ -12,6 +12,7 @@ export default class SettingsForm extends React.Component {
       id: '',
       starting: '',
       user: '',
+			budgetName: ''
     }
   }
 
@@ -20,6 +21,7 @@ export default class SettingsForm extends React.Component {
 			id: this.props.id,
 			starting: (typeof this.props.starting !== 'undefined' && this.props.starting > 0 ? this.props.starting.toString() : ''),
 			user: this.props.user,
+			budgetName: this.props.budgetName
 		})
 	}
 
@@ -29,12 +31,13 @@ export default class SettingsForm extends React.Component {
         id: nextProps.id,
         starting: nextProps.starting.toString(),
         user: nextProps.user,
+				budgetName: nextProps.budgetName
       })
     }
   }
 
   _submitSettingsForm () {
-		this.props.handler(this.state.id, this.state.user, parseFloat(this.state.starting))
+		this.props.handler(this.state.id, this.state.user, this.state.budgetName, parseFloat(this.state.starting))
   }
 
 
@@ -51,6 +54,16 @@ export default class SettingsForm extends React.Component {
                   value={this.state.user}
                   editable={true}
                   onChangeText={(text) => this.setState({user: text})}
+                  style={{color: '#FFF'}}
+              />
+            </Item>
+						<Item floatingLabel style={{marginTop: 30}}>
+              <Label style={{color: 'rgba(255,255,255,.6)'}}>Name this budget</Label>
+              <Input
+									ref="budgetName"
+                  value={this.state.budgetName}
+                  editable={true}
+                  onChangeText={(text) => this.setState({budgetName: text})}
                   style={{color: '#FFF'}}
               />
             </Item>

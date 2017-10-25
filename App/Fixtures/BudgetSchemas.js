@@ -5,7 +5,9 @@ export const SettingsSchema = {
   properties: {
     id: {type: 'string', indexed: true},
     name: 'string',
+    budgetName: {type: 'string', default: ''},
     starting: 'float',
+    date: 'date'
   }
 }
 
@@ -16,6 +18,8 @@ export const CategorySchema = {
   properties: {
     id: {type: 'string', indexed: true},
     title: 'string',
+    categoryLimit: {type: 'float', default: 0},
+    date: 'date'
   }
 }
 
@@ -27,6 +31,8 @@ export const ExpenseSchema = {
     id: {type: 'string', indexed: true},
     type: 'string',
     title: 'string',
-    cost: 'float'
+    cost: 'float',
+    displayDate: 'string',
+    date: 'date'
   }
 }

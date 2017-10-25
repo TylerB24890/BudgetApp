@@ -22,6 +22,7 @@ class SettingsScreen extends Component {
       id: '',
       user: '',
       starting: 0,
+			budgetName: '',
       udpated: false,
 			new: false
     }
@@ -31,18 +32,21 @@ class SettingsScreen extends Component {
     var starting = 0
     var user = ''
     var id = ''
+		var budgetName = ''
 		var updated = false
 
     settings.forEach(function(setting) {
       id = setting.id
       starting = parseFloat(setting.starting).toFixed(2)
       user = setting.name
+			budgetName = setting.budgetName
     })
 
     this.setState({
       id: id,
       starting: starting,
       user: user,
+			budgetName: budgetName,
 			new: this.props.new
     })
   }
@@ -55,10 +59,10 @@ class SettingsScreen extends Component {
 		}
 	}
 
-  _handleSettingsSubmission(id, user, starting) {
+  _handleSettingsSubmission(id, user, budgetName, starting) {
     try {
       realm.write(() => {
-        realm.create('Settings', new SettingsModel(id, user, starting), true)
+        realm.create('Settings', new SettingsModel(id, user, budgetName, starting), true)
       })
 
 			if(this.state.new) {
@@ -91,7 +95,7 @@ class SettingsScreen extends Component {
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
           {updatedMessage}
-          <SettingsForm id={this.state.id} starting={this.state.starting} user={this.state.user} handler={(id, user, starting) => this._handleSettingsSubmission(id, user, starting)}/>
+          <SettingsForm id={this.state.id} budgetName={this.state.budgetName} starting={this.state.starting} user={this.state.user} handler={(id, user, budgetName, starting) => this._handleSettingsSubmission(id, user, budgetName, starting)}/>
         </Content>
       </Container>
     )

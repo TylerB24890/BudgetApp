@@ -14,7 +14,14 @@ export default StyleSheet.create({
     backgroundColor: Colors.background,
     color: '#FFF',
   },
+	datePickerLabel: {
+		paddingBottom: 15,
+		marginTop: 15,
+		marginBottom: 15,
+		borderBottomWidth: 2,
+		borderBottomColor: '#777E8B'
+	},
   buttonContainer: {
-    marginTop: 60,
+    marginTop: 15,
   },
 })

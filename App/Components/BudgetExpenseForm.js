@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Container, Content, Item, Label, Input, Icon, Text } from 'native-base'
-import { Alert, KeyboardAvoidingView } from 'react-native'
+import { Container, Content, Item, Label, Input, Icon, Text, View } from 'native-base'
+import { Alert, KeyboardAvoidingView, DatePickerIOS } from 'react-native'
 import { TextInputMask } from 'react-native-masked-text';
+import DatePicker from 'react-native-datepicker'
 import CategorySelect from './CategorySelect'
 import BudgetButton from './BudgetButton'
 
@@ -12,11 +13,14 @@ export default class BudgetExpenseForm extends Component {
   constructor (props) {
     super(props)
 
+		var date = new Date()
+
     this.state = {
       id: this.props.id,
       title: this.props.title,
       cost: parseFloat(this.props.cost).toFixed(2),
       type: this.props.type,
+			date: this.props.date,
     }
   }
 
@@ -28,11 +32,12 @@ export default class BudgetExpenseForm extends Component {
   }
 
 	componentWillReceiveProps (nextProps) {
-		if(nextProps.title !== this.state.title || nextProps.cost !== this.state.cost || nextProps.type !== this.state.type) {
+		if(nextProps.title !== this.state.title || nextProps.cost !== this.state.cost || nextProps.type !== this.state.type || nextProps.date !== this.state.date) {
 			this.setState({
 				title: nextProps.title,
 				cost: parseFloat(nextProps.cost).toFixed(2),
-				type: nextProps.type
+				type: nextProps.type,
+				date: nextProps.date,
 			})
 		}
 	}
@@ -44,8 +49,9 @@ export default class BudgetExpenseForm extends Component {
     var type = this.state.type
     var cost = this.state.cost
     var id = this.state.id
+		var date = this.state.date
 
-    this.props.handler(title, type, cost, id)
+    this.props.handler(title, type, cost, id, date)
   }
 
   _deleteExpenseItem () {
@@ -99,6 +105,38 @@ export default class BudgetExpenseForm extends Component {
                   style={{color: '#FFF'}}
                 />
               </Item>
+
+							<Item style={[styles.inputGroup, styles.datePickerLabel]}>
+								<DatePicker
+						        style={{width: 200}}
+						        date={this.state.date}
+						        mode="date"
+						        placeholder="Expense Date"
+						        format="MMMM D, YYYY"
+						        confirmBtnText="Confirm"
+						        cancelBtnText="Cancel"
+										showIcon={false}
+						        onDateChange={(date) => {this.setState({date: date})}}
+										customStyles={{
+											dateInput: {
+												borderWidth: 0,
+												borderColor: 'transparent',
+												alignItems: 'flex-start',
+												justifyContent: 'flex-end'
+											},
+											placeholderText: {
+												color: 'rgba(255,255,255,.6)',
+												fontSize: 17,
+												textAlign: 'left',
+											},
+											dateText: {
+												color: '#FFF',
+												textAlign: 'left',
+												fontSize: 17
+											}
+										}}
+						     />
+	            </Item>
 
               <CategorySelect type={this.state.type} categoryHandler={(type) => this._setExpenseCategory(type)}/>
 	              <Content scrollEnabled={false} style={styles.buttonContainer}>

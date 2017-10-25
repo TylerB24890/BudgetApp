@@ -16,7 +16,7 @@ class AddItemScreen extends Component {
   }
 
 
-  _handleNewExpense(title, type, cost, id) {
+  _handleNewExpense(title, type, cost, id, date) {
     if(id === '') {
       try {
         Realm.open({
@@ -24,7 +24,7 @@ class AddItemScreen extends Component {
         }).then(realm => {
           try {
             realm.write(() => {
-              realm.create('BudgetItem', new ExpenseModel(null, type, title, parseFloat(cost)))
+              realm.create('BudgetItem', new ExpenseModel(null, type, title, parseFloat(cost), date))
             })
 
             const {navigate} = this.props.navigation
@@ -50,7 +50,7 @@ class AddItemScreen extends Component {
     return (
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
-          <BudgetExpenseForm id='' title='' cost='0.00' type='' handler={(title, type, cost, id) => this._handleNewExpense(title, type, cost, id)}/>
+          <BudgetExpenseForm id='' title='' cost='0.00' type='' date='' handler={(title, type, cost, id, date) => this._handleNewExpense(title, type, cost, id, date)}/>
         </Content>
       </Container>
     )

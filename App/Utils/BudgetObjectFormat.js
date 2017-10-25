@@ -9,7 +9,7 @@ class BudgetObjectFormat {
 
     //console.log(Array.from(data))
     data.forEach(function (expense) {
-      budgetData.push({key: expense.type, data: {title: expense.title, type: expense.type, cost: expense.cost, id: expense.id}})
+      budgetData.push({key: expense.type, data: {title: expense.title, type: expense.type, cost: expense.cost, displayDate: expense.displayDate, date: expense.date, id: expense.id}})
     })
 
     for(var i = 0; i < budgetData.length; i++) {
