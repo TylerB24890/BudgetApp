@@ -47,6 +47,7 @@ class BudgetView extends React.PureComponent {
 		var user = ''
     var settings = {}
     var total = 0
+		var budgetName = ''
 		var newUser = false
 
     var data = realm.objects('BudgetItem').sorted('type')
@@ -66,6 +67,7 @@ class BudgetView extends React.PureComponent {
     settings.forEach(function(setting) {
       startComp = setting.starting
 			user = setting.user
+			budgetName = setting.budgetName
     })
 
 		if(parseFloat(startComp) <= 0) {
@@ -78,6 +80,7 @@ class BudgetView extends React.PureComponent {
       spending: total,
       balance: (startComp - total),
 			user: user,
+			budgetName: budgetName,
 			new: newUser
     })
   }
@@ -138,7 +141,7 @@ class BudgetView extends React.PureComponent {
    */
   renderHeader = () => {
     return (
-      <BudgetBalance user={this.state.user} navigation={this.props.navigation} starting={this.state.starting} balance={this.state.balance}/>
+      <BudgetBalance user={this.state.user} budgetName={this.state.budgetName} navigation={this.props.navigation} starting={this.state.starting} balance={this.state.balance}/>
     )
   }
 

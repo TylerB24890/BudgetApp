@@ -14,7 +14,8 @@ export default class BudgetBalance extends Component {
       balanceColor: positiveColor,
       starting: this.props.starting,
       balance: this.props.balance,
-			user: this.props.user
+			user: this.props.user,
+			budgetName: this.props.budgetName
     }
   }
 
@@ -26,12 +27,15 @@ export default class BudgetBalance extends Component {
 			color = negativeColor
 		}
 
-    this.setState({
-      balance: nextProps.balance,
-      starting: nextProps.starting,
-			user: nextProps.user,
-			balanceColor: color
-    })
+		if(nextProps.balance !== this.state.balance || nextProps.starting !== this.state.starting || nextProps.budgetName !== this.state.budgetName) {
+			this.setState({
+	      balance: nextProps.balance,
+	      starting: nextProps.starting,
+				user: nextProps.user,
+				budgetName: nextProps.budgetName,
+				balanceColor: color
+	    })
+		}
   }
 
   render () {
