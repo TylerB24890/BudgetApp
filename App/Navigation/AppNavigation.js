@@ -38,10 +38,11 @@ const paramsToProps = (SomeComponent) => {
     }
 }
 
-// Card Stack Navigator
-// Transitions screens in as cards (left to right)
-// Currently only services the 'Add Expense Item' screen
-const CardStack = StackNavigator({
+
+// Slide out Drawer navigator
+// Main app navigation
+// Services all pages (Except add/edit categories & edit expenses)
+const DrawerStack = DrawerNavigator({
 	BudgetView: {
     screen: paramsToProps(BudgetView),
     navigationOptions: ({navigation}) => ({
@@ -61,25 +62,6 @@ const CardStack = StackNavigator({
       )
     })
   },
-  AddItemScreen: {
-    screen: paramsToProps(AddItemScreen),
-    navigationOptions: ({navigation}) => ({
-      title: 'Add Expense',
-			headerRight: (
-				<HeaderHomeIcon navigation={navigation} />
-			),
-    })
-  },
-}, {
-	mode: 'card',
-	headerMode: 'none',
-})
-
-// Slide out Drawer navigator
-// Main app navigation
-// Services all pages (Except add/edit categories & edit expenses)
-const DrawerStack = DrawerNavigator({
-  CardStack: { screen: CardStack },
 	AddItemScreen: {
     screen: paramsToProps(AddItemScreen),
     navigationOptions: ({navigation}) => ({
@@ -133,7 +115,7 @@ const DrawerStack = DrawerNavigator({
   },
 }, {
   drawerWidth: 250,
-	initialRouteName: 'CardStack',
+	initialRouteName: 'BudgetView',
 })
 
 // Main Navigator
@@ -175,30 +157,6 @@ const PrimaryNav = StackNavigator({
   headerMode: 'float',
   initialRouteName: 'DrawerStack',
 	mode: 'modal',
-	transitionConfig: () => ({
-    transitionSpec: {
-      duration: 300,
-      easing: Easing.out(Easing.poly(4)),
-      timing: Animated.timing,
-    },
-    screenInterpolator: sceneProps => {
-      const { layout, position, scene } = sceneProps;
-      const { index } = scene;
-
-      const height = layout.initHeight;
-      const translateY = position.interpolate({
-        inputRange: [index - 1, index, index + 1],
-        outputRange: [height, 0, 0],
-      });
-
-      const opacity = position.interpolate({
-        inputRange: [index - 1, index - 0.99, index],
-        outputRange: [0, 1, 1],
-    	});
-
-      return { opacity, transform: [{ translateY }] };
-    },
-  }),
   navigationOptions: ({navigation}) => ({
 		gesturesEnabled: true,
     headerStyle: styles.header,
