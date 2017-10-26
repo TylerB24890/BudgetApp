@@ -40,7 +40,8 @@ class BudgetView extends React.PureComponent {
       updated: false,
       data: [],
 			user: '',
-			new: true
+			new: true,
+			sort: 'cost'
     }
 
     this._updateBudgetOverview = this._updateBudgetOverview.bind(this)
@@ -54,25 +55,26 @@ class BudgetView extends React.PureComponent {
 			delay: 500
 		})
 
-    var startComp = 0
+    this._setupBudgetView()
+  }
+
+	componentWillReceiveProps (nextProps) {
+		if(typeof nextProps.sort !== 'undefined' && nextProps.sort !== this.state.sort) {
+			this.setState({
+				sort: nextProps.sort
+			}, this._setupBudgetView())
+		}
+	}
+
+	_setupBudgetView () {
+		var startComp = 0
 		var user = ''
     var settings = {}
     var total = 0
 		var budgetName = ''
 		var newUser = false
 
-    var data = realm.objects('BudgetItem').sorted('type')
-
-    var formattedData = new BudgetObjectFormat(data)
-		
-    formattedData.forEach(function(item) {
-			var itemData = item.data
-			itemData.forEach(function(expense) {
-				total += expense.cost
-			})
-    })
-
-    var settingsRealm = new Realm({path: 'SettingsScreen.realm', schema: [SettingsSchema]})
+		var settingsRealm = new Realm({path: 'SettingsScreen.realm', schema: [SettingsSchema]})
     settings = settingsRealm.objects('Settings')
     settings.forEach(function(setting) {
       startComp = setting.starting
@@ -84,6 +86,16 @@ class BudgetView extends React.PureComponent {
 			newUser = true
 		}
 
+    var data = realm.objects('BudgetItem').sorted('type')
+    var formattedData = new BudgetObjectFormat(data, this.state.sort)
+
+    formattedData.forEach(function(item) {
+			var itemData = item.data
+			itemData.forEach(function(expense) {
+				total += expense.cost
+			})
+    })
+
     this.setState({
       starting: startComp,
       data: formattedData,
@@ -91,9 +103,9 @@ class BudgetView extends React.PureComponent {
       balance: (startComp - total),
 			user: user,
 			budgetName: budgetName,
-			new: newUser
+			new: newUser,
     })
-  }
+	}
 
   _getCategoryTitle (catId) {
     let cat = {}
@@ -113,7 +125,7 @@ class BudgetView extends React.PureComponent {
    * Re-rerun the componentDidMount function to update state
    */
   _updateBudgetOverview () {
-    this.componentDidMount()
+    this._setupBudgetView()
     this.forceUpdate()
   }
 

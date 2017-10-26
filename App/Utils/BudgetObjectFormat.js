@@ -4,7 +4,7 @@ import ArrayHelper from './ArrayHelper'
  * Class to format the budget state object by 'key' (Category)
  */
 class BudgetObjectFormat {
-  constructor(data) {
+  constructor(data, sort) {
     var budgetData = []
     var stateData = []
     var returnArray = []
@@ -31,7 +31,7 @@ class BudgetObjectFormat {
     }
 
     // Sort the expense data in each category by cost (lowest to highest)
-    ArrayHelper.sortObjectArray(returnArray)
+    ArrayHelper.sortObjectArray(returnArray, sort)
     return returnArray
   }
 }
