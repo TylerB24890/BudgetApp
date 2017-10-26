@@ -1,5 +1,6 @@
 // Core
 import React from 'react'
+import SplashScreen from 'react-native-smart-splash-screen'
 import { View, SectionList, Text } from 'react-native'
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
 import { connect } from 'react-redux'
@@ -44,6 +45,13 @@ class BudgetView extends React.PureComponent {
   }
 
   componentDidMount () {
+
+		SplashScreen.close({
+			animationType: SplashScreen.animationType.scale,
+			duration: 850,
+			delay: 500
+		})
+
     var startComp = 0
 		var user = ''
     var settings = {}
