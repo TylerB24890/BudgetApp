@@ -55,7 +55,7 @@ const highMessages = [
 export const NewUserMessages = [
   "It takes money to make money.\nEnter a starting balance.",
   "A starting balance helps keep track\nof how much you have spent.",
-  "Enter a starting balance to get more out of your budget."
+  "Enter a starting balance\nto get more out of your budget."
 ]
 
 const RandomMessages = quoteMessages.concat(randomMessages).concat(tipMessages)

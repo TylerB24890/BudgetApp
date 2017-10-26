@@ -19,7 +19,7 @@ export default class BalanceMessage extends Component {
 		var percentLeft = (balance/starting * 100)
 
 		if(starting <= 0) {
-			returnMsg = (
+			return (
 				<TouchableOpacity onPress={() => this.props.navigation.navigate('SettingsScreen')}>
 					<Text style={[styles.messageTextError, styles.messageText]}>{ArrayHelper.randomValue(NewUserMessages)}</Text>
 				</TouchableOpacity>
