@@ -31,19 +31,24 @@ export default class CategorySelect extends Component {
 		var selectColor = 'rgba(255,255,255,.6)'
 
 		if(newCat) {
-			cat = newCat
-			selectColor = '#FFF'
+			this._updateExpenseType(newCat)
+		} else {
+			this.setState({
+				modalVisible: visible,
+				type: cat,
+				selectColor: selectColor
+			})
 		}
-		this.setState({modalVisible: visible, type: cat, selectColor: selectColor})
 	}
 
   _updateExpenseType (value) {
 
-    if(value !== 'key0') {
+    if(value !== 'key0' && value !== '') {
       this.setState({
         type: value,
         selectColor: '#FFF',
         success: true,
+				modalVisible: false,
       }, this.props.categoryHandler(value))
     } else {
       this.setState({

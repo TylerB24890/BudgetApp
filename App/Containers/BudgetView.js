@@ -179,12 +179,12 @@ class BudgetView extends React.PureComponent {
 			directionOffsetThreshold: 80
 		}
     return (
+			<GestureRecognizer
+				onSwipeLeft={() => this.props.navigation.navigate('AddItemScreen', { autoFocus: true })}
+				config={quickAddConfig}
+				style={styles.container}
+			>
       <View style={styles.container}>
-					<GestureRecognizer
-						onSwipeLeft={() => this.props.navigation.navigate('AddItemScreen', { autoFocus: true })}
-						config={quickAddConfig}
-						style={styles.container}
-					>
 						<SectionList
 							renderSectionHeader={this.renderSectionHeader}
 							sections={this.state.data}
@@ -198,8 +198,8 @@ class BudgetView extends React.PureComponent {
 							ListEmptyComponent={this.renderEmpty}
 							renderSectionFooter={this.renderSectionFooter}
 						/>
-					</GestureRecognizer>
       </View>
+			</GestureRecognizer>
     )
   }
 }
