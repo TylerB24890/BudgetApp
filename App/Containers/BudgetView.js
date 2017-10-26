@@ -2,7 +2,6 @@
 import React from 'react'
 import SplashScreen from 'react-native-smart-splash-screen'
 import { View, SectionList, Text } from 'react-native'
-//import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
 import { connect } from 'react-redux'
 
 import GestureRecognizer, { swipeDirections } from '../Components/GestureRecognizer'
@@ -15,6 +14,7 @@ import ExpenseModel from '../Fixtures/ExpenseModel'
 // Utilities
 import BudgetCalculations from '../Utils/BudgetCalculations'
 import BudgetObjectFormat from '../Utils/BudgetObjectFormat'
+import { CurrencyFormat } from '../Utils/CurrencyFormat'
 
 // Render components
 import BudgetBalance from '../Components/BudgetBalance'
@@ -137,7 +137,7 @@ class BudgetView extends React.PureComponent {
 		if(title.length > 1) {
 			return (
 	      <View style={styles.sectionHeader}>
-	        <Text style={styles.headerText}>{title}: <Text style={styles.itemCost}>${parseFloat(total).toFixed(2)}</Text></Text>
+	        <Text style={styles.headerText}>{title}: <Text style={styles.itemCost}>{CurrencyFormat(total)}</Text></Text>
 	      </View>
 	    )
 		} else {

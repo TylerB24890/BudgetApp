@@ -2,6 +2,8 @@ import React from 'react'
 import { View, Text, TouchableHighlight } from 'react-native'
 import styles from './Styles/BudgetItemStyle'
 
+import { CurrencyFormat } from '../Utils/CurrencyFormat'
+
 export default class BudgetItem extends React.Component {
 
   constructor (props) {
@@ -38,7 +40,7 @@ export default class BudgetItem extends React.Component {
 							</View>
             </View>
             <View style={styles.cost}>
-              <Text style={[styles.itemCost]}>- ${parseFloat(this.props.item.cost).toFixed(2)}</Text>
+              <Text style={[styles.itemCost]}>-{CurrencyFormat(this.props.item.cost)}</Text>
             </View>
           </View>
         </TouchableHighlight>

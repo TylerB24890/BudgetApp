@@ -14,7 +14,7 @@ export default StyleSheet.create({
 		backgroundColor: 'transparent',
   },
   item: {
-    flex: .5,
+    flex: .44,
     alignItems: 'flex-start',
   },
   itemTitle: {
@@ -25,7 +25,7 @@ export default StyleSheet.create({
 		textAlign: 'left'
   },
   cost: {
-    flex: .5,
+    flex: .56,
   },
 	itemDate: {
 		color: '#bdc3c7',
