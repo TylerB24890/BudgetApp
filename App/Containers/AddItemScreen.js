@@ -13,6 +13,10 @@ class AddItemScreen extends Component {
 
   constructor(props) {
     super(props)
+
+		this.state = {
+			autoFocus: false
+		}
   }
 
 
@@ -32,7 +36,7 @@ class AddItemScreen extends Component {
             navigate(
               'BudgetView', {
                 updated: true,
-								new: false
+								new: false,
               }
             )
           } catch (e) {
@@ -47,10 +51,11 @@ class AddItemScreen extends Component {
   }
 
   render () {
+
     return (
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
-          <BudgetExpenseForm navigation={this.props.navigation} id='' title='' cost='0.00' type='' date='' handler={(title, type, cost, id, date) => this._handleNewExpense(title, type, cost, id, date)}/>
+          <BudgetExpenseForm autoFocus={this.state.autoFocus} id='' title='' cost='0.00' type='' date='' handler={(title, type, cost, id, date) => this._handleNewExpense(title, type, cost, id, date)}/>
         </Content>
       </Container>
     )

@@ -21,6 +21,7 @@ export default class BudgetExpenseForm extends Component {
       cost: parseFloat(this.props.cost).toFixed(2),
       type: this.props.type,
 			date: this.props.date,
+			autoFocus: this.props.autoFocus
     }
   }
 
@@ -40,6 +41,10 @@ export default class BudgetExpenseForm extends Component {
 				date: nextProps.date,
 			})
 		}
+
+		this.setState({
+			autoFocus: nextProps.autoFocus
+		})
 	}
 
   // Handle the submission of the expense form
@@ -92,6 +97,7 @@ export default class BudgetExpenseForm extends Component {
                   editable={true}
                   onChangeText={(text) => this.setState({title: text})}
                   style={{color: '#FFF'}}
+									autoFocus={this.state.autoFocus}
                 />
               </Item>
 

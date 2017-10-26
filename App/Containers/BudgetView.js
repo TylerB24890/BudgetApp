@@ -1,6 +1,7 @@
 // Core
 import React from 'react'
 import { View, SectionList, Text } from 'react-native'
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
 import { connect } from 'react-redux'
 
 // Database
@@ -162,22 +163,33 @@ class BudgetView extends React.PureComponent {
   oneScreensWorth = 20
 
   render () {
+
+		const quickAddConfig = {
+			velocityThreshold: .3,
+			directionOffsetThreshold: 80
+		}
     return (
-      <View style={styles.container}>
-        <SectionList
-          renderSectionHeader={this.renderSectionHeader}
-          sections={this.state.data}
-          contentContainerStyle={styles.listContent}
-          data={this.state.data}
-          renderItem={this.renderItem.bind(this)}
-          keyExtractor={this.keyExtractor}
-          initialNumToRender={this.oneScreensWorth}
-          ListHeaderComponent={this.renderHeader}
-          ListFooterComponent={this.renderFooter}
-          ListEmptyComponent={this.renderEmpty}
-          renderSectionFooter={this.renderSectionFooter}
-        />
-      </View>
+			<GestureRecognizer
+				onSwipeLeft={() => this.props.navigation.navigate('AddItemScreen', { autoFocus: true })}
+				config={quickAddConfig}
+				style={styles.container}
+			>
+      	<View style={styles.container}>
+					<SectionList
+						renderSectionHeader={this.renderSectionHeader}
+						sections={this.state.data}
+						contentContainerStyle={styles.listContent}
+						data={this.state.data}
+						renderItem={this.renderItem.bind(this)}
+						keyExtractor={this.keyExtractor}
+						initialNumToRender={this.oneScreensWorth}
+						ListHeaderComponent={this.renderHeader}
+						ListFooterComponent={this.renderFooter}
+						ListEmptyComponent={this.renderEmpty}
+						renderSectionFooter={this.renderSectionFooter}
+					/>
+      	</View>
+			</GestureRecognizer>
     )
   }
 }
