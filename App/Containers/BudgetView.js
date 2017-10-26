@@ -2,8 +2,10 @@
 import React from 'react'
 import SplashScreen from 'react-native-smart-splash-screen'
 import { View, SectionList, Text } from 'react-native'
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
+//import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
 import { connect } from 'react-redux'
+
+import GestureRecognizer, { swipeDirections } from '../Components/GestureRecognizer'
 
 // Database
 import Realm from 'realm'
@@ -177,27 +179,27 @@ class BudgetView extends React.PureComponent {
 			directionOffsetThreshold: 80
 		}
     return (
-			<GestureRecognizer
-				onSwipeLeft={() => this.props.navigation.navigate('AddItemScreen', { autoFocus: true })}
-				config={quickAddConfig}
-				style={styles.container}
-			>
-      	<View style={styles.container}>
-					<SectionList
-						renderSectionHeader={this.renderSectionHeader}
-						sections={this.state.data}
-						contentContainerStyle={styles.listContent}
-						data={this.state.data}
-						renderItem={this.renderItem.bind(this)}
-						keyExtractor={this.keyExtractor}
-						initialNumToRender={this.oneScreensWorth}
-						ListHeaderComponent={this.renderHeader}
-						ListFooterComponent={this.renderFooter}
-						ListEmptyComponent={this.renderEmpty}
-						renderSectionFooter={this.renderSectionFooter}
-					/>
-      	</View>
-			</GestureRecognizer>
+      <View style={styles.container}>
+					<GestureRecognizer
+						onSwipeLeft={() => this.props.navigation.navigate('AddItemScreen', { autoFocus: true })}
+						config={quickAddConfig}
+						style={styles.container}
+					>
+						<SectionList
+							renderSectionHeader={this.renderSectionHeader}
+							sections={this.state.data}
+							contentContainerStyle={styles.listContent}
+							data={this.state.data}
+							renderItem={this.renderItem.bind(this)}
+							keyExtractor={this.keyExtractor}
+							initialNumToRender={this.oneScreensWorth}
+							ListHeaderComponent={this.renderHeader}
+							ListFooterComponent={this.renderFooter}
+							ListEmptyComponent={this.renderEmpty}
+							renderSectionFooter={this.renderSectionFooter}
+						/>
+					</GestureRecognizer>
+      </View>
     )
   }
 }
