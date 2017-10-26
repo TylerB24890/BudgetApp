@@ -1,3 +1,5 @@
+import ArrayHelper from './ArrayHelper'
+
 /**
  * Class to format the budget state object by 'key' (Category)
  */
@@ -7,11 +9,12 @@ class BudgetObjectFormat {
     var stateData = []
     var returnArray = []
 
-    //console.log(Array.from(data))
+    // Create the initial array to sort
     data.forEach(function (expense) {
       budgetData.push({key: expense.type, data: {title: expense.title, type: expense.type, cost: expense.cost, displayDate: expense.displayDate, date: expense.date, id: expense.id}})
     })
 
+    // Loop through array and create new array by key (category type)
     for(var i = 0; i < budgetData.length; i++) {
       var type = budgetData[i].key
 
@@ -22,10 +25,13 @@ class BudgetObjectFormat {
       stateData[budgetData[i].key].push(budgetData[i].data)
     }
 
+    // Loop through each type (category) and assign the expense data
     for (var type in stateData) {
       returnArray.push({key: type, data: stateData[type]})
     }
 
+    // Sort the expense data in each category by cost (lowest to highest)
+    ArrayHelper.sortObjectArray(returnArray)
     return returnArray
   }
 }

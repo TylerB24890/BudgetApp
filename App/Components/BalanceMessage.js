@@ -30,19 +30,19 @@ export default class BalanceMessage extends Component {
 			returnMsg = ArrayHelper.randomValue(NegativeMessages)
 		}
 
-		if(percentLeft > 0 && percentLeft <= 15) {
+		if(percentLeft > 0 && percentLeft <= 20) {
 			returnMsg = ArrayHelper.randomValue(LowMessages)
 		}
 
-		if(percentLeft > 15 && percentLeft <= 40) {
+		if(percentLeft > 20 && percentLeft <= 50) {
 			returnMsg = ArrayHelper.randomValue(MediumMessages)
 		}
 
-		if(percentLeft > 40 && percentLeft <= 75) {
+		if(percentLeft > 50 && percentLeft <= 80) {
 			returnMsg = ArrayHelper.randomValue(StableMessages)
 		}
 
-		if(percentLeft > 75) {
+		if(percentLeft > 80) {
 			returnMsg = ArrayHelper.randomValue(HighMessages)
 		}
 

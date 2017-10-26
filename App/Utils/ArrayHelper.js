@@ -6,9 +6,22 @@ let ArrayHelper = {
       })
     )
   },
-
   randomValue: function(arr) {
     return arr[Math.floor(Math.random() * arr.length)]
+  },
+  // Sort items by price
+  sortObjectArray: function(array) {
+    array.forEach((item) => {
+      var arr = item.data
+      return arr.sort((a, b) => {
+        return ArrayHelper.getObjectValue(a) - ArrayHelper.getObjectValue(b)
+      })
+    })
+  },
+  getObjectValue: function(obj) {
+    for(var k in obj) {
+      return obj.cost
+    }
   }
 }
 

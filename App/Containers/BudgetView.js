@@ -64,10 +64,9 @@ class BudgetView extends React.PureComponent {
     var data = realm.objects('BudgetItem').sorted('type')
 
     var formattedData = new BudgetObjectFormat(data)
-
+		
     formattedData.forEach(function(item) {
 			var itemData = item.data
-
 			itemData.forEach(function(expense) {
 				total += expense.cost
 			})

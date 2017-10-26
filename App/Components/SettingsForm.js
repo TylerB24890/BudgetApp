@@ -9,10 +9,10 @@ export default class SettingsForm extends React.Component {
     super(props)
 
     this.state = {
-      id: '',
-      starting: '',
-      user: '',
-			budgetName: ''
+      id: this.props.id,
+      starting: (typeof this.props.starting !== 'undefined' && this.props.starting > 0 ? this.props.starting.toString() : ''),
+      user: this.props.user,
+			budgetName: this.props.budgetName
     }
   }
 
