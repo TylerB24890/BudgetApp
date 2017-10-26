@@ -2,12 +2,14 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+		paddingHorizontal: 10
   },
 	messageText: {
 		color: '#e74c3c',
 		fontSize: 14,
-		marginTop: 10,
+		marginTop: 15,
+		marginBottom: 5,
 		fontStyle: 'italic',
 		textAlign: 'center'
 	},
@@ -15,6 +17,6 @@ export default StyleSheet.create({
 		color: '#e74c3c',
 	},
 	messageTextWhite: {
-		color: '#FFF'
+		color: '#bdc3c7'
 	}
 })
