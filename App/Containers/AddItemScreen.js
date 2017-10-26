@@ -15,9 +15,18 @@ class AddItemScreen extends Component {
     super(props)
 
 		this.state = {
-			autoFocus: false
+			autoFocus: false,
+			type: ''
 		}
   }
+
+	componentWillReceiveProps (nextProps) {
+		if(nextProps.type !== this.state.type) {
+			this.setState({
+				type: nextProps.type
+			})
+		}
+	}
 
 
   _handleNewExpense(title, type, cost, id, date) {
@@ -55,7 +64,7 @@ class AddItemScreen extends Component {
     return (
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
-          <BudgetExpenseForm autoFocus={this.state.autoFocus} id='' title='' cost='0.00' type='' date='' handler={(title, type, cost, id, date) => this._handleNewExpense(title, type, cost, id, date)}/>
+          <BudgetExpenseForm autoFocus={this.state.autoFocus} id='' title='' cost='0.00' type={this.state.type} date='' handler={(title, type, cost, id, date) => this._handleNewExpense(title, type, cost, id, date)}/>
         </Content>
       </Container>
     )

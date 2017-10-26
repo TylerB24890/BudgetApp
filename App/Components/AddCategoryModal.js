@@ -25,11 +25,13 @@ export default class AddCategoryModal extends Component {
 		}
 	}
 
-	_handleCloseModal (visible) {
-		this.props.modalHandler(visible)
+	_handleCloseModal (visible, cat = false) {
+		this.props.modalHandler(visible, cat)
 	}
 
 	_handleNewCategory(id, title) {
+		var newCat = ''
+
 		if(id === '' || id === null) {
 			try {
 				Realm.open({
@@ -41,7 +43,12 @@ export default class AddCategoryModal extends Component {
 							realm.create('Category', new CategoryModel(null, title))
 						})
 
-						this._handleCloseModal(false)
+						var categories = realm.objects('Category').filtered('title = "' + title + '"')
+						categories.forEach(function(cat) {
+							newCat = cat.id
+						})
+
+						this._handleCloseModal(false, newCat)
 					} catch (e) {
 						console.log('Error category: ' + e)
 					}

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Picker, InputGroup, Icon, Text, View, Button } from 'native-base'
+import Metrics from '../Themes/Metrics'
+import { Platform } from 'react-native'
 import AddCategoryModal from './AddCategoryModal'
 import Realm from 'realm'
 import { CategorySchema } from '../Fixtures/BudgetSchemas'
@@ -17,15 +19,22 @@ export default class CategorySelect extends Component {
 
     this.state = {
       type: this.props.type,
-      selectColor: 'rgba(255,255,255,.6)',
+      selectColor: (this.props.type === '' ? 'rgba(255,255,255,.6)' : '#FFF'),
       success: false,
       error: false,
 			modalVisible: false
     }
   }
 
-	_setModalVisible(visible) {
-		this.setState({modalVisible: visible})
+	_setModalVisible(visible, newCat) {
+		var cat = this.state.type
+		var selectColor = 'rgba(255,255,255,.6)'
+
+		if(newCat) {
+			cat = newCat
+			selectColor = '#FFF'
+		}
+		this.setState({modalVisible: visible, type: cat, selectColor: selectColor})
 	}
 
   _updateExpenseType (value) {
@@ -76,6 +85,7 @@ export default class CategorySelect extends Component {
 						headerStyle={{ backgroundColor: Colors.header }}
 						headerTitleStyle={{ color: '#FFF' }}
 						headerBackButtonTextStyle={{ color: '#FFF' }}
+						style={{ width:(Platform.OS === 'ios' ? undefined : Metrics.screenWidth)}}
 					>
 	          {categoryDisplay}
 
@@ -86,7 +96,7 @@ export default class CategorySelect extends Component {
 					<Text style={{fontSize: 14, color: '#FFF'}}>New category</Text>
 				</Button>
 
-				<AddCategoryModal visible={this.state.modalVisible} modalHandler={(visible) => this._setModalVisible(visible)}/>
+				<AddCategoryModal visible={this.state.modalVisible} modalHandler={(visible, newCat) => this._setModalVisible(visible, newCat)}/>
 			</View>
     )
   }
