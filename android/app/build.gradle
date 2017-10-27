@@ -133,6 +133,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-push-notification')
     compile project(':react-native-smart-splash-screen')
     compile project(':realm')
     compile project(':react-native-config')

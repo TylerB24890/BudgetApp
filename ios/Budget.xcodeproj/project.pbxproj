@@ -35,6 +35,7 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* BudgetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BudgetTests.m */; };
+		2F226DFB1FA3DA2F00DB602C /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F226DE11FA3DA2200DB602C /* libRCTPushNotification.a */; };
 		2F5684F51FA22E71007E4A13 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F5684F41FA22E71007E4A13 /* splash.png */; };
 		2FC61DF01FA203DD00ADFE70 /* libRCTSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC61DEF1FA203B300ADFE70 /* libRCTSplashScreen.a */; };
 		2FC61DF41FA2041200ADFE70 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC61DF21FA2041200ADFE70 /* LaunchScreen.xib */; };
@@ -130,6 +131,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "Budget-tvOS";
+		};
+		2F226DE01FA3DA2200DB602C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F226DD11FA3DA2100DB602C /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
+		};
+		2F226DE21FA3DA2200DB602C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F226DD11FA3DA2100DB602C /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
+			remoteInfo = "RCTPushNotification-tvOS";
 		};
 		2FC61DEE1FA203B300ADFE70 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -335,6 +350,7 @@
 		2B57ED0A068B4DCA8C5073C7 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Budget-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Budget-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Budget-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Budget-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F226DD11FA3DA2100DB602C /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		2F5684F41FA22E71007E4A13 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = Budget/Images.xcassets/LaunchImage.launchimage/splash.png; sourceTree = SOURCE_ROOT; };
 		2F8626A4A8434A518FE96B0D /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		2FC61DF21FA2041200ADFE70 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -394,6 +410,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				2FC61DF01FA203DD00ADFE70 /* libRCTSplashScreen.a in Frameworks */,
+				2F226DFB1FA3DA2F00DB602C /* libRCTPushNotification.a in Frameworks */,
 				C24CA2CE010D4C3D80D27A70 /* libRNVectorIcons.a in Frameworks */,
 				649EB31086E64428BFF8B07B /* libReactNativeConfig.a in Frameworks */,
 				FB7317C06B0A4E7C91B6EF99 /* libRealmReact.a in Frameworks */,
@@ -547,6 +564,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2F226DD21FA3DA2100DB602C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F226DE11FA3DA2200DB602C /* libRCTPushNotification.a */,
+				2F226DE31FA3DA2200DB602C /* libRCTPushNotification-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2FC61DEB1FA203B300ADFE70 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -621,6 +647,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				2F226DD11FA3DA2100DB602C /* RCTPushNotification.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -844,6 +871,10 @@
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
 				},
 				{
+					ProductGroup = 2F226DD21FA3DA2100DB602C /* Products */;
+					ProjectRef = 2F226DD11FA3DA2100DB602C /* RCTPushNotification.xcodeproj */;
+				},
+				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
 					ProjectRef = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
 				},
@@ -945,6 +976,20 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2F226DE11FA3DA2200DB602C /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = 2F226DE01FA3DA2200DB602C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2F226DE31FA3DA2200DB602C /* libRCTPushNotification-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTPushNotification-tvOS.a";
+			remoteRef = 2F226DE21FA3DA2200DB602C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2FC61DEF1FA203B300ADFE70 /* libRCTSplashScreen.a */ = {

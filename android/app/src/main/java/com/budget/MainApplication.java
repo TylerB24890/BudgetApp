@@ -3,6 +3,7 @@ package com.budget;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.reactnativecomponent.splashscreen.RCTSplashScreenPackage;
 import io.realm.react.RealmReactPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativePushNotificationPackage(),
             new RCTSplashScreenPackage(),
             new RealmReactPackage(),
             new ReactNativeConfigPackage(),

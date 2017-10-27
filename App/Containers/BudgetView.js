@@ -4,8 +4,6 @@ import SplashScreen from 'react-native-smart-splash-screen'
 import { View, SectionList, Text } from 'react-native'
 import { connect } from 'react-redux'
 
-import GestureRecognizer, { swipeDirections } from '../Components/GestureRecognizer'
-
 // Database
 import Realm from 'realm'
 import { ExpenseSchema, CategorySchema, SettingsSchema } from '../Fixtures/BudgetSchemas'
@@ -17,6 +15,7 @@ import BudgetObjectFormat from '../Utils/BudgetObjectFormat'
 import { CurrencyFormat } from '../Utils/CurrencyFormat'
 
 // Render components
+import GestureRecognizer, { swipeDirections } from '../Components/GestureRecognizer'
 import BudgetBalance from '../Components/BudgetBalance'
 import BudgetItem from '../Components/BudgetItem'
 import EmptyBudget from '../Components/EmptyBudget'

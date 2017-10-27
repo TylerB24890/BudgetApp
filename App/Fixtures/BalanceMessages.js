@@ -5,12 +5,12 @@ const quoteMessages = [
 	"\"Greed, for the lack of a better word, is good.\"\n- Gordon Gekko",
 	"\"Show me the money!\" - Jerry Maguire",
 	"\"Money is better than poverty,\nif only for financial reasons...\" - Woody Allen",
-	"\"Money won't create success,\nthe freedom to make it will\" - Nelson Mandella",
+	"\"Money won't create success,\nthe freedom to make it will\"\n - Nelson Mandella",
 	"\"Do what you love and the money will follow.\"\n - Marsha Sinetar",
-	"\"You can be young without money,\nbut you can't be old without it.\" - Voltaire",
-	"\"Money speaks sense in a language all nations understand\"\n - Aphra Behn",
+	"\"You can be young without money,\nbut you can't be old without it.\"\n - Voltaire",
+	"\"Money speaks sense in a language\nall nations understand\" - Aphra Behn",
 	"\"Money often costs too much\" - Ralph Waldo Emerson",
-	"\"I'd like to live as a poor man with lots of money.\" - Pablo Picasso"
+	"\"I'd like to live as a poor man with lots of money.\"\n - Pablo Picasso"
 ]
 
 const randomMessages = [
@@ -83,4 +83,4 @@ export const NegativeMessages = negativeMessages.concat(RandomMessages);
 export const LowMessages = lowMessages.concat(NegativeMessages)
 export const StableMessages = stableMessages.concat(RandomMessages);
 export const MediumMessages = StableMessages.concat(lowMessages);
-export const HighMessages = highMessages.concat(RandomMessages)
+export const HighMessages = highMessages.concat(StableMessages)
