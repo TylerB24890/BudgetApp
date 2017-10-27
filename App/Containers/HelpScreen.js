@@ -7,22 +7,12 @@ import styles from './Styles/HelpScreenStyle'
 
 class HelpScreen extends Component {
 
-	_handleLink (url) {
-		Linking.canOpenURL(url).then(supported => {
-			if(!supported) {
-				return null
-			} else {
-				return Linking.openURL(url)
-			}
-		}).catch(err => console.error('An error occurred opening link', err))
-	}
-
   render () {
     return (
       <Container style={styles.container}>
 				<Content>
 					<View style={styles.helpContent}>
-						
+
 					</View>
 				</Content>
       </Container>
