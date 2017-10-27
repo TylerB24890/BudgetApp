@@ -7,7 +7,7 @@ import BudgetButton from '../Components/BudgetButton'
 import { connect } from 'react-redux'
 import SettingsForm from '../Components/SettingsForm'
 
-import BudgetNotifications from '../Components/BudgetNotifications'
+import BudgetNotifications from '../Services/BudgetNotifications'
 
 // Styles
 import styles from './Styles/SettingsScreenStyle'
@@ -68,7 +68,7 @@ class SettingsScreen extends Component {
       })
 
 			if(this.state.new) {
-				BudgetNotifications('morning', starting, starting, user)
+				new BudgetNotifications('morning', starting, starting, user)
 				this.props.navigation.navigate('AddItemScreen', { new: false })
 			}
 

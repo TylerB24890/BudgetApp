@@ -13,6 +13,10 @@ import ExpenseModel from '../Fixtures/ExpenseModel'
 import BudgetCalculations from '../Utils/BudgetCalculations'
 import BudgetObjectFormat from '../Utils/BudgetObjectFormat'
 import { CurrencyFormat } from '../Utils/CurrencyFormat'
+import moment from 'moment'
+
+// Services
+import BudgetNotifications from '../Services/BudgetNotifications'
 
 // Render components
 import GestureRecognizer, { swipeDirections } from '../Components/GestureRecognizer'
@@ -104,6 +108,22 @@ class BudgetView extends React.PureComponent {
 			budgetName: budgetName,
 			new: newUser,
     })
+
+		if(startComp !== 0 && ((balance / starting) * 100) < 20) {
+			new BudgetNotifications('low', this.state.balance, this.state.starting, this.state.user)
+		}
+
+		if(moment().isoWeekday() == 5) {
+			new BudgetNotifications('friday', false, false, false, true)
+			new BudgetNotifications('evening', false, false, false, true)
+			new BudgetNotifications('morning', this.state.balance, this.state.starting, this.state.user)
+		} else if(moment().isoWeekday() == 4){
+			new BudgetNotifications('friday', false, false, false, true)
+			new BudgetNotifications('thursday', false, false, false, true)
+			new BudgetNotifications('morning', false, false, false, true)
+		} else {
+			new BudgetNotifications('friday', this.state.balance, this.state.starting, this.state.user)
+		}
 	}
 
   _getCategoryTitle (catId) {

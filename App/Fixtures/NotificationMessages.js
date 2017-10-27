@@ -11,16 +11,20 @@ export const EveningNotificationMessages = [
   "Did you update your budget today? Do it now!"
 ]
 
+export const ThursdayNotificationMessages = [
+  "Weekend plans? Make sure you can afford it. Check your budget now!",
+]
+
 export const FridayNotificationMessages = [
   "Helllooo Friday! Make sure your budget is up to date so you don't overspend this weekend!",
   "TGIF am I right? Check your budget, don't overspend this weekend!",
-  "Weekend plans? Make sure you can afford it. Check your budget now!",
 ]
 
 export const SundayNotificationMessages = []
 
 export const LowNotificationMessages = [
-  "Your cutting it close on your budget. Check now so you don't overspend!"
+  "Your cutting it close on your budget. Check now so you don't overspend!",
+  "Keep an eye on your budget. It looks like you're getting a little low."
 ]
 
 export const RandomNotificationMessages = []

@@ -6,6 +6,9 @@ import { ExpenseSchema } from '../Fixtures/BudgetSchemas'
 import ExpenseModel from '../Fixtures/ExpenseModel'
 import BudgetExpenseForm from '../Components/BudgetExpenseForm'
 
+// Services
+import BudgetNotifications from '../Services/BudgetNotifications'
+
 // Styles
 import styles from './Styles/EditItemScreenStyle'
 
@@ -25,6 +28,8 @@ class EditItemScreen extends Component {
             realm.write(() => {
               realm.create('BudgetItem', new ExpenseModel(id, type, title, parseFloat(cost), date), true)
             })
+
+						new BudgetNotifications('evening')
 
             const {navigate} = this.props.navigation
 
