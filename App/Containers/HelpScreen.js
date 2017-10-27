@@ -1,20 +1,31 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
+import { Container, Content, Text, View, H1, Icon } from 'native-base'
 import { connect } from 'react-redux'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
 
 // Styles
 import styles from './Styles/HelpScreenStyle'
 
 class HelpScreen extends Component {
+
+	_handleLink (url) {
+		Linking.canOpenURL(url).then(supported => {
+			if(!supported) {
+				return null
+			} else {
+				return Linking.openURL(url)
+			}
+		}).catch(err => console.error('An error occurred opening link', err))
+	}
+
   render () {
     return (
-      <ScrollView style={styles.container}>
-        <KeyboardAvoidingView behavior='position'>
-          <Text>HelpScreen</Text>
-        </KeyboardAvoidingView>
-      </ScrollView>
+      <Container style={styles.container}>
+				<Content>
+					<View style={styles.helpContent}>
+						
+					</View>
+				</Content>
+      </Container>
     )
   }
 }
