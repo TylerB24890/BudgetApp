@@ -56,7 +56,7 @@ const DrawerStack = DrawerNavigator({
 			),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
-          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Budget Overview</Text>
+          <Text style={[styles.navText, {paddingTop: 5, color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}]}>Budget Overview</Text>
         </View>
       ),
       drawerIcon: ({ focused }) => (
@@ -73,7 +73,7 @@ const DrawerStack = DrawerNavigator({
 			),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
-          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Add Expense</Text>
+          <Text style={[styles.navText, {paddingTop: 5, color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}]}>Add Expense</Text>
         </View>
       ),
       drawerIcon: ({ focused }) => (
@@ -90,7 +90,7 @@ const DrawerStack = DrawerNavigator({
 			),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
-          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Expense Categories</Text>
+          <Text style={[styles.navText, {paddingTop: 4, color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}]}>Expense Categories</Text>
         </View>
       ),
       drawerIcon: ({ focused }) => (
@@ -107,7 +107,7 @@ const DrawerStack = DrawerNavigator({
 			),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
-          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Settings</Text>
+          <Text style={[styles.navText, {paddingTop: 3, color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}]}>Settings</Text>
         </View>
       ),
       drawerIcon: ({ focused }) => (
@@ -124,7 +124,7 @@ const DrawerStack = DrawerNavigator({
 			),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
-          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>About</Text>
+          <Text style={[styles.navText, {paddingTop: 4, color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}]}>About</Text>
         </View>
       ),
       drawerIcon: ({ focused }) => (
@@ -141,7 +141,7 @@ const DrawerStack = DrawerNavigator({
 			),
       drawerLabel: ({ focused }) => (
         <View style={styles.navElement}>
-          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Help</Text>
+          <Text style={[styles.navText, {paddingTop: 3, color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}]}>Help</Text>
         </View>
       ),
       drawerIcon: ({ focused }) => (

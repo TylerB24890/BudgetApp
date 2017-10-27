@@ -11,11 +11,16 @@ export default StyleSheet.create({
   navElement: {
     paddingVertical: 15,
     flex: 1,
-    alignItems: 'flex-start'
+		justifyContent: 'center',
+		marginBottom: 5
   },
 	headerIcon: {
 		paddingVertical: 10,
 		paddingHorizontal: 10
+	},
+	navText: {
+		fontSize: 15,
+		textAlign: 'left',
 	}
 })
 
