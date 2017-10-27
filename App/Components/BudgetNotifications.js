@@ -1,5 +1,6 @@
 import PushNotification from 'react-native-push-notification'
 import ArrayHelper from '../Utils/ArrayHelper'
+import { CurrencyFormat } from '../Utils/CurrencyFormat'
 import moment from 'moment'
 
 import {
@@ -28,15 +29,15 @@ class BudgetNotifications {
 	_scheduleNotification(type, balance, starting, name, title) {
 
     if(name !== false && balance !== 0) {
-      MorningNotificationMessages.push("Good morning, " + name + "! Your balance today is " + balance + ". Don't forget to keep your budget up to date!")
-      EveningNotificationMessages.push("Good evening, " + name + "! Your balance today is " + balance + ". Did you update your expenses today?")
+      MorningNotificationMessages.push("Good morning, " + name + "! Your balance today is " + CurrencyFormat(balance) + ". Don't forget to keep your budget up to date!")
+      EveningNotificationMessages.push("Good evening, " + name + "! Your balance today is " + CurrencyFormat(balance) + ". Did you update your expenses today?")
       FridayNotificationMessages.push("Happy Friday, " + name + "! Don't overspend this weekend!")
       LowNotificationMessages.push(name + ", your cutting it close on your budget. Check now so you don't overspend!")
-      LowNotificationMessages.push(name + ", your balance is " + balance + ". Have you updated your budget lately?")
+      LowNotificationMessages.push(name + ", your balance is " + CurrencyFormat(balance) + ". Have you updated your budget lately?")
     } else if(balance !== 0) {
-      MorningNotificationMessages.push("Good morning! Your balance today is " + balance + ". Don't forget to keep your budget up to date!")
-      EveningNotificationMessages.push("Good evening! Your balance today is " + balance + ". Did you update your expenses today?")
-      LowNotificationMessages.push("Your balance is " + balance + ". Have you updated your budget lately?")
+      MorningNotificationMessages.push("Good morning! Your balance today is " + CurrencyFormat(balance) + ". Don't forget to keep your budget up to date!")
+      EveningNotificationMessages.push("Good evening! Your balance today is " + CurrencyFormat(balance) + ". Did you update your expenses today?")
+      LowNotificationMessages.push("Your balance is " + CurrencyFormat(balance) + ". Have you updated your budget lately?")
     }
 
 		this._configureNotifications()
