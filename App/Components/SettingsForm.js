@@ -26,7 +26,7 @@ export default class SettingsForm extends React.Component {
 	}
 
   componentWillReceiveProps (nextProps) {
-    if(nextProps.starting !== this.props.starting) {
+    if(nextProps.starting !== this.state.starting) {
       this.setState({
         id: nextProps.id,
         starting: nextProps.starting.toString(),
@@ -48,7 +48,7 @@ export default class SettingsForm extends React.Component {
         <Content scrollEnabled={false}>
           <Container style={styles.form}>
             <Item floatingLabel>
-              <Label style={{color: 'rgba(255,255,255,.6)'}}>What does your mom call you?</Label>
+              <Label style={{color: 'rgba(255,255,255,.6)'}}>What should we call you? <Text style={styles.smallLabel}>(optional)</Text></Label>
               <Input
 									ref="user"
                   value={this.state.user}
@@ -58,7 +58,7 @@ export default class SettingsForm extends React.Component {
               />
             </Item>
 						<Item floatingLabel style={{marginTop: 30}}>
-              <Label style={{color: 'rgba(255,255,255,.6)'}}>Name this budget</Label>
+              <Label style={{color: 'rgba(255,255,255,.6)'}}>Name this budget <Text style={styles.smallLabel}>(optional)</Text></Label>
               <Input
 									ref="budgetName"
                   value={this.state.budgetName}
@@ -68,7 +68,7 @@ export default class SettingsForm extends React.Component {
               />
             </Item>
             <Item floatingLabel style={{marginTop: 30}}>
-              <Label style={{color: 'rgba(255,255,255,.6)'}}>Starting balance</Label>
+              <Label style={{color: 'rgba(255,255,255,.6)'}}>Starting balance <Text style={styles.smallLabel}>(optional)</Text></Label>
               <Icon active name="logo-usd" style={{color: 'rgba(255,255,255,.6)', fontSize: 18}} />
               <Input
 									ref="starting"

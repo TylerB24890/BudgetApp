@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Content, Item, Label, Input, Text, Button } from 'native-base'
+import { Container, Content, View, Item, Label, Input, Text, Button } from 'native-base'
 import BudgetButton from './BudgetButton'
 import styles from './Styles/CategoryFormStyle'
 
@@ -12,6 +12,8 @@ export default class CategoryForm extends React.Component {
       cid: this.props.cid,
       catTitle: this.props.catTitle,
       editing: false,
+			error: false,
+			success: false
     }
   }
 
@@ -24,7 +26,14 @@ export default class CategoryForm extends React.Component {
   }
 
   _submitCategoryForm () {
-    this.props.handler(this.state.cid, this.state.catTitle)
+
+		if(this.state.catTitle === '' || typeof this.state.catTitle == 'undefined') {
+			this.setState({
+				error: true
+			})
+		} else {
+			this.props.handler(this.state.cid, this.state.catTitle)
+		}
   }
 
   _cancelCategoryEdit () {
@@ -38,9 +47,22 @@ export default class CategoryForm extends React.Component {
     )
   }
 
+	_renderErrorMessage () {
+		if(this.state.error) {
+			return (
+				<View style={styles.errorContainer}>
+					<Text style={styles.errorText}>Please enter a category name.</Text>
+				</View>
+			)
+		} else {
+			return null
+		}
+	}
+
   render () {
 
-    let buttons = null;
+    let buttons = null
+		let errorMessage = this._renderErrorMessage()
 
     if(this.state.editing) {
       buttons = (
@@ -61,7 +83,8 @@ export default class CategoryForm extends React.Component {
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
           <Container style={styles.form}>
-            <Item floatingLabel>
+						{errorMessage}
+            <Item floatingLabel error={this.state.error} success={this.state.success}>
               <Label style={{color: 'rgba(255,255,255,.6)'}}>Category name</Label>
               <Input
                 value={this.state.catTitle}

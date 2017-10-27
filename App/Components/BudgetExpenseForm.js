@@ -22,7 +22,11 @@ export default class BudgetExpenseForm extends Component {
       cost: parseFloat(this.props.cost).toFixed(2),
       type: this.props.type,
 			date: this.props.date,
-			autoFocus: this.props.autoFocus
+			autoFocus: this.props.autoFocus,
+			titleError: false,
+			costError: false,
+			titleSuccess: false,
+			costSuccess: false
     }
   }
 
@@ -56,8 +60,23 @@ export default class BudgetExpenseForm extends Component {
     var cost = this.state.cost
     var id = this.state.id
 		var date = this.state.date
+		var titleError = false
+		var costError = false
 
-    this.props.handler(title, type, cost, id, date)
+		if(title == '' || typeof title == 'undefined') {
+			titleError = true
+
+			if(cost == '' || cost == 0 || typeof cost == 'undefined') {
+				costError = true
+			}
+
+			this.setState({
+				titleError: titleError,
+				costError: costError
+			})
+		} else {
+			this.props.handler(title, type, cost, id, date)
+		}
   }
 
   _deleteExpenseItem () {
@@ -82,16 +101,39 @@ export default class BudgetExpenseForm extends Component {
     }
   }
 
+	_renderErrorMessages () {
+
+		let errorMsg = []
+
+		if(this.state.titleError) {
+			errorMsg.push(<Text key="titleError" style={styles.errorText}>Enter a title for this expense.</Text>)
+
+			if(this.state.costError) {
+				errorMsg.push(<Text key="costError" style={styles.errorText}>Enter a cost for this expense.</Text>)
+			}
+
+			return (
+				<View style={styles.errorContainer}>
+					{errorMsg}
+				</View>
+			)
+		} else {
+			return null
+		}
+	}
+
   render () {
 
     let deleteButton = this._renderDeleteButton()
+		let errors = this._renderErrorMessages()
 
     return (
 
       <KeyboardAvoidingView behavior="padding">
         <Container style={styles.container}>
-          <Content scrollEnabled={false}>
-              <Item floatingLabel style={styles.inputGroup}>
+          <Content>
+							{errors}
+              <Item floatingLabel style={styles.inputGroup} error={this.state.titleError} success={this.state.titleSuccess}>
                 <Label style={{color: 'rgba(255,255,255,.6)'}}>What are you buying?</Label>
                 <Input
                   value={this.state.title}
@@ -102,7 +144,7 @@ export default class BudgetExpenseForm extends Component {
                 />
               </Item>
 
-              <Item floatingLabel style={styles.inputGroup}>
+              <Item floatingLabel style={styles.inputGroup} error={this.state.costError} success={this.state.costSuccess}>
                 <Label style={{color: 'rgba(255,255,255,.6)'}}>How much does it cost?</Label>
                 <Icon active name="logo-usd" style={{color: 'rgba(255,255,255,.6)', fontSize: 16}} />
                 <Input
@@ -118,7 +160,7 @@ export default class BudgetExpenseForm extends Component {
 						        style={{width: 200}}
 						        date={this.state.date}
 						        mode="date"
-						        placeholder="Expense Date"
+						        placeholder="Expense Date (optional)"
 						        format="MMMM D, YYYY"
 						        confirmBtnText="Confirm"
 						        cancelBtnText="Cancel"

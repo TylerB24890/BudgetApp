@@ -8,6 +8,9 @@ export default StyleSheet.create({
     paddingTop: (Metrics.screenHeight * .05),
     paddingHorizontal: 15
   },
+	errorText: {
+		color: Colors.error
+	},
   buttonContainer: {
     marginTop: 60,
     flexDirection: 'row',

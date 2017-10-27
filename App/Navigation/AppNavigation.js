@@ -5,13 +5,15 @@ import { DrawerNavigator, StackNavigator } from 'react-navigation'
 import HeaderHomeIcon from '../Components/HeaderHomeIcon'
 import HeaderBackIcon from '../Components/HeaderBackIcon'
 
+import BudgetView from '../Containers/BudgetView'
+import AddItemScreen from '../Containers/AddItemScreen'
 import AddCategoryScreen from '../Containers/AddCategoryScreen'
 import EditCategoryScreen from '../Containers/EditCategoryScreen'
 import CategoriesScreen from '../Containers/CategoriesScreen'
 import EditItemScreen from '../Containers/EditItemScreen'
 import SettingsScreen from '../Containers/SettingsScreen'
-import BudgetView from '../Containers/BudgetView'
-import AddItemScreen from '../Containers/AddItemScreen'
+import AboutScreen from '../Containers/AboutScreen'
+import HelpScreen from '../Containers/HelpScreen'
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
@@ -113,6 +115,40 @@ const DrawerStack = DrawerNavigator({
       )
     })
   },
+	AboutScreen: {
+    screen: paramsToProps(AboutScreen),
+    navigationOptions: ({navigation}) => ({
+      title: 'About',
+			headerRight: (
+				<HeaderHomeIcon navigation={navigation} />
+			),
+      drawerLabel: ({ focused }) => (
+        <View style={styles.navElement}>
+          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>About</Text>
+        </View>
+      ),
+      drawerIcon: ({ focused }) => (
+        <Icon name="ios-information-circle-outline" size={30} color={focused ? activeColor : inactiveColor} />
+      )
+    })
+  },
+	HelpScreen: {
+    screen: paramsToProps(HelpScreen),
+    navigationOptions: ({navigation}) => ({
+      title: 'Help',
+			headerRight: (
+				<HeaderHomeIcon navigation={navigation} />
+			),
+      drawerLabel: ({ focused }) => (
+        <View style={styles.navElement}>
+          <Text style={{color: focused ? activeColor : inactiveColor, fontWeight: focused ? '500' : 'normal'}}>Help</Text>
+        </View>
+      ),
+      drawerIcon: ({ focused }) => (
+        <Icon name="ios-help-outline" size={30} color={focused ? activeColor : inactiveColor} />
+      )
+    })
+  },
 }, {
   drawerWidth: 250,
 	initialRouteName: 'BudgetView',
@@ -121,6 +157,8 @@ const DrawerStack = DrawerNavigator({
 // Main Navigator
 // Transitions screens in as modals
 const PrimaryNav = StackNavigator({
+  AboutScreen: { screen: AboutScreen },
+  HelpScreen: { screen: HelpScreen },
   AddCategoryScreen: {
     screen: paramsToProps(AddCategoryScreen),
     navigationOptions: ({navigation}) => ({

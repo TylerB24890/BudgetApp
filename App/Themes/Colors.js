@@ -5,7 +5,9 @@ const colors = {
   active: '#2c3e50',
   inactive: '#34495e',
   positive: '#2ecc71',
-  negative: '#c0392b'
+  negative: '#c0392b',
+  error: '#e74c3c',
+  success: '#2ecc71'
 }
 
 export default colors

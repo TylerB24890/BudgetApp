@@ -82,7 +82,7 @@ export default class CategorySelect extends Component {
 	      >
 	        <Picker
 	          iosHeader="Categories"
-						placeholder="Expense Category"
+						placeholder="Expense Category (optional)"
 	          mode="dropdown"
 	          selectedValue={val}
 	          onValueChange={this._updateExpenseType.bind(this)}

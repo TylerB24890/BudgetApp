@@ -14,6 +14,10 @@ export default StyleSheet.create({
     backgroundColor: Colors.background,
     color: '#FFF',
   },
+	smallLabel: {
+		fontSize: 12.5,
+		color: 'rgba(255,255,255,.6)'
+	},
 	datePickerLabel: {
 		paddingBottom: 15,
 		marginTop: 15,
@@ -24,4 +28,8 @@ export default StyleSheet.create({
   buttonContainer: {
     marginTop: 15,
   },
+	errorText: {
+		color: Colors.error,
+		marginBottom: 5
+	}
 })
