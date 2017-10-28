@@ -132,6 +132,7 @@ const DrawerStack = DrawerNavigator({
       )
     })
   },
+	/*
 	HelpScreen: {
     screen: paramsToProps(HelpScreen),
     navigationOptions: ({navigation}) => ({
@@ -148,7 +149,7 @@ const DrawerStack = DrawerNavigator({
         <Icon name="ios-help-outline" size={30} color={focused ? activeColor : inactiveColor} />
       )
     })
-  },
+  },*/
 }, {
   drawerWidth: 250,
 	initialRouteName: 'BudgetView',

@@ -1,24 +1,15 @@
 import PushNotification from 'react-native-push-notification'
 import ArrayHelper from '../Utils/ArrayHelper'
-import { CurrencyFormat } from '../Utils/CurrencyFormat'
 import moment from 'moment'
 
-import {
-  MorningNotificationMessages,
-  EveningNotificationMessages,
-  ThursdayNotificationMessages,
-  FridayNotificationMessages,
-  SundayNotificationMessages,
-  LowNotificationMessages,
-  RandomNotificationMessages
-} from '../Fixtures/NotificationMessages'
+import NotificationMessages from '../Fixtures/NotificationMessages'
 
 class BudgetNotifications {
 
-  constructor(type, balance = 0, starting = 0, name = false, title = 'BudgetDown Reminder!', cancel = false) {
+  constructor(type, balance, name, cancel = false) {
 
     if(!cancel) {
-      this._scheduleNotification(type, balance, starting, name, title)
+      this._scheduleNotification(type, balance,  name)
     } else {
       this._cancelNotification(type)
     }
@@ -32,20 +23,13 @@ class BudgetNotifications {
     PushNotification.configure({
       onNotification: function(notification) {
 
-        PushNotification.cancelLocalNotifications({id: notification.data.id})
-
         if(notification.userInteraction) {
           PushNotification.cancelAllLocalNotifications()
         } else {
           switch(notification.data.id) {
             case 'morning' :
-              if(moment().isoWeekday() == 5) {
-                PushNotification.cancelLocalNotifications({id: 'friday'})
+              if(moment().isoWeekday() !== 5 && moment().isoWeekday() !== 4) {
                 PushNotification.cancelLocalNotifications({id: 'evening'})
-              }
-
-              if(moment().isoWeekday() == 4) {
-                PushNotification.cancelLocalNotifications({id: 'thursday'})
               }
 
               PushNotification.cancelLocalNotifications({id: 'low'})
@@ -58,7 +42,6 @@ class BudgetNotifications {
               }
             break;
             case 'thursday' :
-              PushNotification.cancelLocalNotifications({id: 'friday'})
               PushNotification.cancelLocalNotifications({id: 'morning'})
             break;
             case 'friday' :
@@ -66,15 +49,6 @@ class BudgetNotifications {
               PushNotification.cancelLocalNotifications({id: 'morning'})
             break;
             case 'low' :
-              if(moment().isoWeekday() == 5) {
-                PushNotification.cancelLocalNotifications({id: 'friday'})
-                PushNotification.cancelLocalNotifications({id: 'evening'})
-              }
-
-              if(moment().isoWeekday() === 4) {
-                PushNotification.cancelLocalNotifications({id: 'thursday'})
-              }
-
               PushNotification.cancelLocalNotifications({id: 'morning'})
             break;
           }
@@ -83,72 +57,69 @@ class BudgetNotifications {
     })
   }
 
-	_scheduleNotification(type, balance, starting, name, title) {
+	_scheduleNotification(type, balance, name) {
 
-    if(name !== false && name !== '' && balance !== '' && balance !== 0) {
-      MorningNotificationMessages.push("Good morning, " + name + "! Your balance today is " + CurrencyFormat(balance) + ". Don't forget to keep your budget up to date!")
-      FridayNotificationMessages.push("Happy Friday, " + name + "! Don't overspend this weekend!")
-      LowNotificationMessages.push(name + ", your cutting it close on your budget. Check now so you don't overspend!")
-      LowNotificationMessages.push(name + ", your balance is " + CurrencyFormat(balance) + ". Have you updated your budget lately?")
-    } else if(balance !== 0) {
-      MorningNotificationMessages.push("Good morning! Your balance today is " + CurrencyFormat(balance) + ". Don't forget to keep your budget up to date!")
-      EveningNotificationMessages.push("Good evening! Your balance today is " + CurrencyFormat(balance) + ". Did you update your expenses today?")
-      LowNotificationMessages.push("Careful! Your balance is getting low!\nCurrent Balance: " + CurrencyFormat(balance))
-    }
+    var notificationMessage = []
 
 		this._configureNotifications()
 
     switch(type) {
       case 'morning' :
+        notificationMessage = NotificationMessages.MorningNotificationMessages(name, balance)
         PushNotification.localNotificationSchedule({
           id: 'morning',
-          title: title,
-          message: ArrayHelper.randomValue(MorningNotificationMessages),
+          title: "Budget Reminder!",
+          message: ArrayHelper.randomValue(notificationMessage),
           playSound: false,
-          date: moment().add(1, 'day').hours(8).startOf('hour')
+          date: moment().add(1, 'day').hours(9).startOf('hour')
         })
       break;
       case 'evening' :
+        notificationMessage = NotificationMessages.EveningNotificationMessages(name, balance)
         PushNotification.localNotificationSchedule({
           id: 'evening',
-          title: title,
-          message: ArrayHelper.randomValue(EveningNotificationMessages),
+          title: "Budget Reminder!",
+          message: ArrayHelper.randomValue(notificationMessage),
     			playSound: true,
-          date: moment().add(3, 'days').hours(19).startOf('hour')
+          date: moment().add(2, 'days').hours(19).startOf('hour')
         })
       break;
       case 'thursday' :
+        notificationMessage = NotificationMessages.ThursdayNotificationMessages(name, balance)
         PushNotification.localNotificationSchedule({
           id: 'friday',
-          title: title,
-          message: ArrayHelper.randomValue(ThursdayNotificationMessages),
+          title: "Budget Reminder!",
+          message: ArrayHelper.randomValue(notificationMessage),
           playSound: true,
-          date: moment().isoWeekday(4).hours(20).startOf('hour')
+          date: moment().isoWeekday("Thursday").hours(20).startOf('hour')
         })
       break;
       case 'friday' :
+        notificationMessage = NotificationMessages.FridayNotificationMessages(name, balance)
         PushNotification.localNotificationSchedule({
           id: 'friday',
-          title: title,
-          message: ArrayHelper.randomValue(FridayNotificationMessages),
+          title: "Budget Reminder!",
+          message: ArrayHelper.randomValue(notificationMessage),
     			playSound: true,
-          date: moment().isoWeekday(5).hours(18).startOf('hour')
+          date: moment().isoWeekday("Friday").hours(18).startOf('hour')
         })
       break;
       case 'low' :
+        notificationMessage = NotificationMessages.LowNotificationMessages(name, balance)
         PushNotification.localNotificationSchedule({
           id: 'low',
-          title: title,
-          message: ArrayHelper.randomValue(LowNotificationMessages),
+          title: "Budget Reminder!",
+          message: ArrayHelper.randomValue(notificationMessage),
     			playSound: false,
           date: moment().add(1, 'days').hours(8).startOf('hour')
         })
       break;
 			case 'test' :
+        notificationMessage = NotificationMessages.TestNotificationMessage(name, balance)
         PushNotification.localNotificationSchedule({
           id: 'test',
-          title: title,
-          message: ArrayHelper.randomValue(MorningNotificationMessages),
+          title: "Budget Reminder!",
+          message: ArrayHelper.randomValue(notificationMessage),
           playSound: true,
           date: moment().add(10, 'seconds')
         })

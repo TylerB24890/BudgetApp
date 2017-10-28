@@ -61,6 +61,8 @@ class EditItemScreen extends Component {
             realm.delete(expense)
           })
 
+					new BudgetNotifications('evening')
+
           const {navigate} = this.props.navigation
 
           navigate(

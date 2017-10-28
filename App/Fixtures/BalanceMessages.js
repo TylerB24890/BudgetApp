@@ -10,7 +10,8 @@ const quoteMessages = [
 	"\"You can be young without money,\nbut you can't be old without it.\"\n - Voltaire",
 	"\"Money speaks sense in a language\nall nations understand\" - Aphra Behn",
 	"\"Money often costs too much\"\n- Ralph Waldo Emerson",
-	"\"I'd like to live as a poor man\nwith lots of money.\"- Pablo Picasso"
+	"\"I'd like to live as a poor man\nwith lots of money.\"- Pablo Picasso",
+	"\"Life's a garden, dig it.\"\n- Joe Dirté"
 ]
 
 const randomMessages = [

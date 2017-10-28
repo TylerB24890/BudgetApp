@@ -81,7 +81,7 @@ class BudgetView extends React.PureComponent {
     settings = settingsRealm.objects('Settings')
     settings.forEach(function(setting) {
       startComp = setting.starting
-			user = setting.user
+			user = setting.name
 			budgetName = setting.budgetName
     })
 
@@ -110,19 +110,18 @@ class BudgetView extends React.PureComponent {
     })
 
 		if(startComp !== 0 && (((startComp - total) / startComp) * 100) < 20) {
-			new BudgetNotifications('low', this.state.balance, this.state.starting, this.state.user)
+			new BudgetNotifications('low', (startComp - total), user)
 		}
 
-		if(moment().isoWeekday() == 5) {
+		if(moment().isoWeekday() == 5 && moment().hour() >= 15) {
 			new BudgetNotifications('friday', false, false, false, true)
 			new BudgetNotifications('evening', false, false, false, true)
-			new BudgetNotifications('morning', this.state.balance, this.state.starting, this.state.user)
-		} else if(moment().isoWeekday() == 4){
-			new BudgetNotifications('friday', false, false, false, true)
+			new BudgetNotifications('morning', (startComp - total), user)
+		} else if(moment().isoWeekday() == 4 && moment().hour() >= 15){
 			new BudgetNotifications('thursday', false, false, false, true)
-			new BudgetNotifications('morning', false, false, false, true)
 		} else {
-			new BudgetNotifications('friday', this.state.balance, this.state.starting, this.state.user)
+			new BudgetNotifications('thursday', (startComp - total), user)
+			new BudgetNotifications('friday', (startComp - total), user)
 		}
 	}
 
