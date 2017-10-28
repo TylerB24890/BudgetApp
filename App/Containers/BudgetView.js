@@ -4,12 +4,6 @@ import SplashScreen from 'react-native-smart-splash-screen'
 import { View, SectionList, Text } from 'react-native'
 import { connect } from 'react-redux'
 
-// Database
-import Realm from 'realm'
-import { ExpenseSchema, SettingsSchema } from '../Fixtures/BudgetSchemas'
-import ExpenseModel from '../Fixtures/ExpenseModel'
-import CategoryService from '../Services/CategoryService'
-
 // Utilities
 import BudgetCalculations from '../Utils/BudgetCalculations'
 import BudgetObjectFormat from '../Utils/BudgetObjectFormat'
@@ -17,6 +11,9 @@ import { CurrencyFormat } from '../Utils/CurrencyFormat'
 import moment from 'moment'
 
 // Services
+import ExpenseService from '../Services/ExpenseService'
+import CategoryService from '../Services/CategoryService'
+import SettingsService from '../Services/SettingsService'
 import BudgetNotifications from '../Services/BudgetNotifications'
 
 // Render components
@@ -28,7 +25,7 @@ import EmptyBudget from '../Components/EmptyBudget'
 // Styles
 import styles from './Styles/BudgetViewStyle'
 
-let realm = new Realm({schema: [ExpenseSchema]})
+
 let starting = 0
 
 class BudgetView extends React.PureComponent {
@@ -78,8 +75,7 @@ class BudgetView extends React.PureComponent {
 		var budgetName = ''
 		var newUser = false
 
-		var settingsRealm = new Realm({path: 'SettingsScreen.realm', schema: [SettingsSchema]})
-    settings = settingsRealm.objects('Settings')
+    settings = SettingsService.getAllSettings()
     settings.forEach(function(setting) {
       startComp = setting.starting
 			user = setting.name
@@ -90,7 +86,7 @@ class BudgetView extends React.PureComponent {
 			newUser = true
 		}
 
-    var data = realm.objects('BudgetItem').sorted('type')
+    var data = ExpenseService.getAllExpenses()
     var formattedData = new BudgetObjectFormat(data, this.state.sort)
 
     formattedData.forEach(function(item) {
@@ -125,20 +121,6 @@ class BudgetView extends React.PureComponent {
 			new BudgetNotifications('friday', (startComp - total), user)
 		}
 	}
-
-  _getCategoryTitle (catId) {
-    let cat = {}
-    var catTitle = ''
-
-    var catRealm = new Realm({path: 'CategorySelect.realm', schema: [CategorySchema]})
-    cat = catRealm.objects('Category').filtered('id = "' + catId + '"')
-
-    cat.forEach(function(item) {
-      catTitle = item.title
-    })
-
-    return catTitle
-  }
 
   /**
    * Re-rerun the componentDidMount function to update state

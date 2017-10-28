@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types';
+
+// Components
 import { View, Text, TouchableOpacity } from 'react-native'
 import BalanceMessage from './BalanceMessage'
+
+// Utilities
 import { CurrencyFormat } from '../Utils/CurrencyFormat'
+
+// Styles
 import styles, { positiveColor, negativeColor } from './Styles/BudgetBalanceStyle'
 
 export default class BudgetBalance extends Component {

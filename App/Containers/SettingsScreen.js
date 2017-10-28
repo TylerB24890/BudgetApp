@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
-import Realm from 'realm'
-import { SettingsSchema } from '../Fixtures/BudgetSchemas'
-import SettingsModel from '../Fixtures/SettingsModel'
+import { connect } from 'react-redux'
+
+// Services
+import SettingsService from '../Services/SettingsService'
+import BudgetNotifications from '../Services/BudgetNotifications'
+
+// Components
 import { Container, Content, Text } from 'native-base'
 import BudgetButton from '../Components/BudgetButton'
-import { connect } from 'react-redux'
 import SettingsForm from '../Components/SettingsForm'
-
-import BudgetNotifications from '../Services/BudgetNotifications'
 
 // Styles
 import styles from './Styles/SettingsScreenStyle'
-
-let realm = new Realm({path: 'SettingsScreen.realm', schema: [SettingsSchema]})
-let settings = realm.objects('Settings')
 
 class SettingsScreen extends Component {
 
@@ -36,6 +34,8 @@ class SettingsScreen extends Component {
     var id = ''
 		var budgetName = ''
 		var updated = false
+
+		let settings = SettingsService.getAllSettings()
 
     settings.forEach(function(setting) {
       id = setting.id
@@ -62,24 +62,18 @@ class SettingsScreen extends Component {
 	}
 
   _handleSettingsSubmission(id, user, budgetName, starting) {
-    try {
-      realm.write(() => {
-        realm.create('Settings', new SettingsModel(id, user, budgetName, starting), true)
-      })
+    var newUser = SettingsService.newSettings(id, user, budgetName, starting)
 
-			if(this.state.new) {
-				new BudgetNotifications('morning', starting, starting, user)
-				this.props.navigation.navigate('AddItemScreen', { new: false })
-			}
+		if(this.state.new && newUser) {
+			new BudgetNotifications('morning', starting, starting, user)
+			this.props.navigation.navigate('AddItemScreen', { new: false })
+		}
 
-			this.setState({
-				user: user,
-				updated: true,
-				new: false
-			})
-    } catch (e) {
-      console.log('Error opening Settings table: ' + e)
-    }
+		this.setState({
+			user:user,
+			updated: true,
+			new: false
+		})
   }
 
   render () {
