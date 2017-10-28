@@ -16,7 +16,7 @@ import CategoryService from '../Services/CategoryService'
 import SettingsService from '../Services/SettingsService'
 import BudgetNotifications from '../Services/BudgetNotifications'
 
-// Render components
+// Components
 import GestureRecognizer, { swipeDirections } from '../Components/GestureRecognizer'
 import BudgetBalance from '../Components/BudgetBalance'
 import BudgetItem from '../Components/BudgetItem'

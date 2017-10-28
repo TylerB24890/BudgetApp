@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
 
+// Services
 import CategoryService from '../Services/CategoryService'
 
+// Components
+import { Container, Content } from 'native-base'
 import CategoryForm from '../Components/CategoryForm'
 
 // Styles

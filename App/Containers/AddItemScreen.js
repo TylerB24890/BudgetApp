@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import Realm from 'realm'
-import { ExpenseSchema } from '../Fixtures/BudgetSchemas'
-import ExpenseModel from '../Fixtures/ExpenseModel'
-import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
+
+// Services
+import ExpenseService from '../Services/ExpenseService'
+
+// Components
+import { Container, Content } from 'native-base'
 import BudgetExpenseForm from '../Components/BudgetExpenseForm'
 
 // Styles
@@ -31,31 +33,17 @@ class AddItemScreen extends Component {
 
   _handleNewExpense(title, type, cost, id, date) {
     if(id === '') {
-      try {
-        Realm.open({
-          schema: [ExpenseSchema]
-        }).then(realm => {
-          try {
-            realm.write(() => {
-              realm.create('BudgetItem', new ExpenseModel(null, type, title, parseFloat(cost), date))
-            })
 
-            const {navigate} = this.props.navigation
+			if(ExpenseService.addNewExpense(title, cost, date, type)) {
+				const {navigate} = this.props.navigation
 
-            navigate(
-              'BudgetView', {
-                updated: true,
-								new: false,
-              }
-            )
-          } catch (e) {
-            console.log('Error saving budget item: ' + e)
-          }
-        })
-
-      } catch (e) {
-        console.log('Error opening Expense table: ' + e)
-      }
+				navigate(
+					'BudgetView', {
+						updated: true,
+						new: false,
+					}
+				)
+			}
     }
   }
 

@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
+
+// Services
 import CategoryService from '../Services/CategoryService'
 
+// Components
 import { Button, Icon, Text } from 'native-base'
 import { View, Modal } from 'react-native'
 import CategoryForm from './CategoryForm'
+
+// Styles
 import styles from './Styles/AddCategoryModalStyle'
 
 export default class AddCategoryModal extends Component {

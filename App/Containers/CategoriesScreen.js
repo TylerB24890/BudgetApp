@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Container, Content, Text } from 'native-base'
-import Realm from 'realm'
-import { ExpenseSchema } from '../Fixtures/BudgetSchemas'
-
-import CategoryService from '../Services/CategoryService'
-
 import { connect } from 'react-redux'
 
+// Services
+import CategoryService from '../Services/CategoryService'
+import ExpenseService from '../Services/ExpenseService'
+
+// Components
+import { Container, Content, Text } from 'native-base'
 import BudgetButton from '../Components/BudgetButton'
 import CategoryList from '../Components/CategoryList'
 
@@ -30,18 +30,9 @@ class CategoriesScreen extends Component {
     navigate('AddCategoryScreen')
   }
 
-  _deleteCategoryExpenses (catId) {
-    let expenseRealm = new Realm({schema: [ExpenseSchema]})
-
-    expenseRealm.write(() => {
-      var expenses = expenseRealm.objects('BudgetItem').filtered('type = "' + catId + '"')
-      expenseRealm.delete(expenses)
-    })
-  }
-
   _deleteCategory(cid) {
 
-    this._deleteCategoryExpenses(cid)
+    ExpenseService.deleteExpenseByCategory(cid)
 
 		let categories = CategoryService.deleteCategory(cid)
 

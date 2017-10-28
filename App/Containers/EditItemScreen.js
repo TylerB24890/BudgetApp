@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
-import Realm from 'realm'
-import { ExpenseSchema } from '../Fixtures/BudgetSchemas'
-import ExpenseModel from '../Fixtures/ExpenseModel'
-import BudgetExpenseForm from '../Components/BudgetExpenseForm'
 
 // Services
+import ExpenseService from '../Services/ExpenseService'
 import BudgetNotifications from '../Services/BudgetNotifications'
+
+// Components
+import { Container, Content } from 'native-base'
+import BudgetExpenseForm from '../Components/BudgetExpenseForm'
 
 // Styles
 import styles from './Styles/EditItemScreenStyle'
@@ -20,64 +20,30 @@ class EditItemScreen extends Component {
 
   _handleExpenseEdit(title, type, cost, id, date) {
     if(id !== '' && typeof id !== undefined) {
-      try {
-        Realm.open({
-          schema: [ExpenseSchema]
-        }).then(realm => {
-          try {
-            realm.write(() => {
-              realm.create('BudgetItem', new ExpenseModel(id, type, title, parseFloat(cost), date), true)
-            })
+      if(ExpenseService.editExpense(id, title, cost, date, type)) {
 
-						new BudgetNotifications('evening')
+	      const {navigate} = this.props.navigation
 
-            const {navigate} = this.props.navigation
-
-            navigate(
-              'BudgetView', {
-                updated: true
-              }
-            )
-          } catch (e) {
-            console.log('Error saving budget item: ' + e)
-          }
-        })
-
-      } catch (e) {
-        console.log('Error opening Expense table: ' + e)
-      }
+	      navigate(
+	        'BudgetView', {
+	          updated: true
+	        }
+	      )
+			}
     }
   }
 
   _handleDeleteExpense(id) {
+    if(ExpenseService.deleteExpense(id)) {
 
-    try {
-      Realm.open({
-        schema: [ExpenseSchema]
-      }).then(realm => {
-        try {
-          realm.write(() => {
-            var expense = realm.objects('BudgetItem').filtered('id = "' + id + '"')
-            realm.delete(expense)
-          })
+			const {navigate} = this.props.navigation
 
-					new BudgetNotifications('evening')
-
-          const {navigate} = this.props.navigation
-
-          navigate(
-            'BudgetView', {
-              updated: true
-            }
-          )
-        } catch (e) {
-          console.log('Error deleting budget item: ' + e)
-        }
-      })
-
-    } catch (e) {
-      console.log('Error opening Expense table: ' + e)
-    }
+			navigate(
+				'BudgetView', {
+					updated: true
+				}
+			)
+		}
   }
 
   render () {
