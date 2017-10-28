@@ -109,7 +109,7 @@ class BudgetView extends React.PureComponent {
 			new: newUser,
     })
 
-		if(startComp !== 0 && ((balance / starting) * 100) < 20) {
+		if(startComp !== 0 && (((startComp - total) / startComp) * 100) < 20) {
 			new BudgetNotifications('low', this.state.balance, this.state.starting, this.state.user)
 		}
 

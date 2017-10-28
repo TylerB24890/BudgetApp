@@ -9,8 +9,8 @@ const quoteMessages = [
 	"\"Do what you love and the money will follow.\"\n - Marsha Sinetar",
 	"\"You can be young without money,\nbut you can't be old without it.\"\n - Voltaire",
 	"\"Money speaks sense in a language\nall nations understand\" - Aphra Behn",
-	"\"Money often costs too much\" - Ralph Waldo Emerson",
-	"\"I'd like to live as a poor man with lots of money.\"\n - Pablo Picasso"
+	"\"Money often costs too much\"\n- Ralph Waldo Emerson",
+	"\"I'd like to live as a poor man\nwith lots of money.\"- Pablo Picasso"
 ]
 
 const randomMessages = [
