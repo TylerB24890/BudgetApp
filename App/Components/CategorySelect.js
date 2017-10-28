@@ -3,9 +3,8 @@ import { Picker, InputGroup, Icon, Text, View, Button } from 'native-base'
 import Metrics from '../Themes/Metrics'
 import { Platform } from 'react-native'
 import AddCategoryModal from './AddCategoryModal'
-import Realm from 'realm'
-import { CategorySchema } from '../Fixtures/BudgetSchemas'
-import CategoryModel from '../Fixtures/CategoryModel'
+
+import CategoryService from '../Services/CategoryService'
 
 import styles from './Styles/CategorySelectStyle'
 import Colors from '../Themes/Colors'
@@ -58,9 +57,9 @@ export default class CategorySelect extends Component {
   }
 
   _returnExpenseCategories () {
-    var realm = new Realm({path: 'CategorySelect.realm', schema: [CategorySchema]})
 
-    var categories = realm.objects('Category').sorted('title')
+		var categories = CategoryService.getAllCategories()
+
     var categoryDisplay = categories.map(catData => (
       <Item key={catData.id} value={catData.id} label={catData.title} />
     ))

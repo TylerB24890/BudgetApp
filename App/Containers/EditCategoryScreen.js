@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
-import Realm from 'realm'
-import { CategorySchema } from '../Fixtures/BudgetSchemas'
-import CategoryModel from '../Fixtures/CategoryModel'
+
+import CategoryService from '../Services/CategoryService'
+
 import CategoryForm from '../Components/CategoryForm'
 
 // Styles
@@ -17,31 +17,15 @@ class EditCategoryScreen extends Component {
 
   _handleCategoryEdit(cid, title) {
     if(cid !== '' && typeof id !== undefined) {
-      try {
-        Realm.open({
-          path: 'CategorySelect.realm',
-          schema: [CategorySchema]
-        }).then(realm => {
-          try {
-            realm.write(() => {
-              realm.create('Category', new CategoryModel(cid, title), true)
-            })
+      if(CategoryService.editCategory(cid, title)) {
+				const {navigate} = this.props.navigation
 
-            const {navigate} = this.props.navigation
-
-            navigate(
-              'CategoriesScreen', {
-                updated: true
-              }
-            )
-          } catch (e) {
-            console.log('Error saving category: ' + e)
-          }
-        })
-
-      } catch (e) {
-        console.log('Error opening Category table: ' + e)
-      }
+	      navigate(
+	        'CategoriesScreen', {
+	          updated: true
+	        }
+	      )
+			}
     }
   }
 

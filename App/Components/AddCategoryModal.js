@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import Realm from 'realm'
-import { CategorySchema } from '../Fixtures/BudgetSchemas'
-import CategoryModel from '../Fixtures/CategoryModel'
+import CategoryService from '../Services/CategoryService'
+
 import { Button, Icon, Text } from 'native-base'
 import { View, Modal } from 'react-native'
 import CategoryForm from './CategoryForm'
@@ -33,30 +32,8 @@ export default class AddCategoryModal extends Component {
 		var newCat = ''
 
 		if(id === '' || id === null) {
-			try {
-				Realm.open({
-					path: 'CategorySelect.realm',
-					schema: [CategorySchema]
-				}).then(realm => {
-					try {
-						realm.write(() => {
-							realm.create('Category', new CategoryModel(null, title))
-						})
-
-						var categories = realm.objects('Category').filtered('title = "' + title + '"')
-						categories.forEach(function(cat) {
-							newCat = cat.id
-						})
-
-						this._handleCloseModal(false, newCat)
-					} catch (e) {
-						console.log('Error category: ' + e)
-					}
-				})
-
-			} catch (e) {
-				console.log('Error opening Category table: ' + e)
-			}
+			newCat = CategoryService.addCategory(title)
+			this._handleCloseModal(false, newCat)
 		}
 	}
 

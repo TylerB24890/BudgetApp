@@ -6,8 +6,9 @@ import { connect } from 'react-redux'
 
 // Database
 import Realm from 'realm'
-import { ExpenseSchema, CategorySchema, SettingsSchema } from '../Fixtures/BudgetSchemas'
+import { ExpenseSchema, SettingsSchema } from '../Fixtures/BudgetSchemas'
 import ExpenseModel from '../Fixtures/ExpenseModel'
+import CategoryService from '../Services/CategoryService'
 
 // Utilities
 import BudgetCalculations from '../Utils/BudgetCalculations'
@@ -160,7 +161,7 @@ class BudgetView extends React.PureComponent {
    * Render expense section header
    */
   renderSectionHeader = ({section}) => {
-    var title = this._getCategoryTitle(section.key)
+    var title = CategoryService.getCategoryTitle(section.key)
     var total = BudgetCalculations.sectionHeaderTotal(this.state.data, section.key)
 
 		if(title.length > 1) {

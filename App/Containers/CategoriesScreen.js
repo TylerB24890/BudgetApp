@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Container, Content, Text } from 'native-base'
 import Realm from 'realm'
-import { CategorySchema, ExpenseSchema } from '../Fixtures/BudgetSchemas'
-import CategoryModel from '../Fixtures/CategoryModel'
+import { ExpenseSchema } from '../Fixtures/BudgetSchemas'
+
+import CategoryService from '../Services/CategoryService'
+
 import { connect } from 'react-redux'
 
 import BudgetButton from '../Components/BudgetButton'
@@ -11,8 +13,7 @@ import CategoryList from '../Components/CategoryList'
 // Styles
 import styles from './Styles/CategoriesScreenStyle'
 
-let realm = new Realm({path: 'CategorySelect.realm', schema: [CategorySchema]})
-let categories = realm.objects('Category').sorted('title')
+let categories = CategoryService.getAllCategories()
 
 class CategoriesScreen extends Component {
 
@@ -42,15 +43,11 @@ class CategoriesScreen extends Component {
 
     this._deleteCategoryExpenses(cid)
 
-    realm.write(() => {
-      var cat = realm.objects('Category').filtered('id = "' + cid + '"')
-      realm.delete(cat)
+		let categories = CategoryService.deleteCategory(cid)
 
-      let categories = realm.objects('Category').sorted('title')
-      this.setState({
-        categories: categories
-      })
-    })
+		this.setState({
+			categories: categories
+		})
   }
 
   render () {
