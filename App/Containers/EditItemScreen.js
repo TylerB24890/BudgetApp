@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 // Services
 import ExpenseService from '../Services/ExpenseService'
-import BudgetNotifications from '../Services/BudgetNotifications'
 
 // Components
 import { Container, Content } from 'native-base'

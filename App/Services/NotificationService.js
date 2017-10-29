@@ -4,7 +4,47 @@ import moment from 'moment'
 
 import NotificationMessages from '../Fixtures/NotificationMessages'
 
-class BudgetNotifications {
+let NotificationService = {
+  configureNotifications: function () {
+    PushNotification.configure({
+      onNotification: function(notification) {
+        console.log('Notification: ' + notification.data.id)
+      }
+    })
+  },
+
+  scheduleNotificationMessage: function(name, balance, type = false) {
+
+    // 9am
+    var dateToNotify = moment().add(1, 'day').startOf('day').add(9, 'hours')
+    var messages = NotificationMessages.MorningNotificationMessages(name, balance)
+
+    // If after or equal to 5pm
+    if(moment().hour() >= 17) {
+      // Set an evening notification for the next day
+      dateToNotify = moment().add(1, 'day').startOf('day').add(18, 'hours')
+      // Grab evening messages
+      messages = NotificationMessages.EveningNotificationMessages(name, balance)
+    }
+
+    NotificationService.configureNotifications()
+
+    PushNotification.localNotificationSchedule({
+      id: '1',
+      title: "Budget Reminder!",
+      message: ArrayHelper.randomValue(messages),
+      playSound: false,
+      date: dateToNotify
+    })
+  },
+
+  cancelNotificationMessage: function(nid) {
+    PushNotification.cancelLocalNotifications({id: nid})
+  }
+}
+
+/*
+class NotificationService {
 
   constructor(type, balance, name, cancel = false) {
 
@@ -127,5 +167,7 @@ class BudgetNotifications {
     }
 	}
 }
+*/
 
-module.exports = BudgetNotifications
+
+module.exports = NotificationService

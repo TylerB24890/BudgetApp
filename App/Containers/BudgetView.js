@@ -1,7 +1,5 @@
 // Core
 import React from 'react'
-import SplashScreen from 'react-native-smart-splash-screen'
-import { View, SectionList, Text } from 'react-native'
 import { connect } from 'react-redux'
 
 // Utilities
@@ -14,9 +12,11 @@ import moment from 'moment'
 import ExpenseService from '../Services/ExpenseService'
 import CategoryService from '../Services/CategoryService'
 import SettingsService from '../Services/SettingsService'
-import BudgetNotifications from '../Services/BudgetNotifications'
+import NotificationService from '../Services/NotificationService'
 
 // Components
+import SplashScreen from 'react-native-smart-splash-screen'
+import { View, SectionList, Text } from 'react-native'
 import GestureRecognizer, { swipeDirections } from '../Components/GestureRecognizer'
 import BudgetBalance from '../Components/BudgetBalance'
 import BudgetItem from '../Components/BudgetItem'
@@ -24,7 +24,6 @@ import EmptyBudget from '../Components/EmptyBudget'
 
 // Styles
 import styles from './Styles/BudgetViewStyle'
-
 
 let starting = 0
 
@@ -106,20 +105,7 @@ class BudgetView extends React.PureComponent {
 			new: newUser,
     })
 
-		if(startComp !== 0 && (((startComp - total) / startComp) * 100) < 20) {
-			new BudgetNotifications('low', (startComp - total), user)
-		}
-
-		if(moment().isoWeekday() == 5 && moment().hour() >= 15) {
-			new BudgetNotifications('friday', false, false, false, true)
-			new BudgetNotifications('evening', false, false, false, true)
-			new BudgetNotifications('morning', (startComp - total), user)
-		} else if(moment().isoWeekday() == 4 && moment().hour() >= 15){
-			new BudgetNotifications('thursday', false, false, false, true)
-		} else {
-			new BudgetNotifications('thursday', (startComp - total), user)
-			new BudgetNotifications('friday', (startComp - total), user)
-		}
+		NotificationService.scheduleNotificationMessage(user, (startComp - total))
 	}
 
   /**

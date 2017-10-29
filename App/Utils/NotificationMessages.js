@@ -32,7 +32,9 @@ let NotificationMessages = {
       "Did you update your budget today? Do it now!"
     ]
 
-    if(balance !== 0) {
+    if(name !== '' && name !== false && balance !== 0) {
+      returnArr.push("Good evening, " + name + "! Your balance today is " + CurrencyFormat(balance) + ". Is it up to date?")
+    } else if(balance !== 0) {
       returnArr.push("Good evening! Your balance today is " + CurrencyFormat(balance) + ". Did you update your expenses today?")
     }
 

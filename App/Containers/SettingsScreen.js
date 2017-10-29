@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 // Services
 import SettingsService from '../Services/SettingsService'
-import BudgetNotifications from '../Services/BudgetNotifications'
 
 // Components
 import { Container, Content, Text } from 'native-base'
@@ -65,7 +64,6 @@ class SettingsScreen extends Component {
     var newUser = SettingsService.newSettings(id, user, budgetName, starting)
 
 		if(this.state.new && newUser) {
-			new BudgetNotifications('morning', starting, starting, user)
 			this.props.navigation.navigate('AddItemScreen', { new: false })
 		}
 
