@@ -29,7 +29,7 @@ export default class BudgetItem extends React.Component {
 
     return (
       <View>
-        <TouchableHighlight onPress={() => this._navigateToEdit()} underlayColor="#34495e">
+        <TouchableHighlight onPress={() => this._navigateToEdit()} underlayColor="#bdc3c7">
           <View style={styles.row}>
             <View style={styles.item}>
               <Text style={[styles.itemTitle, styles.label]}>

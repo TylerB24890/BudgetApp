@@ -25,7 +25,7 @@ class AboutScreen extends Component {
 
 					<View style={styles.screenHeader}>
 						<View style={styles.aboutContent}>
-							<H1 style={styles.screenTitle}>BudgetDown</H1>
+							<H1 style={styles.screenTitle}>Sumthing</H1>
 							<View>
 								<TouchableOpacity style={styles.aboutLink} onPress={() => this._handleLink('http://tylerb.me')}>
 									<Text style={styles.aboutMetaText}><Text style={styles.aboutMetaTextBold}>Author:</Text> Tyler Bailey - {new Date().getFullYear()}</Text>
@@ -47,7 +47,7 @@ class AboutScreen extends Component {
 					</View>
 
 					<View style={[styles.aboutContent, styles.aboutContentContainer]}>
-						<Text style={styles.aboutText}>BudgetDown is 100% open source and is available for download or modification through the GitHub link (icon) provided above.</Text>
+						<Text style={styles.aboutText}>Sumthing is 100% open source and is available for download or modification through the GitHub link (icon) provided above.</Text>
 					</View>
 
 					<View style={[styles.aboutContent, styles.aboutContentContainer]}>

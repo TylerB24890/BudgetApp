@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   label: {
     textAlign: 'center',
-    color: '#FFF',
+    color: '#333',
     fontSize: 16
   },
   listContent: {
@@ -18,7 +18,7 @@ export default StyleSheet.create({
   sectionHeader: {
     marginTop: 0,
     marginBottom: 10,
-    backgroundColor: '#34495e',
+    backgroundColor: '#1abc9c',
     paddingVertical: 10,
     paddingHorizontal: 15
   },

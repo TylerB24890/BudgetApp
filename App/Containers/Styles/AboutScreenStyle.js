@@ -11,13 +11,13 @@ export default StyleSheet.create({
 		marginTop: 15
 	},
 	aboutText: {
-		color: '#FFF',
+		color: '#333',
 		marginBottom: 15,
 		fontSize: 15,
 		textAlign: 'center'
 	},
 	aboutTextBold: {
-		color: '#FFF',
+		color: '#333',
 		fontWeight: 'bold'
 	},
 	aboutLink: {
@@ -25,12 +25,12 @@ export default StyleSheet.create({
 		paddingVertical: 10
 	},
 	aboutMetaText: {
-		color: '#FFF',
+		color: '#333',
 		fontSize: 14,
 	},
 	aboutMetaTextBold: {
 		fontWeight: 'bold',
-		color: '#FFF',
+		color: '#333',
 		fontSize: 14
 	},
 	socialIcons: {
@@ -39,7 +39,7 @@ export default StyleSheet.create({
 		flexDirection: 'row'
 	},
 	aboutMetaIcon: {
-		color: '#bdc3c7',
+		color: '#e74c3c',
 		marginHorizontal: 10,
 		fontSize: 26
 	}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Animated, View, Easing, TouchableOpacity } from 'react-native'
+import { Text, Animated, View, Easing, TouchableOpacity, Image } from 'react-native'
 import { DrawerNavigator, StackNavigator } from 'react-navigation'
 
 import HeaderHomeIcon from '../Components/HeaderHomeIcon'
@@ -184,7 +184,6 @@ const PrimaryNav = StackNavigator({
   EditItemScreen: {
     screen: paramsToProps(EditItemScreen),
     navigationOptions: ({navigation}) => ({
-      title: 'Edit Expense',
 			headerLeft: (
 				<HeaderBackIcon navigation={navigation} />
 			),
@@ -200,6 +199,9 @@ const PrimaryNav = StackNavigator({
 		gesturesEnabled: true,
     headerStyle: styles.header,
     headerTintColor: '#ecf0f1',
+		headerTitle: (
+			<Image style={{width: 95, height: 40}} source={require('../Images/app-logo.png')} />
+		),
     headerLeft: (
 			<TouchableOpacity style={styles.headerIcon} onPress={() => { if(navigation.state.index === 0) {
 				navigation.navigate('DrawerOpen')

@@ -10,7 +10,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
 		borderWidth: .5,
-		borderColor: '#2ecc71',
+		borderColor: '#2c3e50',
 		backgroundColor: 'transparent',
   },
   item: {
@@ -18,8 +18,8 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
   },
   itemTitle: {
-    fontWeight: 'bold',
-    color: '#FFF',
+    fontWeight: '500',
+    color: '#333',
     fontSize: 16,
     flex: 1,
 		textAlign: 'left'
@@ -28,17 +28,17 @@ export default StyleSheet.create({
     flex: .56,
   },
 	itemDate: {
-		color: '#bdc3c7',
+		color: '#7f8c8d',
 	},
   itemCost: {
-    fontWeight: 'normal',
+    fontWeight: '300',
     textAlign: 'right',
-		color: '#ecf0f1',
+		color: '#333',
 		fontSize: 30
   },
   label: {
     textAlign: 'left',
-    color: '#ecf0f1',
+    color: '#333',
     fontSize: 22
   },
 })

@@ -34,7 +34,7 @@ const ApplicationStyles = {
     screenTitle: {
       fontSize: 22,
       textAlign: 'center',
-      fontWeight: 'normal',
+      fontWeight: '600',
       flex: 1,
       alignItems: 'center',
       color: '#333'
