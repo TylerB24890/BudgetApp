@@ -11,12 +11,12 @@ export default StyleSheet.create({
 	},
 	closeButtonText: {
 		fontSize: 22,
-		color: '#FFF',
+		color: '#333',
 		textAlign: 'right'
 	},
 	closeButton: {
 		fontSize: 54,
-		color: '#FFF',
+		color: '#333',
 		textAlign: 'right',
 		marginRight: 20,
 	}

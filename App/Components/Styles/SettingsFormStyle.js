@@ -13,9 +13,9 @@ export default StyleSheet.create({
   },
 	smallLabel: {
 		fontSize: 12.5,
-		color: 'rgba(255,255,255,.6)'
+		color: 'rgba(51,51,51,.6)'
 	},
   label: {
-    color: 'rgba(255,255,255,.6)'
+    color: 'rgba(51,51,51,.6)'
   }
 })

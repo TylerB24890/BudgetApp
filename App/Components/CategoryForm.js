@@ -85,12 +85,12 @@ export default class CategoryForm extends React.Component {
           <Container style={styles.form}>
 						{errorMessage}
             <Item floatingLabel error={this.state.error} success={this.state.success}>
-              <Label style={{color: 'rgba(255,255,255,.6)'}}>Category name</Label>
+              <Label style={{color: 'rgba(51,51,51,.6)'}}>Category name</Label>
               <Input
                 value={this.state.catTitle}
                 editable={true}
                 onChangeText={(text) => this.setState({catTitle: text})}
-                style={{color: '#FFF'}}
+                style={{color: '#333'}}
                 autoFocus={true}
               />
             </Item>

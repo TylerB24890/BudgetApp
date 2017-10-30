@@ -48,34 +48,34 @@ export default class SettingsForm extends React.Component {
         <Content scrollEnabled={false}>
           <Container style={styles.form}>
             <Item floatingLabel>
-              <Label style={{color: 'rgba(255,255,255,.6)'}}>What should we call you? <Text style={styles.smallLabel}>(optional)</Text></Label>
+              <Label style={{color: 'rgba(51,51,51,.6)'}}>What should we call you? <Text style={styles.smallLabel}>(optional)</Text></Label>
               <Input
 									ref="user"
                   value={this.state.user}
                   editable={true}
                   onChangeText={(text) => this.setState({user: text})}
-                  style={{color: '#FFF'}}
+                  style={{color: '#333'}}
               />
             </Item>
 						<Item floatingLabel style={{marginTop: 30}}>
-              <Label style={{color: 'rgba(255,255,255,.6)'}}>Name this budget <Text style={styles.smallLabel}>(optional)</Text></Label>
+              <Label style={{color: 'rgba(51,51,51,.6)'}}>Name this budget <Text style={styles.smallLabel}>(optional)</Text></Label>
               <Input
 									ref="budgetName"
                   value={this.state.budgetName}
                   editable={true}
                   onChangeText={(text) => this.setState({budgetName: text})}
-                  style={{color: '#FFF'}}
+                  style={{color: '#333'}}
               />
             </Item>
             <Item floatingLabel style={{marginTop: 30}}>
-              <Label style={{color: 'rgba(255,255,255,.6)'}}>Starting balance <Text style={styles.smallLabel}>(optional)</Text></Label>
-              <Icon active name="logo-usd" style={{color: 'rgba(255,255,255,.6)', fontSize: 18}} />
+              <Label style={{color: 'rgba(51,51,51,.6)'}}>Starting balance <Text style={styles.smallLabel}>(optional)</Text></Label>
+              <Icon active name="logo-usd" style={{color: 'rgba(51,51,51,.6)', fontSize: 18}} />
               <Input
 									ref="starting"
                   value={this.state.starting}
                   editable={true}
                   onChangeText={(text) => this.setState({starting: text})}
-                  style={{color: '#FFF'}}
+                  style={{color: '#333'}}
                   keyboardType="numeric"
                 />
             </Item>

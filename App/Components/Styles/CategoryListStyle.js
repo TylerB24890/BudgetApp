@@ -13,7 +13,7 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
   },
   listItemText: {
-    color: '#FFF',
+    color: '#333',
     marginLeft: 20,
     fontSize: 20
   }
