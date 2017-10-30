@@ -2,7 +2,7 @@ import PushNotification from 'react-native-push-notification'
 import ArrayHelper from '../Utils/ArrayHelper'
 import moment from 'moment'
 
-import NotificationMessages from '../Fixtures/NotificationMessages'
+import NotificationMessages from '../Utils/NotificationMessages'
 
 let NotificationService = {
   configureNotifications: function () {
