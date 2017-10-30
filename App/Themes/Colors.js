@@ -5,7 +5,7 @@ const colors = {
   active: '#2c3e50',
   inactive: '#34495e',
   positive: '#16a085',
-  negative: '#c0392b',
+  negative: '#e74c3c',
   error: '#e74c3c',
   success: '#2ecc71'
 }

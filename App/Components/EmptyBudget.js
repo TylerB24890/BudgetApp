@@ -20,24 +20,23 @@ export default class EmptyBudget extends Component {
       <Container style={styles.container}>
         <Content scrollEnabled={false}>
           <Text style={[styles.emptyListText, styles.welcome]}>
-            So, you're broke too, huh?
+            Welcome to Sumthing!
           </Text>
 
           <Text style={[styles.emptyListText, styles.help]}>
-            Have a hard time managing your expenses?{"\n"}
-            <Text style={styles.small}>So do we.</Text>
+            A budgeting app designed to be simple{'\n'}<Text style={styles.small}>and effective</Text>
           </Text>
 
           <Text style={[styles.emptyListText, styles.help]}>
-            This application is designed to help you get your shit together, financially.
+            Simply enter a starting balance and start tracking your expenses. You can enter an expense on the go by swiping left from the main screen.
           </Text>
 
           <Text style={[styles.emptyListText, styles.help]}>
-            Categorize your expenses and{"\n"}let the app do the math.{"\n"}{"\n"}<Text style={styles.small}>Because math is hard.</Text>
+            Take it a step further and categorize your expenses to get a total for each category.
           </Text>
 
           <Content style={{marginTop: 30}}>
-            <BudgetButton block type="go" onPress={() => this.props.navigation.navigate('SettingsScreen', { new: this.props.new })} text="Let's do this." />
+            <BudgetButton block type="go" onPress={() => this.props.navigation.navigate('SettingsScreen', { new: this.props.new })} text="Get started" />
           </Content>
         </Content>
       </Container>

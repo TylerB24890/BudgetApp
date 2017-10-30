@@ -10,7 +10,7 @@ export default class SettingsForm extends React.Component {
 
     this.state = {
       id: this.props.id,
-      starting: (typeof this.props.starting !== 'undefined' && this.props.starting > 0 ? this.props.starting.toString() : ''),
+      starting: (typeof this.props.starting !== 'undefined' && this.props.starting > 0 && this.props.starting !== '' ? this.props.starting.toString() : ''),
       user: this.props.user,
 			budgetName: this.props.budgetName
     }
@@ -19,7 +19,7 @@ export default class SettingsForm extends React.Component {
 	componentDidMount () {
 		this.setState({
 			id: this.props.id,
-			starting: (typeof this.props.starting !== 'undefined' && this.props.starting > 0 ? this.props.starting.toString() : ''),
+			starting: (typeof this.props.starting !== 'undefined' && this.props.starting > 0 && this.props.starting !== '' ? this.props.starting.toString() : ''),
 			user: this.props.user,
 			budgetName: this.props.budgetName
 		})

@@ -10,7 +10,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
 		borderWidth: .5,
-		borderColor: '#2c3e50',
+		borderColor: '#16a085',
 		backgroundColor: 'transparent',
   },
   item: {
@@ -33,7 +33,7 @@ export default StyleSheet.create({
   itemCost: {
     fontWeight: '300',
     textAlign: 'right',
-		color: '#333',
+		color: '#e74c3c',
 		fontSize: 30
   },
   label: {
