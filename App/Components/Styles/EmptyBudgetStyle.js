@@ -9,13 +9,13 @@ export default StyleSheet.create({
     paddingHorizontal: 15,
   },
   emptyListText: {
-    color: '#FFF',
+    color: '#333',
     textAlign: 'center'
   },
   welcome: {
-    fontSize: 24,
+    fontSize: 25,
     marginTop: 10,
-    fontWeight: 'bold',
+    fontWeight: 'normal',
     marginBottom: 10
   },
   help: {
@@ -24,10 +24,10 @@ export default StyleSheet.create({
   },
   blockText: {
     flex: 1,
-    color: '#FFF'
+    color: '#333'
   },
   button: {
-    backgroundColor: '#16a085',
+    backgroundColor: '#c0392b',
     marginTop: 50,
   },
   buttonText: {
@@ -37,6 +37,6 @@ export default StyleSheet.create({
 	small: {
 		fontSize: 15,
 		fontStyle: 'italic',
-		color: '#FFF'
+		color: '#333'
 	}
 })

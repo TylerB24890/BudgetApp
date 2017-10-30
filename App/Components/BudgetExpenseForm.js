@@ -136,24 +136,24 @@ export default class BudgetExpenseForm extends Component {
           <Content>
 							{errors}
               <Item floatingLabel style={styles.inputGroup} error={this.state.titleError} success={this.state.titleSuccess}>
-                <Label style={{color: 'rgba(255,255,255,.6)'}}>What are you buying?</Label>
+                <Label style={{color: 'rgba(51,51,51,.6)'}}>What are you buying?</Label>
                 <Input
                   value={this.state.title}
                   editable={true}
                   onChangeText={(text) => this.setState({title: text})}
-                  style={{color: '#FFF'}}
+                  style={{color: '#333'}}
 									autoFocus={this.state.autoFocus}
                 />
               </Item>
 
               <Item floatingLabel style={styles.inputGroup} error={this.state.costError} success={this.state.costSuccess}>
-                <Label style={{color: 'rgba(255,255,255,.6)'}}>How much does it cost?</Label>
-                <Icon active name="logo-usd" style={{color: 'rgba(255,255,255,.6)', fontSize: 16}} />
+                <Label style={{color: 'rgba(51,51,51,.6)'}}>How much does it cost?</Label>
+                <Icon active name="logo-usd" style={{color: 'rgba(51,51,51,.6)', fontSize: 16}} />
                 <Input
                   value={this.state.cost !== "0.00" ? this.state.cost : ""}
                   onChangeText={(text) => this.setState({cost: text})}
                   keyboardType="numeric"
-                  style={{color: '#FFF'}}
+                  style={{color: '#333'}}
                 />
               </Item>
 
@@ -176,12 +176,12 @@ export default class BudgetExpenseForm extends Component {
 												justifyContent: 'flex-end'
 											},
 											placeholderText: {
-												color: 'rgba(255,255,255,.6)',
+												color: 'rgba(51,51,51,.6)',
 												fontSize: 17,
 												textAlign: 'left',
 											},
 											dateText: {
-												color: '#FFF',
+												color: '#333',
 												textAlign: 'left',
 												fontSize: 17
 											}

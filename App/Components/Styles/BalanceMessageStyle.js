@@ -6,7 +6,7 @@ export default StyleSheet.create({
 		paddingHorizontal: 10
   },
 	messageText: {
-		color: '#e74c3c',
+		color: '#333',
 		fontSize: 14,
 		marginTop: 15,
 		marginBottom: 5,
@@ -17,6 +17,6 @@ export default StyleSheet.create({
 		color: '#e74c3c',
 	},
 	messageTextWhite: {
-		color: '#bdc3c7'
+		color: '#2c3e50'
 	}
 })

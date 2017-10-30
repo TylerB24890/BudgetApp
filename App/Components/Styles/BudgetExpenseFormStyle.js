@@ -9,21 +9,22 @@ export default StyleSheet.create({
   },
   inputGroup: {
     marginVertical: 10,
+		borderBottomColor: 'rgba(80,80,80,.5)'
   },
   input: {
     backgroundColor: Colors.background,
-    color: '#FFF',
+    color: '#333',
   },
 	smallLabel: {
 		fontSize: 12.5,
-		color: 'rgba(255,255,255,.6)'
+		color: 'rgba(51,51,51,.6)'
 	},
 	datePickerLabel: {
 		paddingBottom: 15,
 		marginTop: 15,
 		marginBottom: 15,
-		borderBottomWidth: 2,
-		borderBottomColor: '#777E8B'
+		borderBottomWidth: 1.5,
+		borderBottomColor: 'rgba(80,80,80,.3)'
 	},
   buttonContainer: {
     marginTop: 15,

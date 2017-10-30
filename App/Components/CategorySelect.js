@@ -18,7 +18,7 @@ export default class CategorySelect extends Component {
 
     this.state = {
       type: this.props.type,
-      selectColor: (this.props.type === '' ? 'rgba(255,255,255,.6)' : '#FFF'),
+      selectColor: (this.props.type === '' ? 'rgba(51,51,51,.6)' : '#333'),
       success: false,
       error: false,
 			modalVisible: false
@@ -27,7 +27,7 @@ export default class CategorySelect extends Component {
 
 	_setModalVisible(visible, newCat) {
 		var cat = this.state.type
-		var selectColor = 'rgba(255,255,255,.6)'
+		var selectColor = 'rgba(51,51,51,.6)'
 
 		if(newCat) {
 			this._updateExpenseType(newCat)
@@ -45,7 +45,7 @@ export default class CategorySelect extends Component {
     if(value !== 'key0' && value !== '') {
       this.setState({
         type: value,
-        selectColor: '#FFF',
+        selectColor: '#333',
         success: true,
 				modalVisible: false,
       }, this.props.categoryHandler(value))
@@ -75,7 +75,7 @@ export default class CategorySelect extends Component {
     return (
 			<View>
 				<InputGroup
-	        style={{marginTop: 15}}
+	        style={{marginTop: 15, borderBottomWidth: 2, borderBottomColor: 'rgba(80,80,80,.25)'}}
 	        error={this.state.error}
 	        success={this.state.success}
 	      >
@@ -96,8 +96,8 @@ export default class CategorySelect extends Component {
 	        </Picker>
 	      </InputGroup>
 				<Button iconLeft transparent onPress={() => { this._setModalVisible(true) }}>
-					<Icon name="ios-add" style={{color: '#FFF', fontSize: 14}}/>
-					<Text style={{fontSize: 14, color: '#FFF'}}>New category</Text>
+					<Icon name="ios-add" style={{color: '#333', fontSize: 14}}/>
+					<Text style={{fontSize: 14, color: '#333'}}>New category</Text>
 				</Button>
 
 				<AddCategoryModal visible={this.state.modalVisible} modalHandler={(visible, newCat) => this._setModalVisible(visible, newCat)}/>

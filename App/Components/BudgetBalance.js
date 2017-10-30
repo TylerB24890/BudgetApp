@@ -46,11 +46,11 @@ export default class BudgetBalance extends Component {
       <View style={styles.screenHeader}>
         <View style={styles.starting}>
 					<TouchableOpacity onPress={() => this.props.navigation.navigate('SettingsScreen', { starting: this.state.starting })}>
-						<Text style={styles.screenTitle}>Starting Balance: <Text style={styles.starting}>{CurrencyFormat(this.state.starting)}</Text></Text>
+						<Text style={styles.screenTitle}>Starting Balance: <Text style={[styles.starting, {fontWeight: '600'}]}>{CurrencyFormat(this.state.starting)}</Text></Text>
 					</TouchableOpacity>
         </View>
         <View style={styles.available}>
-          <Text style={styles.screenTitle}>Available: <Text style={{color: this.state.balanceColor}}>{CurrencyFormat(this.state.balance)}</Text></Text>
+          <Text style={styles.screenTitle}>Available: <Text style={{color: this.state.balanceColor, fontWeight: '600'}}>{CurrencyFormat(this.state.balance)}</Text></Text>
         </View>
 
 				<BalanceMessage user={this.state.user} balance={this.state.balance} starting={this.state.starting} navigation={this.props.navigation} />

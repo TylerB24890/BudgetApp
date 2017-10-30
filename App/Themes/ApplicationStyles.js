@@ -27,17 +27,17 @@ const ApplicationStyles = {
       paddingTop: 15,
       marginBottom: 30,
       borderBottomWidth: 0.5,
-      borderBottomColor: '#FFF',
+      borderBottomColor: '#333',
       paddingBottom: 15,
       alignItems: 'center'
     },
     screenTitle: {
       fontSize: 22,
       textAlign: 'center',
-      fontWeight: 'bold',
+      fontWeight: 'normal',
       flex: 1,
       alignItems: 'center',
-      color: '#FFF'
+      color: '#333'
     },
   }
 }

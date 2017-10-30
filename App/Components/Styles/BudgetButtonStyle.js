@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   budgetButton: {
-    backgroundColor: '#1abc9c',
+    backgroundColor: '#16a085',
     paddingVertical: 10,
     paddingHorizontal: 10
   },
