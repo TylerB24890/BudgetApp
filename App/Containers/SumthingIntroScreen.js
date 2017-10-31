@@ -19,7 +19,7 @@ class SumthingIntroScreen extends Component {
     this.props.navigation.navigate('BudgetView', {new: data.new})
   }
 
-  _ondoneBtnHandle = () => {
+  _onDoneBtnHandle = () => {
 		const data = this.props.navigation.state.params
     this.props.navigation.navigate('BudgetView', {new: data.new})
   }
@@ -34,34 +34,6 @@ class SumthingIntroScreen extends Component {
   }
 
   render() {
-    const pageArray = [
-			{
-	      title: 'Manage your expenses',
-	      description: 'on the go and instantly by swiping left on the main screen',
-	      img: 'https://goo.gl/Bnc3XP',
-	      imgStyle: {
-	        height: 80 * 2.5,
-	        width: 109 * 2.5,
-	      },
-	      backgroundColor: '#16a085',
-	      fontColor: '#fff',
-	      level: 10,
-	    },
-			{
-	      title: 'Assign categories',
-	      description: 'to see how and where you are spending money',
-				img: 'https://goo.gl/Bnc3XP',
-	      imgStyle: {
-	        height: 80 * 2.5,
-	        width: 109 * 2.5,
-	      },
-	      backgroundColor: '#2ecc71',
-	      fontColor: '#fff',
-	      level: 10,
-	    },
-		]
-
-
     return (
 			<AppIntro>
 

@@ -27,6 +27,7 @@ const randomMessages = [
 	"Money doesn't grow on trees...\nor does it?",
 	"Money grows on the tree of persistence.",
 	"You have to spend money to make money",
+	"Save sumthing!",
 ]
 
 const tipMessages = [
@@ -69,7 +70,8 @@ const highMessages = [
   "You're rolling in the doh!",
   "Do you even need to budget?",
 	"There are people who have money\nand people who are rich.\nWhich one are you?",
-	"Mo' money, mo' problems"
+	"Mo' money, mo' problems",
+	"You've got SUMthing to give..."
 ]
 
 export const NewUserMessages = [

@@ -61,20 +61,23 @@ class BudgetView extends React.PureComponent {
 				AsyncStorage.setItem('newUser', "false")
 				this.props.navigation.navigate('SumthingIntroScreen', {new: true})
 			} else {
-				this.setState({new: false})
+				this.setState({
+					new: false
+				})
+
+				this._setupBudgetView()
 			}
 		})
-
-    this._setupBudgetView()
   }
 
+	/*
 	componentWillReceiveProps (nextProps) {
 		if(typeof nextProps.sort !== 'undefined' && nextProps.sort !== this.state.sort) {
 			this.setState({
 				sort: nextProps.sort
 			}, this._setupBudgetView())
 		}
-	}
+	}*/
 
 	_setupBudgetView () {
 		var startComp = 0
@@ -119,7 +122,7 @@ class BudgetView extends React.PureComponent {
 			new: newUser,
     })
 
-		//NotificationService.scheduleNotificationMessage(user, (startComp - total))
+		NotificationService.scheduleNotificationMessage(user, (startComp - total))
 	}
 
   /**
