@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, Animated, View, Easing, TouchableOpacity, Image } from 'react-native'
 import { DrawerNavigator, StackNavigator } from 'react-navigation'
+import SumthingIntroScreen from '../Containers/SumthingIntroScreen'
 
 import HeaderHomeIcon from '../Components/HeaderHomeIcon'
 import HeaderBackIcon from '../Components/HeaderBackIcon'
@@ -132,9 +133,8 @@ const DrawerStack = DrawerNavigator({
       )
     })
   },
-	/*
 	HelpScreen: {
-    screen: paramsToProps(HelpScreen),
+    screen: paramsToProps(SumthingIntroScreen),
     navigationOptions: ({navigation}) => ({
       title: 'Help',
 			headerRight: (
@@ -149,7 +149,7 @@ const DrawerStack = DrawerNavigator({
         <Icon name="ios-help-outline" size={30} color={focused ? activeColor : inactiveColor} />
       )
     })
-  },*/
+  },
 }, {
   drawerWidth: 250,
 	initialRouteName: 'BudgetView',
@@ -158,6 +158,7 @@ const DrawerStack = DrawerNavigator({
 // Main Navigator
 // Transitions screens in as modals
 const PrimaryNav = StackNavigator({
+  SumthingIntroScreen: { screen: SumthingIntroScreen },
   AboutScreen: { screen: AboutScreen },
   HelpScreen: { screen: HelpScreen },
   AddCategoryScreen: {
@@ -196,7 +197,7 @@ const PrimaryNav = StackNavigator({
   initialRouteName: 'DrawerStack',
 	mode: 'modal',
   navigationOptions: ({navigation}) => ({
-		gesturesEnabled: true,
+		gesturesEnabled: false,
     headerStyle: styles.header,
     headerTintColor: '#ecf0f1',
 		headerTitle: (

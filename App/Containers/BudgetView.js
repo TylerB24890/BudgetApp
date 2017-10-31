@@ -1,6 +1,7 @@
 // Core
 import React from 'react'
 import { connect } from 'react-redux'
+import { AsyncStorage } from 'react-native'
 
 // Utilities
 import BudgetCalculations from '../Utils/BudgetCalculations'
@@ -55,6 +56,15 @@ class BudgetView extends React.PureComponent {
 			delay: 500
 		})
 
+		AsyncStorage.getItem('newUser').then(value => {
+			if(value == undefined || typeof value == 'undefined' || value == null) {
+				AsyncStorage.setItem('newUser', "false")
+				this.props.navigation.navigate('SumthingIntroScreen', {new: true})
+			} else {
+				this.setState({new: false})
+			}
+		})
+
     this._setupBudgetView()
   }
 
@@ -81,8 +91,12 @@ class BudgetView extends React.PureComponent {
 			budgetName = setting.budgetName
     })
 
-		if(parseFloat(startComp) <= 0) {
-			newUser = true
+		if(typeof this.props.navigation.state.params !== 'undefined' && typeof this.props.navigation.state.params.new !== 'undefined') {
+			newUser = this.props.navigation.state.params.new
+		} else {
+			if(parseFloat(startComp) <= 0) {
+				newUser = true
+			}
 		}
 
     var data = ExpenseService.getAllExpenses()
@@ -105,7 +119,7 @@ class BudgetView extends React.PureComponent {
 			new: newUser,
     })
 
-		NotificationService.scheduleNotificationMessage(user, (startComp - total))
+		//NotificationService.scheduleNotificationMessage(user, (startComp - total))
 	}
 
   /**
