@@ -40,8 +40,9 @@ class SumthingIntroScreen extends Component {
   render() {
     return (
 			<Swiper
-				showButtons={true}
+				showButtons
 				activeDotColor="#ecf0f1"
+				loop={false}
 			>
 
         <View style={[styles.slide,{ backgroundColor: '#1abc9c' }]}>
