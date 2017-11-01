@@ -69,6 +69,8 @@ class SettingsScreen extends Component {
 
 		this.setState({
 			user:user,
+			budgetName: budgetName,
+			starting: starting,
 			updated: true,
 			new: false
 		})

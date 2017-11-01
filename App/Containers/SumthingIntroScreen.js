@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { Image, TouchableOpacity } from 'react-native'
 import { Container, View, Text, H1, Footer } from 'native-base'
-import AppIntro from 'react-native-app-intro'
+import Swiper from 'react-native-swiper'
 
 // Styles
 import styles from './Styles/SumthingIntroScreenStyle'
@@ -39,7 +39,10 @@ class SumthingIntroScreen extends Component {
 
   render() {
     return (
-			<AppIntro>
+			<Swiper
+				showButtons={true}
+				activeDotColor="#ecf0f1"
+			>
 
         <View style={[styles.slide,{ backgroundColor: '#1abc9c' }]}>
 					<View level={15} style={styles.slideImageContainer}>
@@ -53,7 +56,7 @@ class SumthingIntroScreen extends Component {
 					</View>
 					<View style={styles.skipContainer}>
 						<TouchableOpacity onPress={() => this._onSkipBtnHandle()}>
-							<Text style={styles.skip}>Skip <Text style={styles.swipe}>(1/4)</Text></Text>
+							<Text style={styles.skip}>Skip</Text>
 						</TouchableOpacity>
 					</View>
         </View>
@@ -71,7 +74,7 @@ class SumthingIntroScreen extends Component {
 					</View>
 					<View style={{marginTop: 8}}>
 						<TouchableOpacity onPress={() => this._onSkipBtnHandle()}>
-							<Text style={styles.skip}>Skip <Text style={styles.swipe}>(2/4)</Text></Text>
+							<Text style={styles.skip}>Skip</Text>
 						</TouchableOpacity>
 					</View>
         </View>
@@ -89,7 +92,7 @@ class SumthingIntroScreen extends Component {
 					</View>
 					<View style={styles.skipContainer}>
 						<TouchableOpacity onPress={() => this._onSkipBtnHandle()}>
-							<Text style={styles.skip}>Skip <Text style={styles.swipe}>(3/4)</Text></Text>
+							<Text style={styles.skip}>Skip</Text>
 						</TouchableOpacity>
 					</View>
         </View>
@@ -111,7 +114,7 @@ class SumthingIntroScreen extends Component {
 						</TouchableOpacity>
 					</View>
         </View>
-      </AppIntro>
+      </Swiper>
     )
 
   }
