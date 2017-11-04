@@ -62,9 +62,7 @@ class BudgetView extends React.PureComponent {
 			} else {
 				this.setState({
 					new: false
-				})
-
-				this._setupBudgetView()
+				}, this._setupBudgetView())
 			}
 		})
   }
