@@ -168,10 +168,6 @@ class BudgetView extends React.PureComponent {
     )
   }
 
-  // Render a footer?
-  renderFooter = () =>
-    <Text style={[styles.label, styles.sectionHeader]}></Text>
-
   // Does each section need a footer?
   renderSectionFooter = () =>
     <View style={styles.sectionFooter}></View>
@@ -203,7 +199,6 @@ class BudgetView extends React.PureComponent {
 				keyExtractor={this.keyExtractor}
 				initialNumToRender={this.oneScreensWorth}
 				ListHeaderComponent={this.renderHeader}
-				ListFooterComponent={this.renderFooter}
 				ListEmptyComponent={this.renderEmpty}
 				renderSectionFooter={this.renderSectionFooter}
 			/>
