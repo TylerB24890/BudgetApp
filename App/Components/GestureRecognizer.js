@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ScrollView, PanResponder} from 'react-native';
+import { SectionList, PanResponder } from 'react-native';
 
 export const swipeDirections = {
   SWIPE_UP: 'SWIPE_UP',
@@ -100,7 +100,7 @@ class GestureRecognizer extends Component {
   }
 
   render() {
-    return (<ScrollView {...this.props} {...this._panResponder.panHandlers}/>);
+    return (<SectionList {...this.props} {...this._panResponder.panHandlers}/>);
   }
 };
 

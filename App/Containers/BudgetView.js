@@ -7,7 +7,6 @@ import { AsyncStorage } from 'react-native'
 import BudgetCalculations from '../Utils/BudgetCalculations'
 import BudgetObjectFormat from '../Utils/BudgetObjectFormat'
 import { CurrencyFormat } from '../Utils/CurrencyFormat'
-import moment from 'moment'
 
 // Services
 import ExpenseService from '../Services/ExpenseService'
@@ -198,21 +197,18 @@ class BudgetView extends React.PureComponent {
 				onSwipeLeft={() => this.props.navigation.navigate('AddItemScreen', { autoFocus: true })}
 				config={quickAddConfig}
 				style={styles.container}
-			>
-				<SectionList
-					renderSectionHeader={this.renderSectionHeader}
-					sections={this.state.data}
-					contentContainerStyle={styles.listContent}
-					data={this.state.data}
-					renderItem={this.renderItem.bind(this)}
-					keyExtractor={this.keyExtractor}
-					initialNumToRender={this.oneScreensWorth}
-					ListHeaderComponent={this.renderHeader}
-					ListFooterComponent={this.renderFooter}
-					ListEmptyComponent={this.renderEmpty}
-					renderSectionFooter={this.renderSectionFooter}
-				/>
-			</GestureRecognizer>
+				renderSectionHeader={this.renderSectionHeader}
+				sections={this.state.data}
+				contentContainerStyle={styles.listContent}
+				data={this.state.data}
+				renderItem={this.renderItem.bind(this)}
+				keyExtractor={this.keyExtractor}
+				initialNumToRender={this.oneScreensWorth}
+				ListHeaderComponent={this.renderHeader}
+				ListFooterComponent={this.renderFooter}
+				ListEmptyComponent={this.renderEmpty}
+				renderSectionFooter={this.renderSectionFooter}
+			/>
     )
   }
 }

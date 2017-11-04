@@ -67,11 +67,13 @@ export default class BudgetExpenseForm extends Component {
 
 		if(title == '' || typeof title == 'undefined') {
 			titleError = true
+		}
 
-			if(cost == '' || cost == 0 || typeof cost == 'undefined') {
-				costError = true
-			}
+		if(cost == '' || cost == 0 || typeof cost == 'undefined') {
+			costError = true
+		}
 
+		if(titleError || costError) {
 			this.setState({
 				titleError: titleError,
 				costError: costError
@@ -106,14 +108,19 @@ export default class BudgetExpenseForm extends Component {
 	_renderErrorMessages () {
 
 		let errorMsg = []
+		var error = false
 
 		if(this.state.titleError) {
 			errorMsg.push(<Text key="titleError" style={styles.errorText}>Enter a title for this expense.</Text>)
+			error = true
+		}
 
-			if(this.state.costError) {
-				errorMsg.push(<Text key="costError" style={styles.errorText}>Enter a cost for this expense.</Text>)
-			}
+		if(this.state.costError) {
+			errorMsg.push(<Text key="costError" style={styles.errorText}>Enter a cost for this expense.</Text>)
+			error = true
+		}
 
+		if(error) {
 			return (
 				<View style={styles.errorContainer}>
 					{errorMsg}
