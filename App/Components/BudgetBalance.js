@@ -24,21 +24,35 @@ export default class BudgetBalance extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-
+	componentDidMount () {
 		var color = this.state.balanceColor
 
-		if(nextProps.balance < 0) {
+		if(this.state.balance < 0) {
 			color = negativeColor
 		}
 
 		this.setState({
-	  	balance: nextProps.balance,
-	    starting: nextProps.starting,
-			user: nextProps.user,
-			budgetName: nextProps.budgetName,
 			balanceColor: color
-	  })
+		})
+	}
+
+  componentWillReceiveProps (nextProps) {
+
+		var color = this.state.balanceColor
+
+		if(nextProps.balance !== this.state.balance || nextProps.starting !== this.state.starting) {
+			if(nextProps.balance < 0) {
+				color = negativeColor
+			}
+			
+			this.setState({
+		  	balance: nextProps.balance,
+		    starting: nextProps.starting,
+				user: nextProps.user,
+				budgetName: nextProps.budgetName,
+				balanceColor: color
+		  })
+		}
   }
 
   render () {

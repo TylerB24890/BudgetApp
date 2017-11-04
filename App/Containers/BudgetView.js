@@ -16,8 +16,8 @@ import NotificationService from '../Services/NotificationService'
 
 // Components
 import SplashScreen from 'react-native-smart-splash-screen'
-import { View, SectionList, Text } from 'react-native'
-import GestureRecognizer, { swipeDirections } from '../Components/GestureRecognizer'
+import { View, Text } from 'react-native'
+import GestureRecognizer from '../Components/GestureRecognizer'
 import BudgetBalance from '../Components/BudgetBalance'
 import BudgetItem from '../Components/BudgetItem'
 import EmptyBudget from '../Components/EmptyBudget'
@@ -190,7 +190,7 @@ class BudgetView extends React.PureComponent {
 
 		const quickAddConfig = {
 			velocityThreshold: .3,
-			directionOffsetThreshold: 80
+			directionOffsetThreshold: 110
 		}
     return (
 			<GestureRecognizer
