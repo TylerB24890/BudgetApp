@@ -25,7 +25,16 @@ import EmptyBudget from '../Components/EmptyBudget'
 // Styles
 import styles from './Styles/BudgetViewStyle'
 
+// Get the intital user settings
+let settings = SettingsService.getAllSettings()
+// Get the intital expenses (formatted)
+let expenses = new BudgetObjectFormat(ExpenseService.getAllExpenses(), 'cost')
 let starting = 0
+let total = 0
+let balance = 0
+let user = ''
+let budgetName = ''
+let newUser = true
 
 class BudgetView extends React.PureComponent {
 
@@ -33,14 +42,41 @@ class BudgetView extends React.PureComponent {
 
     super(props)
 
+		// Check if the user has been on the app before
+		AsyncStorage.getItem('newUser').then(value => {
+			// If not, redirect them to the app intro slider
+			if(value == undefined || typeof value == 'undefined' || value == null) {
+				AsyncStorage.setItem('newUser', "false")
+				this.props.navigation.navigate('SumthingIntroScreen', {new: true})
+			} else {
+				newUser = false
+			}
+		})
+
+		// Get the total for the expenses
+    total = BudgetCalculations.expenseTotals(expenses)
+
+		// Parse the settings and get initial data
+		if(typeof settings !== 'undefined' && settings !== null) {
+			settings.forEach(function(setting) {
+	      starting = setting.starting
+				user = setting.name
+				budgetName = setting.budgetName
+	    })
+		}
+
+		balance = (starting - total)
+
+		// Set initial app state (calculate the balance)
     this.state = {
       starting: starting,
-      spending: 0,
-      balance: 0,
+      spending: total,
+      balance: balance,
       updated: false,
-      data: [],
-			user: '',
-			new: true,
+			budgetName: budgetName,
+      data: expenses,
+			user: user,
+			new: newUser,
 			sort: 'cost'
     }
 
@@ -48,78 +84,54 @@ class BudgetView extends React.PureComponent {
   }
 
   componentDidMount () {
-
+		// Close the splash screen
 		SplashScreen.close({
 			animationType: SplashScreen.animationType.scale,
 			duration: 850,
 			delay: 500
 		})
 
-		AsyncStorage.getItem('newUser').then(value => {
-			if(value == undefined || typeof value == 'undefined' || value == null) {
-				AsyncStorage.setItem('newUser', "false")
-				this.props.navigation.navigate('SumthingIntroScreen', {new: true})
-			} else {
-				this.setState({
-					new: false
-				}, this._setupBudgetView())
-			}
-		})
+		this._setupBudgetView()
   }
 
-	/*
-	componentWillReceiveProps (nextProps) {
-		if(typeof nextProps.sort !== 'undefined' && nextProps.sort !== this.state.sort) {
-			this.setState({
-				sort: nextProps.sort
-			}, this._setupBudgetView())
-		}
-	}*/
-
+	/**
+	 * Setup the app state and budget overview data
+	 */
 	_setupBudgetView () {
-		var startComp = 0
-		var user = ''
-    var settings = {}
-    var total = 0
-		var budgetName = ''
-		var newUser = false
 
+		// Get the current settings
     settings = SettingsService.getAllSettings()
     settings.forEach(function(setting) {
-      startComp = setting.starting
+      starting = setting.starting
 			user = setting.name
 			budgetName = setting.budgetName
     })
 
-		if(typeof this.props.navigation.state.params !== 'undefined' && typeof this.props.navigation.state.params.new !== 'undefined') {
-			newUser = this.props.navigation.state.params.new
+		// Is this user new?
+		const navParams = this.props.navigation.state.params
+		if(typeof navParams !== 'undefined' && typeof navParams.new !== 'undefined') {
+			newUser = navParams.new
 		} else {
-			if(parseFloat(startComp) <= 0) {
+			if(parseFloat(starting) <= 0) {
 				newUser = true
 			}
 		}
 
-    var data = ExpenseService.getAllExpenses()
-    var formattedData = new BudgetObjectFormat(data, this.state.sort)
+		// Get new/updated expenses
+  	expenses = new BudgetObjectFormat(ExpenseService.getAllExpenses(), this.state.sort)
+  	total = BudgetCalculations.expenseTotals(expenses)
+		balance = (starting - total)
 
-    formattedData.forEach(function(item) {
-			var itemData = item.data
-			itemData.forEach(function(expense) {
-				total += expense.cost
-			})
-    })
-
+		// Set the state
     this.setState({
-      starting: startComp,
-      data: formattedData,
+      starting: starting,
+      data: expenses,
       spending: total,
-      balance: (startComp - total),
+      balance: balance,
 			user: user,
 			budgetName: budgetName,
 			new: newUser,
-    })
-
-		NotificationService.scheduleNotificationMessage(user, (startComp - total))
+    }, NotificationService.scheduleNotificationMessage(user, balance))
 	}
 
   /**
@@ -144,12 +156,12 @@ class BudgetView extends React.PureComponent {
    */
   renderSectionHeader = ({section}) => {
     var title = CategoryService.getCategoryTitle(section.key)
-    var total = BudgetCalculations.sectionHeaderTotal(this.state.data, section.key)
+    var catTotal = BudgetCalculations.sectionHeaderTotal(this.state.data, section.key)
 
 		if(title.length > 1) {
 			return (
 	      <View style={styles.sectionHeader}>
-	        <Text style={styles.headerText}>{title}: <Text style={styles.itemCost}>{CurrencyFormat(total)}</Text></Text>
+	        <Text style={styles.headerText}>{title}: <Text style={styles.itemCost}>{CurrencyFormat(catTotal)}</Text></Text>
 	      </View>
 	    )
 		} else {

@@ -16,30 +16,9 @@ export default class SettingsForm extends React.Component {
     }
   }
 
-	componentDidMount () {
-		this.setState({
-			id: this.props.id,
-			starting: (typeof this.props.starting !== 'undefined' && this.props.starting > 0 && this.props.starting !== '' ? this.props.starting.toString() : ''),
-			user: this.props.user,
-			budgetName: this.props.budgetName
-		})
-	}
-
-  componentWillReceiveProps (nextProps) {
-    if(nextProps.starting !== this.state.starting) {
-      this.setState({
-        id: nextProps.id,
-        starting: nextProps.starting.toString(),
-        user: nextProps.user,
-				budgetName: nextProps.budgetName
-      })
-    }
-  }
-
   _submitSettingsForm () {
 		this.props.handler(this.state.id, this.state.user, this.state.budgetName, parseFloat(this.state.starting))
   }
-
 
   render () {
 

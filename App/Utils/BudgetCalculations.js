@@ -16,6 +16,19 @@ let BudgetCalculations = {
     })
 
     return sectionTotal
+  },
+
+  expenseTotals: function(data) {
+    var total = 0
+
+    data.forEach(function(item) {
+			var itemData = item.data
+			itemData.forEach(function(expense) {
+				total += expense.cost
+			})
+    })
+
+    return total
   }
 }
 

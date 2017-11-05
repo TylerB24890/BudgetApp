@@ -12,59 +12,49 @@ import SettingsForm from '../Components/SettingsForm'
 // Styles
 import styles from './Styles/SettingsScreenStyle'
 
+let settings = SettingsService.getAllSettings()
+let id = ''
+let user = ''
+let starting = 0
+let budgetName = ''
+let newUser = true
+
 class SettingsScreen extends Component {
 
   constructor(props) {
     super(props)
 
+		const navParams = this.props.navigation.state.params
+
+		settings = SettingsService.getAllSettings()
+
+		if(typeof settings !== 'undefined' && settings !== null) {
+			newUser = false
+
+			settings.forEach(function(setting) {
+	      id = setting.id
+	      starting = parseFloat(setting.starting).toFixed(2)
+	      user = setting.name
+				budgetName = setting.budgetName
+	    })
+		}
+
     this.state = {
-      id: '',
-      user: '',
-      starting: 0,
-			budgetName: '',
+      id: id,
+      user: user,
+      starting: starting,
+			budgetName: budgetName,
       udpated: false,
-			new: false
+			new: newUser
     }
   }
 
-  componentDidMount () {
-    var starting = 0
-    var user = ''
-    var id = ''
-		var budgetName = ''
-		var updated = false
-
-		let settings = SettingsService.getAllSettings()
-
-    settings.forEach(function(setting) {
-      id = setting.id
-      starting = parseFloat(setting.starting).toFixed(2)
-      user = setting.name
-			budgetName = setting.budgetName
-    })
-
-    this.setState({
-      id: id,
-      starting: starting,
-      user: user,
-			budgetName: budgetName,
-			new: this.props.new
-    })
-  }
-
-	componentWillReceiveProps (nextProps) {
-		if(nextProps.new !== this.state.new) {
-			this.setState({
-				new: nextProps.new
-			})
-		}
-	}
-
   _handleSettingsSubmission(id, user, budgetName, starting) {
-    var newUser = SettingsService.newSettings(id, user, budgetName, starting)
+    var userData = SettingsService.newSettings(id, user, budgetName, starting)
+		newUser = false
 
-		if(this.state.new && newUser) {
-			this.props.navigation.navigate('AddItemScreen', { new: false })
+		if(this.state.new && userData) {
+			this.props.navigation.navigate('AddItemScreen', { new: newUser })
 		}
 
 		this.setState({
@@ -72,7 +62,7 @@ class SettingsScreen extends Component {
 			budgetName: budgetName,
 			starting: starting,
 			updated: true,
-			new: false
+			new: newUser
 		})
   }
 
