@@ -42,17 +42,6 @@ class BudgetView extends React.PureComponent {
 
     super(props)
 
-		// Check if the user has been on the app before
-		AsyncStorage.getItem('newUser').then(value => {
-			// If not, redirect them to the app intro slider
-			if(value == undefined || typeof value == 'undefined' || value == null) {
-				AsyncStorage.setItem('newUser', "false")
-				this.props.navigation.navigate('SumthingIntroScreen', {new: true})
-			} else {
-				newUser = false
-			}
-		})
-
 		// Get the total for the expenses
     total = BudgetCalculations.expenseTotals(expenses)
 
@@ -91,13 +80,24 @@ class BudgetView extends React.PureComponent {
 			delay: 500
 		})
 
-		this._setupBudgetView()
+		// Check if the user has been on the app before
+		AsyncStorage.getItem('newUser').then(value => {
+			// If not, redirect them to the app intro slider
+			if(value == undefined || typeof value == 'undefined' || value == null) {
+				AsyncStorage.setItem('newUser', "false")
+				this.props.navigation.navigate('SumthingIntroScreen', {new: true})
+			} else {
+				this._setupBudgetView()
+			}
+		})
   }
 
 	/**
 	 * Setup the app state and budget overview data
 	 */
 	_setupBudgetView () {
+
+		newUser = false
 
 		// Get the current settings
     settings = SettingsService.getAllSettings()
