@@ -1,3 +1,5 @@
+const numeral = require('numeral')
+
 export const CurrencyFormat = (num) => {
-  return num.toLocaleString('en-US', { style: 'currency', currency: 'USD'})
+  return numeral(num).format('$0,0.00')
 }
