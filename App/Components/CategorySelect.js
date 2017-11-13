@@ -93,7 +93,7 @@ export default class CategorySelect extends Component {
 						headerStyle={{ backgroundColor: Colors.header }}
 						headerTitleStyle={{ color: '#FFF' }}
 						headerBackButtonTextStyle={{ color: '#FFF' }}
-						style={{ width:(Platform.OS === 'ios' ? undefined : Metrics.screenWidth)}}
+						style={{ width:(Platform.OS === 'ios' ? undefined : (Metrics.screenWidth - 30))}}
 					>
 	          {categoryDisplay}
 
