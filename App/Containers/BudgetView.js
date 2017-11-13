@@ -204,6 +204,7 @@ class BudgetView extends React.PureComponent {
 				config={quickAddConfig}
 				style={styles.container}
 				renderSectionHeader={this.renderSectionHeader}
+        stickySectionHeadersEnabled={true}
 				sections={this.state.data}
 				contentContainerStyle={styles.listContent}
 				data={this.state.data}
