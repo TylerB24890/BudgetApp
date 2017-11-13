@@ -49,7 +49,9 @@ export default class AddCategoryModal extends Component {
         <Modal
 					isVisible={this.state.modalVisible}
 					onModalShow={() => this.setState({modalVisible: true})}
-					onModalHide={() => this.setState({modalVisible: false})}
+					onModalHide={() => this._handleCloseModal(false)}
+					onBackButtonPress={() => this._handleCloseModal(false)}
+					animationOut={'zoomOutUp'}
 				>
 					<View style={[styles.modalContent, {flex: 1}]}>
 						<Button iconRight transparent onPress={() => this._handleCloseModal(false)} style={{alignSelf: 'flex-end', paddingTop: 10}}>
