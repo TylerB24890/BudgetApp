@@ -40,7 +40,7 @@ class SumthingIntroScreen extends Component {
   render() {
     return (
 			<Swiper
-				showButtons
+				showButtons={true}
 				activeDotColor="#ecf0f1"
 				loop={false}
 			>

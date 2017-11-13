@@ -7,7 +7,6 @@ export default StyleSheet.create({
   },
 	modalContent: {
 		backgroundColor: Colors.background,
-		paddingTop: 50,
 	},
 	closeButtonText: {
 		fontSize: 22,

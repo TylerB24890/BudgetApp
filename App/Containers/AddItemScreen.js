@@ -51,7 +51,7 @@ class AddItemScreen extends Component {
 
     return (
       <Container style={styles.container}>
-        <Content scrollEnabled={false}>
+        <Content>
           <BudgetExpenseForm autoFocus={this.state.autoFocus} id='' title='' cost='0.00' type={this.state.type} date='' handler={(title, type, cost, id, date) => this._handleNewExpense(title, type, cost, id, date)}/>
         </Content>
       </Container>

@@ -5,7 +5,8 @@ import CategoryService from '../Services/CategoryService'
 
 // Components
 import { Button, Icon, Text } from 'native-base'
-import { View, Modal } from 'react-native'
+import { View } from 'react-native'
+import Modal from 'react-native-modal'
 import CategoryForm from './CategoryForm'
 
 // Styles
@@ -46,10 +47,9 @@ export default class AddCategoryModal extends Component {
     return (
       <View style={{marginTop: 34}}>
         <Modal
-					animationType="slide"
-					transparent={true}
-					visible={this.state.modalVisible}
-					onRequestClose={() => this.setState({modalVisible: false})}
+					isVisible={this.state.modalVisible}
+					onModalShow={() => this.setState({modalVisible: true})}
+					onModalHide={() => this.setState({modalVisible: false})}
 				>
 					<View style={[styles.modalContent, {flex: 1}]}>
 						<Button iconRight transparent onPress={() => this._handleCloseModal(false)} style={{alignSelf: 'flex-end', paddingTop: 10}}>
