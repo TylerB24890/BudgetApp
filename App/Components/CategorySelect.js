@@ -64,6 +64,10 @@ export default class CategorySelect extends Component {
       <Item key={catData.id} value={catData.id} label={catData.title} />
     ))
 
+    if(Platform.OS !== 'ios') {
+      categoryDisplay.unshift(<Item style={{color: 'rgba(255,255,255,.6)'}} key="null" value={null} label="Expense Category (optional)" />)
+    }
+
     return categoryDisplay
   }
 

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { ApplicationStyles, Metrics } from '../../Themes/'
 
 export default StyleSheet.create({
@@ -19,8 +19,8 @@ export default StyleSheet.create({
 		marginBottom: 15,
 	},
 	slideImage: {
-		width: 181,
-		height: 350,
+		width: (Platform.OS === 'ios' ? 166 : 145),
+		height: (Platform.OS === 'ios' ? 321 : 280),
 		alignSelf: 'center'
 	},
 	slideText: {
@@ -33,7 +33,7 @@ export default StyleSheet.create({
 		fontWeight: '700'
 	},
 	skipContainer: {
-		marginTop: 12,
+		marginTop: (Platform.OS === 'ios' ? 12 : 8),
 		justifyContent: 'center'
 	},
 	skip: {

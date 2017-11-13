@@ -27,18 +27,18 @@ let NotificationService = {
 
 
     // 9am
-    var dateToNotify = moment().add(1, 'day').startOf('day').add(9, 'hours')
+    var dateToNotify = moment().add(1, 'day').startOf('day').add(9, 'hours').valueOf()
     var message = ArrayHelper.randomValue(NotificationMessages.MorningNotificationMessages(name, balance))
 
     if(type === 'test') {
-      dateToNotify = moment().add(10, 'seconds')
+      dateToNotify = moment().add(10, 'seconds').valueOf()
       message = ArrayHelper.randomValue(NotificationMessages.MorningNotificationMessages(name, balance))
     }
 
     // If after or equal to 5pm
     if(moment().hour() >= 17) {
       // Set an evening notification for the next day
-      dateToNotify = moment().add(1, 'day').startOf('day').add(18, 'hours')
+      dateToNotify = moment().add(1, 'day').startOf('day').add(18, 'hours').valueOf()
       // Grab evening messages
       message = ArrayHelper.randomValue(NotificationMessages.EveningNotificationMessages(name, balance))
       type = 'evening'

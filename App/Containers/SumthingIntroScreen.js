@@ -55,11 +55,6 @@ class SumthingIntroScreen extends Component {
           <View level={5}>
 						<Text style={styles.slideText}><Text style={styles.slideTextBold}>on the go</Text> by swiping left from the home screen. Edit or delete an expense by tapping it.</Text>
 					</View>
-					<View style={styles.skipContainer}>
-						<TouchableOpacity onPress={() => this._onSkipBtnHandle()}>
-							<Text style={styles.skip}>Skip</Text>
-						</TouchableOpacity>
-					</View>
         </View>
 
 
@@ -73,11 +68,6 @@ class SumthingIntroScreen extends Component {
           <View level={5}>
 						<Text style={styles.slideText}>to see where your money is going and how much. Categories give you the ability to delete a group of expenses in one click. Perfect for one time expenses!</Text>
 					</View>
-					<View style={{marginTop: 8}}>
-						<TouchableOpacity onPress={() => this._onSkipBtnHandle()}>
-							<Text style={styles.skip}>Skip</Text>
-						</TouchableOpacity>
-					</View>
         </View>
 
 
@@ -90,11 +80,6 @@ class SumthingIntroScreen extends Component {
 					</View>
           <View level={5}>
 						<Text style={styles.slideText}>to keep track of how much money you have left. Try setting your starting balance to your paycheck and budget from there.</Text>
-					</View>
-					<View style={styles.skipContainer}>
-						<TouchableOpacity onPress={() => this._onSkipBtnHandle()}>
-							<Text style={styles.skip}>Skip</Text>
-						</TouchableOpacity>
 					</View>
         </View>
 

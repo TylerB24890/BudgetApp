@@ -49,6 +49,7 @@ export default class AddCategoryModal extends Component {
 					animationType="slide"
 					transparent={true}
 					visible={this.state.modalVisible}
+					onRequestClose={() => this.setState({modalVisible: false})}
 				>
 					<View style={[styles.modalContent, {flex: 1}]}>
 						<Button iconRight transparent onPress={() => this._handleCloseModal(false)} style={{alignSelf: 'flex-end', paddingTop: 10}}>

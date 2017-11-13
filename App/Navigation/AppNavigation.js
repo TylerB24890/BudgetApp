@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Animated, View, Easing, TouchableOpacity, Image } from 'react-native'
+import { Text, Animated, View, Easing, TouchableOpacity, Image, Platform } from 'react-native'
 import { DrawerNavigator, StackNavigator } from 'react-navigation'
 import SumthingIntroScreen from '../Containers/SumthingIntroScreen'
 
@@ -201,7 +201,7 @@ const PrimaryNav = StackNavigator({
     headerStyle: styles.header,
     headerTintColor: '#ecf0f1',
 		headerTitle: (
-			<Image style={{width: 95, height: 40}} source={require('../Images/app-logo.png')} />
+			<Image style={{width: 95, height: 40, alignSelf: 'center', marginTop: (Platform.OS === 'ios' ? 0 : 5)}} source={require('../Images/app-logo.png')} />
 		),
     headerLeft: (
 			<TouchableOpacity style={styles.headerIcon} onPress={() => { if(navigation.state.index === 0) {
@@ -211,7 +211,7 @@ const PrimaryNav = StackNavigator({
 			}}}>
 				<Icon name={navigation.state.index == 0 ? 'ios-menu' : 'ios-close'} size={30} color='#FFF' />
 			</TouchableOpacity>
-		)
+		),
 	})
 })
 

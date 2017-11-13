@@ -50,7 +50,7 @@ class EditItemScreen extends Component {
 
     return (
       <Container style={styles.container}>
-        <Content scrollEnabled={false}>
+        <Content>
           <BudgetExpenseForm
             title={data.title}
             cost={data.cost}
