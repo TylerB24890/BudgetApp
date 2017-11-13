@@ -42,18 +42,16 @@ export default class CategorySelect extends Component {
 
   _updateExpenseType (value) {
 
-    if(value !== 'key0' && value !== '') {
-      this.setState({
-        type: value,
-        selectColor: '#333',
-        success: true,
-				modalVisible: false,
-      }, this.props.categoryHandler(value))
-    } else {
-      this.setState({
-        error: true
-      })
+    if(value === 'key0' || value === '') {
+      value = ''
     }
+
+    this.setState({
+      type: value,
+      selectColor: '#333',
+      success: true,
+      modalVisible: false,
+    }, this.props.categoryHandler(value))
   }
 
   _returnExpenseCategories () {
@@ -65,7 +63,7 @@ export default class CategorySelect extends Component {
     ))
 
     if(Platform.OS !== 'ios') {
-      categoryDisplay.unshift(<Item style={{color: 'rgba(255,255,255,.6)'}} key="null" value={null} label="Expense Category (optional)" />)
+      categoryDisplay.unshift(<Item style={{color: 'rgba(255,255,255,.6)'}} key="key0" value="" label="Expense Category (optional)" />)
     }
 
     return categoryDisplay
@@ -73,7 +71,7 @@ export default class CategorySelect extends Component {
 
   render () {
 
-    var val = this.state.type.length > 1 ? this.state.type : 'key0'
+    var val = (this.state.type.length > 1 ? this.state.type : 'key0')
     categoryDisplay = this._returnExpenseCategories()
 
     return (
