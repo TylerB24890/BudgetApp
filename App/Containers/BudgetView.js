@@ -131,7 +131,7 @@ class BudgetView extends React.PureComponent {
 			user: user,
 			budgetName: budgetName,
 			new: newUser,
-    }, NotificationService.scheduleNotificationMessage(user, balance))
+    })
 	}
 
   /**
