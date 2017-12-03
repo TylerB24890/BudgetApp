@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { AsyncStorage } from 'react-native'
 
 // Utilities
+import SplashScreenHandler from '../Utils/SplashScreenHandler'
 import BudgetCalculations from '../Utils/BudgetCalculations'
 import BudgetObjectFormat from '../Utils/BudgetObjectFormat'
 import { CurrencyFormat } from '../Utils/CurrencyFormat'
@@ -15,7 +16,6 @@ import SettingsService from '../Services/SettingsService'
 import NotificationService from '../Services/NotificationService'
 
 // Components
-import SplashScreen from 'react-native-smart-splash-screen'
 import { View, Text } from 'react-native'
 import GestureRecognizer from '../Components/GestureRecognizer'
 import BudgetBalance from '../Components/BudgetBalance'
@@ -74,11 +74,7 @@ class BudgetView extends React.PureComponent {
 
   componentDidMount () {
 		// Close the splash screen
-		SplashScreen.close({
-			animationType: SplashScreen.animationType.scale,
-			duration: 850,
-			delay: 500
-		})
+		SplashScreenHandler.closeSplashScreen()
 
 		// Check if the user has been on the app before
 		AsyncStorage.getItem('newUser').then(value => {

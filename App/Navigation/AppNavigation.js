@@ -14,7 +14,6 @@ import CategoriesScreen from '../Containers/CategoriesScreen'
 import EditItemScreen from '../Containers/EditItemScreen'
 import SettingsScreen from '../Containers/SettingsScreen'
 import AboutScreen from '../Containers/AboutScreen'
-import HelpScreen from '../Containers/HelpScreen'
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
@@ -160,7 +159,7 @@ const DrawerStack = DrawerNavigator({
 const PrimaryNav = StackNavigator({
   SumthingIntroScreen: { screen: SumthingIntroScreen },
   AboutScreen: { screen: AboutScreen },
-  HelpScreen: { screen: HelpScreen },
+  HelpScreen: { screen: SumthingIntroScreen },
   AddCategoryScreen: {
     screen: paramsToProps(AddCategoryScreen),
     navigationOptions: ({navigation}) => ({

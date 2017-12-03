@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+// Utilities
+import SplashScreenHandler from '../Utils/SplashScreenHandler'
+
 // Services
 import SettingsService from '../Services/SettingsService'
 
@@ -8,6 +11,7 @@ import SettingsService from '../Services/SettingsService'
 import { Container, Content, Text } from 'native-base'
 import BudgetButton from '../Components/BudgetButton'
 import SettingsForm from '../Components/SettingsForm'
+import AndroidBackButton from '../Components/AndroidBackButton'
 
 // Styles
 import styles from './Styles/SettingsScreenStyle'
@@ -48,6 +52,11 @@ class SettingsScreen extends Component {
 			new: newUser
     }
   }
+  
+  componentDidMount () {
+    // Close the splash screen
+		SplashScreenHandler.closeSplashScreen()
+  }
 
   _handleSettingsSubmission(id, user, budgetName, starting) {
     var userData = SettingsService.newSettings(id, user, budgetName, starting)
@@ -83,6 +92,8 @@ class SettingsScreen extends Component {
         <Content scrollEnabled={false}>
           {updatedMessage}
           <SettingsForm id={this.state.id} budgetName={this.state.budgetName} starting={this.state.starting} user={this.state.user} handler={(id, user, budgetName, starting) => this._handleSettingsSubmission(id, user, budgetName, starting)}/>
+          
+          <AndroidBackButton onPress={() => this.props.navigation.goBack()} />
         </Content>
       </Container>
     )

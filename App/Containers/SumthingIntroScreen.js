@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import SplashScreenHandler from '../Utils/SplashScreenHandler'
+
 import { Image, TouchableOpacity } from 'react-native'
 import { Container, View, Text, H1, Footer } from 'native-base'
 import Swiper from 'react-native-swiper'
+import AndroidBackButton from '../Components/AndroidBackButton'
 
 // Styles
 import styles from './Styles/SumthingIntroScreenStyle'
@@ -13,7 +16,11 @@ class SumthingIntroScreen extends Component {
 	constructor(props) {
 		super(props)
 	}
-
+	
+	componentDidMount () {
+		SplashScreenHandler.closeSplashScreen()
+	}
+	
 	_onSkipBtnHandle = () => {
 		this._onDoneBtnHandle()
   }
@@ -44,7 +51,7 @@ class SumthingIntroScreen extends Component {
 				activeDotColor="#ecf0f1"
 				loop={false}
 			>
-
+				
         <View style={[styles.slide,{ backgroundColor: '#1abc9c' }]}>
 					<View level={15} style={styles.slideImageContainer}>
 						<Image style={styles.slideImage} source={require('../Images/intro-screen1.png')} />
@@ -100,6 +107,8 @@ class SumthingIntroScreen extends Component {
 						</TouchableOpacity>
 					</View>
         </View>
+				
+				<AndroidBackButton onPress={() => this.props.navigation.goBack()} />
       </Swiper>
     )
 

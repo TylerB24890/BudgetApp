@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import SplashScreenHandler from '../Utils/SplashScreenHandler'
+
+// Components
 import { Container, Content, Text, View, H1, Icon } from 'native-base'
 import { Linking, TouchableOpacity } from 'react-native'
-import { connect } from 'react-redux'
+import AndroidBackButton from '../Components/AndroidBackButton'
 
 // Styles
 import styles from './Styles/AboutScreenStyle'
 
 class AboutScreen extends Component {
-
+	
+	componentDidMount () {
+		SplashScreenHandler.closeSplashScreen()
+	}
+	
 	_handleLink (url) {
 		Linking.canOpenURL(url).then(supported => {
 			if(!supported) {
@@ -53,7 +62,8 @@ class AboutScreen extends Component {
 					<View style={[styles.aboutContent, styles.aboutContentContainer]}>
 						<Text style={styles.aboutText}>For comments, recommendations and suggestions please use the GitHub issues form or email me through my personal portfolio {'\n'}(click on the "Author" text at the top)</Text>
 					</View>
-
+					
+					<AndroidBackButton onPress={() => this.props.navigation.goBack()} />
 				</Content>
       </Container>
     )

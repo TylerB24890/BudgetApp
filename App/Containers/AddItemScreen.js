@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+// Utilities
+import SplashScreenHandler from '../Utils/SplashScreenHandler'
+
 // Services
 import ExpenseService from '../Services/ExpenseService'
 
 // Components
 import { Container, Content } from 'native-base'
 import BudgetExpenseForm from '../Components/BudgetExpenseForm'
+import AndroidBackButton from '../Components/AndroidBackButton'
 
 // Styles
 import styles from './Styles/AddItemScreenStyle'
@@ -20,6 +24,10 @@ class AddItemScreen extends Component {
 			autoFocus: false,
 			type: ''
 		}
+  }
+  
+  componentDidMount () {
+    SplashScreenHandler.closeSplashScreen()
   }
 
 	componentWillReceiveProps (nextProps) {
@@ -53,6 +61,7 @@ class AddItemScreen extends Component {
       <Container style={styles.container}>
         <Content>
           <BudgetExpenseForm autoFocus={this.state.autoFocus} id='' title='' cost='0.00' type={this.state.type} date='' handler={(title, type, cost, id, date) => this._handleNewExpense(title, type, cost, id, date)}/>
+          <AndroidBackButton onPress={() => this.props.navigation.goBack()} />
         </Content>
       </Container>
     )

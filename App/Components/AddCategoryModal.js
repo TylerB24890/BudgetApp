@@ -8,6 +8,7 @@ import { Button, Icon, Text } from 'native-base'
 import { View } from 'react-native'
 import Modal from 'react-native-modal'
 import CategoryForm from './CategoryForm'
+import AndroidBackButton from './AndroidBackButton'
 
 // Styles
 import styles from './Styles/AddCategoryModalStyle'
@@ -59,6 +60,8 @@ export default class AddCategoryModal extends Component {
 						</Button>
 						<CategoryForm cid='' catTitle='' editing={false} handler={(id, title) => this._handleNewCategory(id, title)}/>
 					</View>
+					
+					<AndroidBackButton onPress={() => this._handleCloseModal(false)} />
         </Modal>
       </View>
     )

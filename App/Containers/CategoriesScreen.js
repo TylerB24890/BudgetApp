@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+// Utilities
+import SplashScreenHandler from '../Utils/SplashScreenHandler'
+
 // Services
 import CategoryService from '../Services/CategoryService'
 import ExpenseService from '../Services/ExpenseService'
@@ -9,6 +12,7 @@ import ExpenseService from '../Services/ExpenseService'
 import { Container, Content, Text } from 'native-base'
 import BudgetButton from '../Components/BudgetButton'
 import CategoryList from '../Components/CategoryList'
+import AndroidBackButton from '../Components/AndroidBackButton'
 
 // Styles
 import styles from './Styles/CategoriesScreenStyle'
@@ -23,6 +27,11 @@ class CategoriesScreen extends Component {
     this.state = {
       categories: categories
     }
+  }
+
+  componentDidMount () {
+    // Close the splash screen
+		SplashScreenHandler.closeSplashScreen()
   }
 
   _navigateToAddCategory () {
@@ -59,6 +68,8 @@ class CategoriesScreen extends Component {
             navigation={this.props.navigation}
             deleteHandler={(cid, catTitle) => this._deleteCategory(cid, catTitle)}
           />
+          
+          <AndroidBackButton onPress={() => this.props.navigation.goBack()} />
         </Content>
       </Container>
     )
